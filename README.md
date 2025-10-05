@@ -12,11 +12,10 @@ pnpm dev
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Second, add environment variables in a `.env` file. You can use the `.env.example` file as a template.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Finally, open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
 ## Project Overview
 
@@ -27,6 +26,8 @@ This project uses [`next/font`](https://nextjs.org/docs/app/building-your-applic
 * **Font**: Geist with cyrillic support
 * **Theme**: Only light theme for now + prussian blue primary color (bg-blue-900)
 
+### Release & Deployment
+Now vercel is used for deployment. You can deploy your own version by pushing your branch to repository.
 
 ### Lint & Formatting
 * Biome
@@ -35,7 +36,7 @@ This project uses [`next/font`](https://nextjs.org/docs/app/building-your-applic
 
 
 ## Useful Links
-russian banks icons: https://www.figma.com/community/file/863381574197862284
-navbar with amazing animation: https://www.shadcnblocks.com/block/navbar1
-components: https://www.shadcn-ui-blocks.com/blocks/react/ecommerce/shopping-cart/1
-components_2: https://shadcnuikit.com/dashboard/default
+- russian banks icons: https://www.figma.com/community/file/863381574197862284
+- navbar with amazing animation: https://www.shadcnblocks.com/block/navbar1
+- components: https://www.shadcn-ui-blocks.com/blocks/react/ecommerce/shopping-cart/1
+- components_2: https://shadcnuikit.com/dashboard/default
