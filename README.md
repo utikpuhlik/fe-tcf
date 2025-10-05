@@ -37,3 +37,5 @@ This project uses [`next/font`](https://nextjs.org/docs/app/building-your-applic
 ## Useful Links
 russian banks icons: https://www.figma.com/community/file/863381574197862284
 navbar with amazing animation: https://www.shadcnblocks.com/block/navbar1
+components: https://www.shadcn-ui-blocks.com/blocks/react/ecommerce/shopping-cart/1
+components_2: https://shadcnuikit.com/dashboard/default
