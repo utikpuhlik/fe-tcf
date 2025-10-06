@@ -4,6 +4,7 @@ import "./globals.css";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import Footer from "@/components/layout/footer/footer";
+import { GoogleAnalytics } from "@next/third-parties/google"
 
 export const metadata: Metadata = {
 	title: "Магазин автозапчастей Ford | TCF",
@@ -20,6 +21,7 @@ export default function RootLayout({
 			<body>
 				{/*<Navbar1/>*/}
 				{children}
+                <GoogleAnalytics gaId={"G-9X3EXVF7ES"}/>
 				<SpeedInsights />
 				<Analytics />
 				<Footer />
