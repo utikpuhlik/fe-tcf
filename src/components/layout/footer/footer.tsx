@@ -9,8 +9,39 @@ export default function Footer() {
 				<div className="flex flex-col gap-2">
 					<h3 className="text-lg font-semibold">TCF</h3>
 					<p className="text-sm text-muted-foreground">
-						Магазин оригинальных и контрактных автозапчастей для Ford из Турции
-						!!ADD FLAGS!!, Европы и Китая с доставкой по России.
+						Магазин оригинальных и контрактных автозапчастей для Ford из Турции{" "}
+						<span
+							className="inline-block text-lg leading-none align-middle"
+							role="img"
+							aria-label="Турция"
+						>
+							🇹🇷
+						</span>
+						, Европы{" "}
+						<span
+							className="inline-block text-lg leading-none align-middle"
+							role="img"
+							aria-label="Европейский союз"
+						>
+							🇪🇺
+						</span>{" "}
+						и Китая{" "}
+						<span
+							className="inline-block text-lg leading-none align-middle"
+							role="img"
+							aria-label="Китай"
+						>
+							🇨🇳
+						</span>{" "}
+						с доставкой по России{" "}
+						<span
+							className="inline-block text-lg leading-none align-middle"
+							role="img"
+							aria-label="Россия"
+						>
+							🇷🇺
+						</span>
+						.
 					</p>
 				</div>
 
@@ -49,20 +80,36 @@ export default function Footer() {
 						</div>
 					</div>
 					<div className="flex items-center gap-2">
-						<Image
-							src="/socials/whatsapp.svg"
-							alt="whatsapp"
-							width={50}
-							height={20}
-							className="h-6 w-auto"
-						/>
-						<Image
-							src="/socials/telegram.svg"
-							alt="telegram"
-							width={50}
-							height={20}
-							className="h-6 w-auto"
-						/>
+						<a
+							href="https://wa.me/79187772186"
+							target="_blank"
+							rel="noopener noreferrer"
+							aria-label="Написать в WhatsApp"
+							className="transition-opacity hover:opacity-80"
+						>
+							<Image
+								src="/socials/whatsapp.svg"
+								alt="whatsapp"
+								width={64}
+								height={20}
+								className="h-10 w-auto"
+							/>
+						</a>
+						<a
+							href="https://t.me/Katyermy"
+							target="_blank"
+							rel="noopener noreferrer"
+							aria-label="Написать в Telegram"
+							className="transition-opacity hover:opacity-80"
+						>
+							<Image
+								src="/socials/telegram.svg"
+								alt="telegram"
+								width={64}
+								height={20}
+								className="h-10 w-auto"
+							/>
+						</a>
 					</div>
 				</div>
 
