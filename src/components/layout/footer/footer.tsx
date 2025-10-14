@@ -147,13 +147,6 @@ export default function Footer() {
 					</h3>
 					<div className="grid grid-cols-3 gap-3 justify-items-stretch sm:grid-cols-3 lg:grid-cols-4">
 						<Image
-							src="/payments/vtb.svg"
-							alt="VTB"
-							width={50}
-							height={20}
-							className="h-6 w-auto"
-						/>
-						<Image
 							src="/payments/mir.svg"
 							alt="MIR"
 							width={50}
@@ -168,8 +161,15 @@ export default function Footer() {
 							className="h-6 w-auto"
 						/>
 						<Image
-							src="/payments/io.svg"
-							alt="YooMoney"
+							src="/payments/cash.svg"
+							alt="Cash"
+							width={50}
+							height={20}
+							className="h-6 w-auto"
+						/>
+						<Image
+							src="/payments/vtb.svg"
+							alt="VTB"
 							width={50}
 							height={20}
 							className="h-6 w-auto"
@@ -196,8 +196,8 @@ export default function Footer() {
 							className="h-6 w-auto"
 						/>
 						<Image
-							src="/payments/cash.svg"
-							alt="Cash"
+							src="/payments/io.svg"
+							alt="YooMoney"
 							width={50}
 							height={20}
 							className="h-6 w-auto"
