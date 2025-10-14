@@ -67,6 +67,12 @@ export default function Footer() {
 				{/* Телефоны */}
 				<div className="flex flex-col gap-3 text-sm text-muted-foreground">
 					<h3 className="text-lg font-semibold text-foreground">Контакты:</h3>
+					<div className="flex items-start gap-2">
+						<Mail className="h-4 w-4 text-primary mt-0.5" />
+						<a href="mailto:fordsevas@yandex.ru" className="hover:underline">
+							fordsevas@yandex.ru
+						</a>
+					</div>
 					<div>
 						<p className="font-medium">Розничный отдел:</p>
 						<div className="flex items-center gap-2">
@@ -85,17 +91,11 @@ export default function Footer() {
 							</a>
 						</div>
 					</div>
-					<div className="flex items-start gap-2">
-						<Mail className="h-4 w-4 text-primary mt-0.5" />
-						<a href="mailto:fordsevas@yandex.ru" className="hover:underline">
-							fordsevas@yandex.ru
-						</a>
-					</div>
 					<div className="flex flex-col gap-2">
 						<h4 className="font-medium text-foreground">Мы отвечаем онлайн:</h4>
 						<div className="flex items-center gap-2">
 							<a
-								href="https://wa.me/79187772186"
+								href="https://wa.me/79780661456"
 								target="_blank"
 								rel="noopener noreferrer"
 								aria-label="Написать в WhatsApp"
@@ -104,9 +104,8 @@ export default function Footer() {
 								<Image
 									src="/socials/whatsapp.svg"
 									alt="whatsapp"
-									width={64}
-									height={20}
-									className="h-8 w-auto"
+									width={32}
+									height={32}
 								/>
 							</a>
 							<a
@@ -119,9 +118,22 @@ export default function Footer() {
 								<Image
 									src="/socials/telegram.svg"
 									alt="telegram"
-									width={64}
-									height={20}
-									className="h-8 w-auto"
+									width={32}
+									height={32}
+								/>
+							</a>
+							<a
+								href="viber://chat?number=%2B79780661456"
+								target="_blank"
+								rel="noopener noreferrer"
+								aria-label="Написать в Viber"
+								className="transition-opacity hover:opacity-80"
+							>
+								<Image
+									src="/socials/viber.svg"
+									alt="viber"
+									width={32}
+									height={32}
 								/>
 							</a>
 						</div>
@@ -133,10 +145,31 @@ export default function Footer() {
 					<h3 className="text-lg font-semibold text-foreground">
 						Способы оплаты:
 					</h3>
-					<div className="grid grid-cols-3 gap-3 sm:grid-cols-3 lg:grid-cols-4">
+					<div className="grid grid-cols-3 gap-3 justify-items-stretch sm:grid-cols-3 lg:grid-cols-4">
+						<Image
+							src="/payments/vtb.svg"
+							alt="VTB"
+							width={50}
+							height={20}
+							className="h-6 w-auto"
+						/>
 						<Image
 							src="/payments/mir.svg"
 							alt="MIR"
+							width={50}
+							height={20}
+							className="h-6 w-auto"
+						/>
+						<Image
+							src="/payments/sbp.svg"
+							alt="SBP"
+							width={50}
+							height={20}
+							className="h-6 w-auto"
+						/>
+						<Image
+							src="/payments/io.svg"
+							alt="YooMoney"
 							width={50}
 							height={20}
 							className="h-6 w-auto"
@@ -158,20 +191,6 @@ export default function Footer() {
 						<Image
 							src="/payments/alfabank.svg"
 							alt="Alfa-Bank"
-							width={50}
-							height={20}
-							className="h-6 w-auto"
-						/>
-						<Image
-							src="/payments/sbp.svg"
-							alt="SBP"
-							width={50}
-							height={20}
-							className="h-6 w-auto"
-						/>
-						<Image
-							src="/payments/io.svg"
-							alt="YooMoney"
 							width={50}
 							height={20}
 							className="h-6 w-auto"

@@ -39,7 +39,7 @@ export default function MapWithContactInfo() {
 						<CardContent>
 							<h3 className="mb-6 text-xl font-semibold">Контакты</h3>
 
-							<div className="mb-8 space-y-4">
+							<div className="space-y-4">
 								<div
 									className="flex items-start gap-3 text-sm text-muted-
     foreground"
@@ -101,7 +101,7 @@ export default function MapWithContactInfo() {
 										</h4>
 										<div className="flex items-center gap-2">
 											<a
-												href="https://wa.me/79187772186"
+												href="https://wa.me/79780661456"
 												target="_blank"
 												rel="noopener noreferrer"
 												aria-label="Написать в WhatsApp"
@@ -110,9 +110,8 @@ export default function MapWithContactInfo() {
 												<Image
 													src="/socials/whatsapp.svg"
 													alt="whatsapp"
-													width={64}
-													height={20}
-													className="h-8 w-auto"
+													width={32}
+													height={32}
 												/>
 											</a>
 											<a
@@ -125,9 +124,22 @@ export default function MapWithContactInfo() {
 												<Image
 													src="/socials/telegram.svg"
 													alt="telegram"
-													width={64}
-													height={20}
-													className="h-8 w-auto"
+													width={32}
+													height={32}
+												/>
+											</a>
+											<a
+												href="viber://chat?number=%2B79780661456"
+												target="_blank"
+												rel="noopener noreferrer"
+												aria-label="Написать в Viber"
+												className="transition-opacity hover:opacity-80"
+											>
+												<Image
+													src="/socials/viber.svg"
+													alt="viber"
+													width={32}
+													height={32}
 												/>
 											</a>
 										</div>
