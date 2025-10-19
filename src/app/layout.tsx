@@ -1,10 +1,11 @@
 import { GeistSans } from "geist/font/sans";
 import type { Metadata } from "next";
 import "./globals.css";
+import { GoogleAnalytics } from "@next/third-parties/google";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import Footer from "@/components/layout/footer/footer";
-import { GoogleAnalytics } from "@next/third-parties/google"
+import { Header } from "@/components/layout/header/header";
 
 export const metadata: Metadata = {
 	title: "Магазин автозапчастей Ford | TCF",
@@ -19,9 +20,10 @@ export default function RootLayout({
 	return (
 		<html lang="en" className={GeistSans.className}>
 			<body>
+				<Header />
 				{/*<Navbar1/>*/}
 				{children}
-                <GoogleAnalytics gaId={"G-9X3EXVF7ES"}/>
+				<GoogleAnalytics gaId={"G-9X3EXVF7ES"} />
 				<SpeedInsights />
 				<Analytics />
 				<Footer />
