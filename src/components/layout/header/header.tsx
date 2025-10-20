@@ -43,7 +43,7 @@ export function Header() {
 	}, []);
 
 	return (
-		<header className="bg-background">
+		<header className="bg-background relative mt-0.5 after:content-[''] after:absolute after:bottom-0 after:left-4 after:right-4 after:h-px after:bg-border sm:after:left-6 sm:after:right-6 2xl:after:left-[calc(50%-850px)] 2xl:after:right-[calc(50%-850px)]">
 			<div className="container mx-auto flex flex-col gap-4 px-4 py-4 sm:h-16 sm:flex-row sm:items-center sm:gap-6 sm:px-6 2xl:max-w-[1700px]">
 				<div className="flex w-full items-center justify-between gap-4 sm:w-auto sm:flex-shrink-0 sm:gap-6">
 					<Link
