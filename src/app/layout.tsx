@@ -21,7 +21,6 @@ export default function RootLayout({
 		<html lang="en" className={GeistSans.className}>
 			<body>
 				<Header />
-				{/*<Navbar1/>*/}
 				{children}
 				<GoogleAnalytics gaId={"G-9X3EXVF7ES"} />
 				<SpeedInsights />
