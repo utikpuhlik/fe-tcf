@@ -51,7 +51,7 @@ export function Header() {
 						className="flex items-center gap-2 flex-shrink-0 ml-4 sm:ml-0"
 					>
 						<Image
-							src="/logo/ford-480.png"
+							src="/logo/logo.svg"
 							alt="Ford"
 							width={116}
 							height={42}
@@ -169,7 +169,7 @@ export function Header() {
 									className="block rounded-md px-3 py-2 hover:bg-muted"
 									onClick={() => setIsMenuOpen(false)}
 								>
-									Помошь
+									Помощь
 								</Link>
 							</div>
 						) : null}
