@@ -9,16 +9,14 @@ export default function Footer() {
 				{/* О магазине */}
 				<div className="flex flex-col gap-2 max-w-[18rem]">
 					<h3 className="text-lg font-semibold">О нас:</h3>
-                    <p className="text-sm text-muted-foreground">
-                        Продажа запчастей для автомобилей FORD из Турции, Европы и Китая с доставкой по России.
-                    </p>
-                    <p className="text-sm text-muted-foreground">
-                        Опыт работы с 1994 г.
-                    </p>
-                    <p className="text-sm text-muted-foreground">
-                        Ассортимент более 16 000 наименований на складе в
-                        Севастополе
-                    </p>
+					<p className="text-sm text-muted-foreground">
+						Продажа запчастей для автомобилей FORD из Турции, Европы и Китая с
+						доставкой по России.
+					</p>
+					<p className="text-sm text-muted-foreground">Опыт работы с 1994 г.</p>
+					<p className="text-sm text-muted-foreground">
+						Ассортимент более 16 000 наименований на складе в Севастополе
+					</p>
 				</div>
 
 				{/* Контакты */}
@@ -26,9 +24,9 @@ export default function Footer() {
 					<h3 className="text-lg font-semibold text-foreground">Адрес:</h3>
 					<div className="flex items-start gap-2">
 						<MapPin className="h-4 w-4 text-primary mt-0.5" />
-                            <Link href="https://yandex.ru/profile/213863116617?lang=ru&ysclid=mh9krqci6293026905">
-                                Севастополь, ул. Хрусталёва, 74Ж
-                            </Link>
+						<Link href="https://yandex.ru/profile/213863116617?lang=ru&ysclid=mh9krqci6293026905">
+							Севастополь, ул. Хрусталёва, 74Ж
+						</Link>
 					</div>
 					<div className="flex items-start gap-2">
 						<Clock className="h-4 w-4 text-primary mt-0.5" />
@@ -36,7 +34,7 @@ export default function Footer() {
 							<p>
 								Пн–Пт: 09:00 – 19:00
 								<br />
-                                Сб: 9:00-15:00
+								Сб: 9:00-15:00
 								<br />
 								Вс: выходной
 							</p>
@@ -189,13 +187,16 @@ export default function Footer() {
 			{/* Нижняя линия */}
 			<div className="border-t py-4">
 				<div className="container mx-auto flex flex-col items-center justify-between text-xs text-muted-foreground px-4 sm:px-6 md:flex-row 2xl:max-w-[1700px]">
-					<p>&copy; {`1994 - ${new Date().getFullYear()}`} Торговый центр "Форд". Все права защищены.</p>
+					<p>
+						&copy; {`1994 - ${new Date().getFullYear()}`} Торговый центр "Форд".
+						Все права защищены.
+					</p>
 					{/*<p>Built with ❤️</p>*/}
-                    <div className="flex gap-4">
-                        <p>Карта сайта</p>
-                        <p>Политика конфиденциальности</p>
-                        <p>Публичная оферта</p>
-                    </div>
+					<div className="flex gap-4">
+						<p>Карта сайта</p>
+						<p>Политика конфиденциальности</p>
+						<p>Публичная оферта</p>
+					</div>
 				</div>
 			</div>
 		</footer>
