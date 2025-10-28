@@ -21,5 +21,5 @@ const FEATURED_CATEGORIES: ThreeColumnPreviewCategory[] = [
 ];
 
 export function FeaturedCategoriesSection() {
-	return <ThreeColumnPreview categories={FEATURED_CATEGORIES} imageOnly />;
+	return <ThreeColumnPreview categories={FEATURED_CATEGORIES} />;
 }
