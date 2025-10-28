@@ -2,7 +2,7 @@ import { MapPin } from "lucide-react";
 
 import { InfoCard } from "@/components/home/info-card";
 
-const WORKING_HOURS = ["Пн–Пт: 09:00–19:00","Сб: 9:00-15:00", "Вс: выходной"];
+const WORKING_HOURS = ["Пн–Пт: 09:00 – 19:00", "Сб: 9:00 - 15:00", "Вс: выходной"];
 
 export function ContactsInfoCard() {
 	return (

@@ -10,7 +10,7 @@ const FEATURED_CATEGORIES: ThreeColumnPreviewCategory[] = [
 			"Оригинальные запчасти Ford и их альтернативные аналоги в наличии и под заказ по VIN-номеру.",
 		image: "/main/car-parts-1.jpg",
 		productCount: 9790,
-        href: "/catalog/ford",
+		href: "/catalog/ford",
 	},
 	{
 		title: "Разное",
@@ -18,7 +18,7 @@ const FEATURED_CATEGORIES: ThreeColumnPreviewCategory[] = [
 			"Расходники, аксессуары и универсальные детали для любых марок.",
 		image: "/main/car-parts-2.jpg",
 		productCount: 25,
-        href: "/catalog/raznoe",
+		href: "/catalog/raznoe",
 	},
 ];
 
