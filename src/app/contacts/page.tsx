@@ -48,7 +48,7 @@ export default function MapWithContactInfo() {
 									<div className="text-left">
 										<h4 className="font-medium">Адрес</h4>
 										<p className="text-muted-foreground text-sm">
-											Севастополь
+											г. Севастополь
 											<br />
 											ул. Хрусталёва, 74Ж
 											<br />
