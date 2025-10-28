@@ -1,1 +1,1 @@
-pnpm lint
+biome check --write
