@@ -43,9 +43,11 @@ export function InfoCard({
 					<div className="mt-auto flex justify-end">
 						<Link
 							href={href}
-							className="inline-flex items-center gap-1 text-xs font-medium uppercase tracking-[0.24em] text-neutral-900 transition hover:tracking-[0.3em]"
+							className="inline-flex items-center gap-1 text-xs font-medium uppercase tracking-[0.24em] text-neutral-900 transition"
 						>
-							<span>{ctaLabel}</span>
+							<span className="hover:underline underline-offset-4">
+								{ctaLabel}
+							</span>
 							<span aria-hidden className="text-sm">
 								→
 							</span>
