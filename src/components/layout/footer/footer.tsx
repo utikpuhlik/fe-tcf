@@ -2,11 +2,6 @@ import { Clock, Mail, MapPin, Phone } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
-async function getCurrentYear() {
-	"use cache";
-	return new Date().getFullYear();
-}
-
 export default function Footer() {
 	return (
 		<footer className="w-full border-t bg-background">
@@ -193,8 +188,8 @@ export default function Footer() {
 			<div className="border-t py-4">
 				<div className="container mx-auto flex flex-col items-center justify-between text-xs text-muted-foreground px-4 sm:px-6 md:flex-row 2xl:max-w-[1700px]">
 					<p>
-						&copy; {`1994 - ${getCurrentYear()}`} Торговый центр "Форд". Все
-						права защищены.
+						&copy; {`1994 - ${new Date().getFullYear()}`} Торговый центр "Форд".
+						Все права защищены.
 					</p>
 					{/*<p>Built with ❤️</p>*/}
 					<div className="flex gap-4">
