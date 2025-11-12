@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default function NotFound() {
 	return (
-		<main className="flex min-h-screen flex-col-reverse justify-end gap-12 bg-white px-6 py-8 text-neutral-900 lg:flex-row lg:items-center lg:justify-between lg:px-16">
+		<main className="flex flex-col-reverse justify-end gap-12 bg-white px-6 py-8 text-neutral-900 lg:flex-row lg:items-center lg:justify-between lg:px-16">
 			<section className="flex max-w-xl flex-col items-center gap-6 text-center lg:items-start lg:text-left">
 				<p className="text-sm uppercase tracking-[0.4em] text-neutral-500">
 					Ошибка 404
@@ -31,7 +31,10 @@ export default function NotFound() {
 					</Link>
 				</div>
 			</section>
-			<section aria-hidden className="flex w-full justify-end">
+			<section
+				aria-hidden
+				className="order-1 flex w-full justify-end lg:order-2"
+			>
 				<Image
 					src="/404.svg"
 					alt="Страница не найдена"
