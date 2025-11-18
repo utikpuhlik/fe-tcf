@@ -21,11 +21,12 @@ export default function MapWithContactInfo() {
 				</p>
 			</div>
 
+            {/* TODO: При загрузке карты высвечивается текст "МагазинАвтозапчастейИАвтотоваров", а только потом карта, надо будет исправить как-нибудь*/}
 			<div className="grid gap-8 lg:grid-cols-5">
 				{/* Map Section - 3/5 width on large screens */}
 				<div className="bg-muted h-[400px] overflow-hidden rounded-lg lg:col-span-3 lg:h-full">
 					<iframe
-						src="https://yandex.ru/map-widget/v1/?ll=33.522279%2C44.556992&z=17&pt=33.522279%2C44.556992%2Cpm2rdm&l=map"
+						src="https://yandex.ru/map-widget/v1/?from=mapframe&ll=33.523270%2C44.557017&mode=poi&poi%5Bpoint%5D=33.522394%2C44.556903&poi%5Buri%5D=ymapsbm1%3A%2F%2Forg%3Foid%3D1235343301&pt=33.522279%2C44.556992&source=mapframe&utm_source=mapframe&z=19"
 						className="h-full w-full border-0"
 						loading="lazy"
 						title="Карта: Севастополь, ул. Хрусталёва, 74Ж"
