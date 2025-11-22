@@ -1,8 +1,8 @@
 import { GeistSans } from "geist/font/sans";
 import type { Metadata } from "next";
 import "./globals.css";
-// import { ruRU } from "@clerk/localizations";
-// import { ClerkProvider } from "@clerk/nextjs";
+import { ruRU } from "@clerk/localizations";
+import { ClerkProvider } from "@clerk/nextjs";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
@@ -20,7 +20,7 @@ export default function RootLayout({
 	children: React.ReactNode;
 }>) {
 	return (
-		// <ClerkProvider localization={ruRU}>
+		<ClerkProvider localization={ruRU}>
 		<html lang="en" className={GeistSans.className}>
 			<body>
 				<Header />
@@ -31,6 +31,6 @@ export default function RootLayout({
 				<Footer />
 			</body>
 		</html>
-		// </ClerkProvider>
+		</ClerkProvider>
 	);
 }
