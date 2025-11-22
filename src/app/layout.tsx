@@ -6,6 +6,8 @@ import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import Footer from "@/components/layout/footer/footer";
 import { Header } from "@/components/layout/header/header";
+import {ClerkProvider} from "@clerk/nextjs";
+import {ruRU} from "@clerk/localizations";
 
 export const metadata: Metadata = {
 	title: "Магазин автозапчастей Ford | TCF",
@@ -18,6 +20,7 @@ export default function RootLayout({
 	children: React.ReactNode;
 }>) {
 	return (
+        <ClerkProvider localization={ruRU}>
 		<html lang="en" className={GeistSans.className}>
 			<body>
 				<Header />
@@ -28,5 +31,6 @@ export default function RootLayout({
 				<Footer />
 			</body>
 		</html>
+        </ClerkProvider>
 	);
 }
