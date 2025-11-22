@@ -15,7 +15,7 @@ export default function Footer() {
 					</p>
 					<p className="text-sm text-muted-foreground">Опыт работы с 1994 г.</p>
 					<p className="text-sm text-muted-foreground">
-						Ассортимент более 16 000 наименований на складе в Севастополе
+						Ассортимент более 16 000 наименований на складе в Севастополе.
 					</p>
 				</div>
 

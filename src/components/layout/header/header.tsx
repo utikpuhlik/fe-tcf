@@ -110,7 +110,10 @@ export function Header() {
 						className="order-1 flex basis-1/2 items-center justify-center gap-4 text-base font-semibold text-center sm:order-1 sm:basis-auto sm:justify-start sm:text-left
   sm:text-sm sm:ml-4"
 					>
-						<Link href="/catalog" className="hover:text-primary transition">
+						<Link
+							href="/catalog/ford"
+							className="hover:text-primary transition"
+						>
 							Каталог
 						</Link>
 					</nav>
