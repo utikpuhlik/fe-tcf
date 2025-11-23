@@ -4,7 +4,6 @@ import {
 	fetchEntityById,
 	fetchEntityBySlug,
 } from "@/lib/api/generic/fetchEntity";
-import { apiRequest } from "@/lib/api/generic/request";
 import { fetchAndParse } from "@/lib/api/utils/fetchJson";
 import { type CountSchema, zCountSchema } from "@/lib/schemas/commonSchema";
 import {
@@ -62,28 +61,5 @@ export const productsApi = {
 		params.set("is_deleted", String(is_deleted));
 		const url = `${env.NEXT_PUBLIC_API_URL}/${ENTITY}/meta/count?${params.toString()}`;
 		return fetchAndParse(url, zCountSchema);
-	},
-	// -------------------------------
-	// POST
-	// -------------------------------
-	post(data: FormData): Promise<ProductSchema> {
-		const url = `${env.NEXT_PUBLIC_API_URL}/${ENTITY}`;
-		return apiRequest(url, { method: "POST", body: data }, zProductSchema);
-	},
-
-	// -------------------------------
-	// PATCH
-	// -------------------------------
-	patch(id: string, data: FormData): Promise<ProductSchema> {
-		const url = `${env.NEXT_PUBLIC_API_URL}/${ENTITY}/${id}`;
-		return apiRequest(url, { method: "PATCH", body: data }, zProductSchema);
-	},
-
-	// -------------------------------
-	// DELETE
-	// -------------------------------
-	delete(id: string): Promise<void> {
-		const url = `${env.NEXT_PUBLIC_API_URL}/${ENTITY}/${id}`;
-		return apiRequest(url, { method: "DELETE" }, null);
 	},
 };
