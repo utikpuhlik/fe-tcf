@@ -4,7 +4,7 @@ import { z } from "zod";
 export const env = createEnv({
 	server: {
 		APP_ENV: z.string().default("dev"),
-		// CLERK_SECRET_KEY: z.string(),
+		CLERK_SECRET_KEY: z.string(),
 	},
 	client: {
 		NEXT_PUBLIC_API_URL: z.url(),
@@ -18,11 +18,12 @@ export const env = createEnv({
 	},
 	runtimeEnv: {
 		APP_ENV: process.env.APP_ENV,
-		// CLERK_SECRET_KEY: process.env.CLERK_SECRET_KEY,
+		CLERK_SECRET_KEY: process.env.CLERK_SECRET_KEY,
 
 		NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL,
 
-		NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY,
+		NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY:
+			process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY,
 		// NEXT_PUBLIC_CLERK_SIGN_IN_URL: process.env.NEXT_PUBLIC_CLERK_SIGN_IN_URL,
 		// NEXT_PUBLIC_CLERK_SIGN_UP_URL: process.env.NEXT_PUBLIC_CLERK_SIGN_UP_URL,
 		// NEXT_PUBLIC_CLERK_SIGN_IN_FALLBACK_REDIRECT_URL: process.env.NEXT_PUBLIC_CLERK_SIGN_IN_FALLBACK_REDIRECT_URL,

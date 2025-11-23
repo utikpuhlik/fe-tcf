@@ -21,16 +21,16 @@ export default function RootLayout({
 }>) {
 	return (
 		<ClerkProvider localization={ruRU}>
-		<html lang="en" className={GeistSans.className}>
-			<body>
-				<Header />
-				{children}
-				<GoogleAnalytics gaId={"G-9X3EXVF7ES"} />
-				<SpeedInsights />
-				<Analytics />
-				<Footer />
-			</body>
-		</html>
+			<html lang="en" className={GeistSans.className}>
+				<body>
+					<Header />
+					{children}
+					<GoogleAnalytics gaId={"G-9X3EXVF7ES"} />
+					<SpeedInsights />
+					<Analytics />
+					<Footer />
+				</body>
+			</html>
 		</ClerkProvider>
 	);
 }
