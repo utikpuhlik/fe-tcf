@@ -6,6 +6,7 @@ import {
 } from "@/lib/api/generic/fetchEntity";
 import { apiRequest } from "@/lib/api/generic/request";
 import { fetchAndParse } from "@/lib/api/utils/fetchJson";
+import { type CountSchema, zCountSchema } from "@/lib/schemas/commonSchema";
 import {
 	type ProductPaginatedSchema,
 	type ProductSchema,
@@ -51,6 +52,16 @@ export const productsApi = {
 		const res = await fetch(url);
 		const text = await res.text();
 		return JSON.parse(text) as Record<string, number>;
+	},
+	fetchCount(
+		sub_category_id?: string,
+		is_deleted: boolean = false,
+	): Promise<CountSchema> {
+		const params = new URLSearchParams();
+		if (sub_category_id) params.set("sub_category_id", sub_category_id);
+		params.set("is_deleted", String(is_deleted));
+		const url = `${env.NEXT_PUBLIC_API_URL}/${ENTITY}/meta/count?${params.toString()}`;
+		return fetchAndParse(url, zCountSchema);
 	},
 	// -------------------------------
 	// POST
