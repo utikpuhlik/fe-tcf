@@ -34,6 +34,12 @@ export const productsApi = {
 		const url = `${env.NEXT_PUBLIC_API_URL}/${ENTITY}?sub_category_id=${sub_category_id}`;
 		return fetchAndParse(url, zProductPaginatedSchema);
 	},
+	fetchBySubCategorySlug(
+		sub_category_slug: string,
+	): Promise<ProductPaginatedSchema> {
+		const url = `${env.NEXT_PUBLIC_API_URL}/${ENTITY}?sub_category_slug=${sub_category_slug}`;
+		return fetchAndParse(url, zProductPaginatedSchema);
+	},
 	// -------------------------------
 	// Facets
 	// -------------------------------

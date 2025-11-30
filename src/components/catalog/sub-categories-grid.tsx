@@ -19,7 +19,7 @@ export function SubCategoriesGrid({
 			items={categories}
 			facets={facets}
 			className={className}
-			makeHref={(c) => `/catalog/ford/${c.slug}`}
+			makeHref={(c) => `/catalog/ford/${c.category.slug}/${c.slug}`}
 		/>
 	);
 }

@@ -28,11 +28,23 @@ Finally, open [http://localhost:3000](http://localhost:3000) with your browser t
 Now vercel is used for deployment. You can deploy your own version by pushing your branch to repository.
 
 ### Lint & Formatting
-* Biome
-* Prettier
+* Biome (v2) for linting and formatting
+* Husky (pre-commit hooks)
 
 
-
+## Business Logic Overview
+### Catalog
+```
+Categories
+    ↓ 1-to-many
+Subcategories
+    ↓ 1-to-many
+Products
+    ↓ 1-to-many
+Offers - конкретное предложение от производителя/поставщика:
+    ↓ add-to-cart
+Cart Items
+```
 ## Useful Links
 - russian banks icons: https://www.figma.com/community/file/863381574197862284
 - navbar with amazing animation: https://www.shadcnblocks.com/block/navbar1

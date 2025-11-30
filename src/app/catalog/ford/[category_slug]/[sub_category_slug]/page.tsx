@@ -1,7 +1,7 @@
+import { ProductsList } from "@/components/catalog/products-list";
 import Breadcrumbs from "@/components/shared/breadcrumbs";
 import { productsApi } from "@/lib/api/productApi";
 import { subCategoriesApi } from "@/lib/api/subCategoryApi";
-import type { ProductPaginatedSchema } from "@/lib/schemas/productSchema";
 
 interface Props {
 	params: Promise<{ sub_category_slug: string }>;
@@ -10,10 +10,10 @@ interface Props {
 export default async function ProductsPage({ params }: Props) {
 	const { sub_category_slug } = await params;
 
-	const sub_category = await subCategoriesApi.fetchBySlug(sub_category_slug);
-
-	const _productsData: ProductPaginatedSchema =
-		await productsApi.fetchBySubCategoryId(sub_category.id);
+	const [sub_category, productsData] = await Promise.all([
+		await subCategoriesApi.fetchBySlug(sub_category_slug),
+		await productsApi.fetchBySubCategorySlug(sub_category_slug),
+	]);
 
 	return (
 		<main className="space-y-4">
@@ -27,13 +27,13 @@ export default async function ProductsPage({ params }: Props) {
 					},
 					{
 						label: sub_category.name,
-						href: `/catalog/${sub_category.category.slug}/${sub_category_slug}`,
+						href: `/catalog/ford/${sub_category.category.slug}/${sub_category_slug}`,
 						active: true,
 					},
 				]}
 			/>
 
-			{/*<SubCategoriesGrid categories={products.items} facets={facets} />*/}
+			<ProductsList products={productsData.items} />
 		</main>
 	);
 }

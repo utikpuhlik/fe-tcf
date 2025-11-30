@@ -13,6 +13,10 @@ export const offersApi = {
 		const url = `${env.NEXT_PUBLIC_API_URL}/${ENTITY}?product_id=${product_id}`;
 		return fetchAndParse(url, zOfferPaginatedSchema);
 	},
+	fetchByProductSlug(product_slug: string): Promise<OfferPaginatedSchema> {
+		const url = `${env.NEXT_PUBLIC_API_URL}/${ENTITY}?product_slug=${product_slug}`;
+		return fetchAndParse(url, zOfferPaginatedSchema);
+	},
 	fetchCount(
 		product_id?: string,
 		in_stock?: boolean,
