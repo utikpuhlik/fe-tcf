@@ -1,16 +1,11 @@
 "use client";
 
-import {
-	SignedIn,
-	SignedOut,
-	SignInButton,
-	SignUpButton,
-	UserButton,
-} from "@clerk/nextjs";
+import { SignedIn, SignedOut } from "@daveyplate/better-auth-ui";
 import { ChevronDown, Heart, Search, ShoppingCart, User } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+import AuthButtons from "@/components/layout/header/auth-buttons";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -87,19 +82,6 @@ export function Header() {
 								<Heart className="size-6 sm:size-5" />
 							</Button>
 						</Link>
-
-						{/* Clerk Integration */}
-						<SignedOut>
-							<SignInButton />
-							<SignUpButton>
-								<button className="bg-[#6c47ff] text-white rounded-full font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 cursor-pointer">
-									Sign Up
-								</button>
-							</SignUpButton>
-						</SignedOut>
-						<SignedIn>
-							<UserButton showName />
-						</SignedIn>
 
 						<Sheet>
 							<SheetTrigger asChild>
@@ -199,27 +181,32 @@ export function Header() {
 				</div>
 
 				<div className="hidden items-center gap-2 md:gap-4 sm:flex sm:flex-shrink-0 sm:justify-end">
-					<Link href="/profile">
-						<Button
-							variant="ghost"
-							size="icon"
-							className="rounded-full"
-							aria-label="Личный кабинет"
-						>
-							<User className="size-5" />
-						</Button>
-					</Link>
+					<SignedOut>
+						<AuthButtons />
+					</SignedOut>
 
-					<Link href="/favorites">
-						<Button
-							variant="ghost"
-							size="icon"
-							className="rounded-full"
-							aria-label="Избранное"
-						>
-							<Heart className="size-5" />
-						</Button>
-					</Link>
+					<SignedIn>
+						<Link href="/profile">
+							<Button
+								variant="ghost"
+								size="icon"
+								className="rounded-full"
+								aria-label="Личный кабинет"
+							>
+								<User className="size-5" />
+							</Button>
+						</Link>
+						<Link href="/favorites">
+							<Button
+								variant="ghost"
+								size="icon"
+								className="rounded-full"
+								aria-label="Избранное"
+							>
+								<Heart className="size-5" />
+							</Button>
+						</Link>
+					</SignedIn>
 
 					<Sheet>
 						<SheetTrigger asChild>

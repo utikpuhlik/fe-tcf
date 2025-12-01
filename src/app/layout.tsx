@@ -1,13 +1,13 @@
 import { GeistSans } from "geist/font/sans";
 import type { Metadata } from "next";
 import "./globals.css";
-import { ruRU } from "@clerk/localizations";
-import { ClerkProvider } from "@clerk/nextjs";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Providers } from "@/app/providers";
 import Footer from "@/components/layout/footer/footer";
 import { Header } from "@/components/layout/header/header";
+import { ThemedTopLoader } from "@/components/layout/top-loader";
 
 export const metadata: Metadata = {
 	title: "Магазин автозапчастей Ford | TCF",
@@ -20,17 +20,18 @@ export default function RootLayout({
 	children: React.ReactNode;
 }>) {
 	return (
-		<ClerkProvider localization={ruRU}>
-			<html lang="en" className={GeistSans.className}>
-				<body>
+		<html lang="en" className={GeistSans.className}>
+			<body>
+				<Providers>
+					<ThemedTopLoader />
 					<Header />
 					{children}
 					<GoogleAnalytics gaId={"G-9X3EXVF7ES"} />
 					<SpeedInsights />
 					<Analytics />
 					<Footer />
-				</body>
-			</html>
-		</ClerkProvider>
+				</Providers>
+			</body>
+		</html>
 	);
 }

@@ -5,6 +5,7 @@ export const env = createEnv({
 	server: {
 		APP_ENV: z.string().default("dev"),
 		CLERK_SECRET_KEY: z.string(),
+		DATABASE_URL: z.string(),
 	},
 	client: {
 		NEXT_PUBLIC_API_URL: z.url(),
@@ -18,6 +19,7 @@ export const env = createEnv({
 	},
 	runtimeEnv: {
 		APP_ENV: process.env.APP_ENV,
+		DATABASE_URL: process.env.DATABASE_URL,
 		CLERK_SECRET_KEY: process.env.CLERK_SECRET_KEY,
 
 		NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL,

@@ -1,12 +1,16 @@
-import { auth } from "@clerk/nextjs/server";
+import { headers } from "next/headers";
+import { auth } from "@/lib/auth";
 
 export async function getAuthHeader(): Promise<HeadersInit> {
-	const { getToken } = await auth(); // pulls token from request context
-	const token = await getToken(); // short-lived JWT
+	const session = await auth.api.getSession({
+		headers: await headers(),
+	});
 
-	if (!token) {
+	if (!session) {
 		throw new Error("Missing auth token");
 	}
 
-	return { Authorization: `Bearer ${token}` };
+	return {
+		Authorization: `Bearer ${session.session.token}`,
+	};
 }
