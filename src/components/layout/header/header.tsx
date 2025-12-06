@@ -1,11 +1,10 @@
 "use client";
 
-import { SignedIn, SignedOut } from "@daveyplate/better-auth-ui";
+import { UserButton } from "@daveyplate/better-auth-ui";
 import { ChevronDown, Heart, Search, ShoppingCart, User } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
-import AuthButtons from "@/components/layout/header/auth-buttons";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -181,32 +180,17 @@ export function Header() {
 				</div>
 
 				<div className="hidden items-center gap-2 md:gap-4 sm:flex sm:flex-shrink-0 sm:justify-end">
-					<SignedOut>
-						<AuthButtons />
-					</SignedOut>
-
-					<SignedIn>
-						<Link href="/profile">
-							<Button
-								variant="ghost"
-								size="icon"
-								className="rounded-full"
-								aria-label="Личный кабинет"
-							>
-								<User className="size-5" />
-							</Button>
-						</Link>
-						<Link href="/favorites">
-							<Button
-								variant="ghost"
-								size="icon"
-								className="rounded-full"
-								aria-label="Избранное"
-							>
-								<Heart className="size-5" />
-							</Button>
-						</Link>
-					</SignedIn>
+					<UserButton size="icon" />
+					<Link href="/favorites">
+						<Button
+							variant="ghost"
+							size="icon"
+							className="rounded-full"
+							aria-label="Избранное"
+						>
+							<Heart className="size-5" />
+						</Button>
+					</Link>
 
 					<Sheet>
 						<SheetTrigger asChild>

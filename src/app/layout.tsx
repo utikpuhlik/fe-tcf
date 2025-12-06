@@ -4,9 +4,9 @@ import "./globals.css";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import { Providers } from "@/app/providers";
 import Footer from "@/components/layout/footer/footer";
 import { Header } from "@/components/layout/header/header";
+import { Providers } from "@/components/layout/providers";
 import { ThemedTopLoader } from "@/components/layout/top-loader";
 
 export const metadata: Metadata = {

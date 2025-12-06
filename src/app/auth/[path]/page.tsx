@@ -16,24 +16,7 @@ export default async function AuthPage({
 
 	return (
 		<main className="container flex grow flex-col items-center justify-center self-center p-4 md:p-6">
-			<AuthView
-				path={path}
-				localization={{
-					SIGN_IN: "Вход",
-					SIGN_UP: "Регистрация",
-					MAGIC_LINK: "Войти по ссылке",
-					EMAIL: "Электронная почта",
-					PASSWORD: "Пароль",
-					FORGOT_PASSWORD: "Забыли пароль?",
-					RESET_PASSWORD: "Сброс пароля",
-					GO_BACK: "Назад",
-					SIGN_IN_ACTION: "Войти",
-					SIGN_UP_ACTION: "Зарегистрироваться",
-					RESET_PASSWORD_ACTION: "Сбросить пароль",
-					SIGN_IN_DESCRIPTION:
-						"Введите свои учетные данные, чтобы войти в систему.",
-				}}
-			/>
+			<AuthView path={path} />
 		</main>
 	);
 }
