@@ -15,26 +15,21 @@ import {
 	Text,
 } from "@react-email/components";
 
-interface VercelInviteUserEmailProps {
-	username?: string;
-	invitedByUsername?: string;
-	invitedByEmail?: string;
-	teamName?: string;
-	inviteLink?: string;
+interface VerifyUserEmailProps {
+	name?: string;
+	email?: string;
+	link?: string;
 	headingText: string;
 }
 
-const baseUrl = "http://localhost:3000";
+const baseUrl = "https://fe-tcf.vercel.app";
 
-export const VercelInviteUserEmail = ({
-	username,
-	invitedByUsername,
-	invitedByEmail,
-	teamName,
-	inviteLink,
+export const VerifyUserEmail = ({
+	name,
+	link,
 	headingText,
-}: VercelInviteUserEmailProps) => {
-	const previewText = `Join ${invitedByUsername} on Vercel`;
+}: VerifyUserEmailProps) => {
+	const previewText = `Активация учетной записи | TCF`;
 
 	return (
 		<Html>
@@ -61,39 +56,41 @@ export const VercelInviteUserEmail = ({
 							{headingText}
 							<Hr />
 						</Heading>
+
 						<Text className="text-[14px] text-black leading-[24px]">
-							Hello {username},
+							Здравствуйте, {name}!
 						</Text>
-						<Text className="text-[14px] text-black leading-[24px]">
-							<strong>{invitedByUsername}</strong> (
-							<Link
-								href={`mailto:${invitedByEmail}`}
-								className="text-blue-600 no-underline"
-							>
-								{invitedByEmail}
-							</Link>
-							) has invited you to the <strong>{teamName}</strong> team on{" "}
-							<strong>Vercel</strong>.
+						<Text>
+							Вы создали новую учётную запись клиента{" "}
+							<Link href={"https://ford-parts.com.ru"}>TCF</Link>. Вам осталось
+							только активировать её, нажав на кнопку ниже.
 						</Text>
 						<Section className="mt-[32px] mb-[32px] text-center">
 							<Button
 								className="rounded bg-[#000000] px-5 py-3 text-center font-semibold text-[12px] text-white no-underline"
-								href={inviteLink}
+								href={link}
 							>
 								Подтвердить
 							</Button>
 						</Section>
 						<Text className="text-[14px] text-black leading-[24px]">
-							or copy and paste this URL into your browser:{" "}
-							<Link href={inviteLink} className="text-blue-600 no-underline">
-								{inviteLink}
+							или скопируйте URL ссылку и вставьте в вашем браузере:{" "}
+							<Link href={link} className="text-blue-600 no-underline">
+								{link}
 							</Link>
 						</Text>
 						<Hr className="mx-0 my-[26px] w-full border border-[#eaeaea] border-solid" />
 						<Text className="text-[#666666] text-[12px] leading-[24px]">
-							Если вы не ожидали это увидеть, проигнорируйте это письмо. Если вы
-							обеспокоены безопасностью своего аккаунта, пожалуйста, ответьте на
-							это письмо, чтобы связаться с нами.
+							Если вы не ожидали это увидеть, проигнорируйте письмо. Если у вас
+							есть вопросы, ответьте на это письмо или свяжитесь с нами по
+							адресу:{" "}
+							<Link
+								href="mailto:fordsevas@yandex.ru"
+								className="text-blue-600 no-underline"
+							>
+								fordsevas@yandex.ru
+							</Link>
+							.
 						</Text>
 					</Container>
 				</Body>
@@ -102,13 +99,10 @@ export const VercelInviteUserEmail = ({
 	);
 };
 
-VercelInviteUserEmail.PreviewProps = {
-	username: "alanturing",
-	invitedByUsername: "Alan",
-	invitedByEmail: "alan.turing@example.com",
-	teamName: "Enigma",
-	inviteLink: "https://vercel.com",
+VerifyUserEmail.PreviewProps = {
+	name: "Владислав",
+	link: "https://vercel.com",
 	headingText: "Подтвердите адрес электронной почты",
-} as VercelInviteUserEmailProps;
+} as VerifyUserEmailProps;
 
-export default VercelInviteUserEmail;
+export default VerifyUserEmail;

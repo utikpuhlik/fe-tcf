@@ -1,25 +1,36 @@
 import {
 	Body,
 	Button,
-	Column,
 	Container,
 	Head,
 	Heading,
+	Hr,
 	Html,
+	Img,
+	Link,
+	Preview,
 	pixelBasedPreset,
-	Row,
 	Section,
 	Tailwind,
 	Text,
 } from "@react-email/components";
 
-export const VerifyEmailTemplate = ({
+interface VerifyUserEmailProps {
+	name?: string;
+	email?: string;
+	link?: string;
+	headingText: string;
+}
+
+const baseUrl = "https://fe-tcf.vercel.app";
+
+export const VerifyUserEmail = ({
 	name,
 	link,
-}: {
-	name: string;
-	link: string;
-}) => {
+	headingText,
+}: VerifyUserEmailProps) => {
+	const previewText = `Активация учетной записи | TCF`;
+
 	return (
 		<Html>
 			<Head />
@@ -28,46 +39,70 @@ export const VerifyEmailTemplate = ({
 					presets: [pixelBasedPreset],
 				}}
 			>
-				<Body className="bg-[#f6f6f6] py-10 font-sans">
-					<Container className="mx-auto max-w-[480px] rounded-lg bg-white p-8 shadow-md">
-						<Section>
-							<Heading className="mb-4 font-semibold text-black text-xl">
-								Подтвердите вашу почту
-							</Heading>
-
-							<Text className="mb-4 text-[#444] text-[14px] leading-[22px]">
-								Здравствуйте, {name}! Добро пожаловать в TCF 👋
-							</Text>
-
-							<Text className="mb-6 text-[#444] text-[14px] leading-[22px]">
-								Чтобы завершить регистрацию, нажмите кнопку ниже.
-							</Text>
-
-							<Section className="my-6 text-center">
-								<Button
-									href={link}
-									className="inline-block rounded-lg bg-black px-5 py-3 font-medium text-sm text-white"
-								>
-									Подтвердить email
-								</Button>
-							</Section>
-
-							<Text className="mt-6 text-[#777] text-[12px] leading-[20px]">
-								Если вы не запрашивали создание аккаунта — просто игнорируйте
-								письмо.
-							</Text>
-
-							<Row className="mt-8">
-								<Column align="center">
-									<Text className="text-center text-[#999] text-[12px]">
-										© {new Date().getFullYear()} TCF — Ford запчасти
-									</Text>
-								</Column>
-							</Row>
+				<Body className="mx-auto my-auto bg-white px-2 font-sans">
+					<Preview>{previewText}</Preview>
+					<Container className="mx-auto my-[40px] max-w-[465px] rounded border border-[#eaeaea] border-solid p-[20px]">
+						<Section className="mt-[24px]">
+							<Img
+								src={`${baseUrl}/logo/logo.svg`}
+								width="128"
+								height="40"
+								alt="Vercel Logo"
+								className="mx-auto my-0"
+							/>
 						</Section>
+						<Heading className="mx-0 my-[30px] p-0 text-center font-normal text-[18px] text-black">
+							<Hr />
+							{headingText}
+							<Hr />
+						</Heading>
+
+						<Text className="text-[14px] text-black leading-[24px]">
+							Здравствуйте, {name}!
+						</Text>
+						<Text>
+							Вы создали новую учётную запись клиента{" "}
+							<Link href={"https://ford-parts.com.ru"}>TCF</Link>. Вам осталось
+							только активировать её, нажав на кнопку ниже.
+						</Text>
+						<Section className="mt-[32px] mb-[32px] text-center">
+							<Button
+								className="rounded bg-[#000000] px-5 py-3 text-center font-semibold text-[12px] text-white no-underline"
+								href={link}
+							>
+								Подтвердить
+							</Button>
+						</Section>
+						<Text className="text-[14px] text-black leading-[24px]">
+							или скопируйте URL ссылку и вставьте в вашем браузере:{" "}
+							<Link href={link} className="text-blue-600 no-underline">
+								{link}
+							</Link>
+						</Text>
+						<Hr className="mx-0 my-[26px] w-full border border-[#eaeaea] border-solid" />
+						<Text className="text-[#666666] text-[12px] leading-[24px]">
+							Если вы не ожидали это увидеть, проигнорируйте письмо. Если у вас
+							есть вопросы, ответьте на это письмо или свяжитесь с нами по
+							адресу:{" "}
+							<Link
+								href="mailto:fordsevas@yandex.ru"
+								className="text-blue-600 no-underline"
+							>
+								fordsevas@yandex.ru
+							</Link>
+							.
+						</Text>
 					</Container>
 				</Body>
 			</Tailwind>
 		</Html>
 	);
 };
+
+VerifyUserEmail.PreviewProps = {
+	name: "Владислав",
+	link: "https://vercel.com",
+	headingText: "Подтвердите адрес электронной почты",
+} as VerifyUserEmailProps;
+
+export default VerifyUserEmail;

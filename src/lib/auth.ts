@@ -5,7 +5,7 @@ import { nextCookies } from "better-auth/next-js";
 import { jwt } from "better-auth/plugins";
 import { db } from "@/db";
 import * as schema from "@/db/schema";
-import { VerifyEmailTemplate } from "@/emails/verify-email";
+import VerifyUserEmail from "@/emails/verify-email";
 import { env } from "@/env";
 import { resend } from "@/lib/email/resend";
 
@@ -108,15 +108,16 @@ export const auth = betterAuth({
 			urlObj.searchParams.set("callbackURL", "/");
 
 			const emailHtml = await render(
-				VerifyEmailTemplate({
+				VerifyUserEmail({
 					name: user.name || "User",
 					link: urlObj.toString(),
+					headingText: "Активация учетной записи",
 				}),
 			);
 			await resend.emails.send({
-				from: "TCF <no-reply@info.eucalytics.uk>",
+				from: "Торговый центр Форд <no-reply@info.eucalytics.uk>",
 				to: user.email,
-				subject: "Подтвердите ваш email адрес",
+				subject: "Активация учетной записи | TCF",
 				html: emailHtml,
 			});
 		},
