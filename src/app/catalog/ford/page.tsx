@@ -10,7 +10,7 @@ export default async function CataloguePage() {
 
 	return (
 		<main className="space-y-4">
-			<h1 className="text-xl font-semibold tracking-tight lg:text-2xl">
+			<h1 className="font-semibold text-xl tracking-tight lg:text-2xl">
 				Каталог
 			</h1>
 

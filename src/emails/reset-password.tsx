@@ -9,20 +9,20 @@ export const ResetPasswordTemplate = ({
 	link: string;
 }) => (
 	<EmailLayout>
-		<Heading className="text-xl font-semibold mb-4">Сброс пароля 🔐</Heading>
+		<Heading className="mb-4 font-semibold text-xl">Сброс пароля 🔐</Heading>
 
-		<Text className="text-gray-700 mb-4">
+		<Text className="mb-4 text-gray-700">
 			Привет, {name}! Поступил запрос на сброс пароля.
 		</Text>
 
 		<Button
 			href={link}
-			className="bg-black text-white px-5 py-3 rounded-lg text-sm font-medium"
+			className="rounded-lg bg-black px-5 py-3 font-medium text-sm text-white"
 		>
 			Сбросить пароль
 		</Button>
 
-		<Text className="text-gray-500 mt-6">
+		<Text className="mt-6 text-gray-500">
 			Если это были не вы — просто проигнорируйте это письмо.
 		</Text>
 	</EmailLayout>

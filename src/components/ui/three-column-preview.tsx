@@ -45,7 +45,7 @@ export function ThreeColumnPreview({
 
 					<div className="absolute inset-0 flex h-full flex-col p-6 text-white">
 						<div className="flex flex-1 flex-col items-center justify-center gap-4 text-center">
-							<h3 className="text-xl font-semibold uppercase tracking-[0.28em]">
+							<h3 className="font-semibold text-xl uppercase tracking-[0.28em]">
 								{category.title}
 							</h3>
 							{!imageOnly && (

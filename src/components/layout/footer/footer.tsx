@@ -5,31 +5,31 @@ import Link from "next/link";
 export default function Footer() {
 	return (
 		<footer className="w-full border-t bg-background">
-			<div className="container mx-auto grid gap-8 py-10 px-4 sm:px-6 md:grid-cols-[repeat(4,minmax(0,1fr))] lg:grid-cols-[1.15fr_1fr_1fr_0.9fr] justify-items-start 2xl:max-w-[1700px]">
+			<div className="container mx-auto grid justify-items-start gap-8 px-4 py-10 sm:px-6 md:grid-cols-[repeat(4,minmax(0,1fr))] lg:grid-cols-[1.15fr_1fr_1fr_0.9fr] 2xl:max-w-[1700px]">
 				{/* О магазине */}
-				<div className="flex flex-col gap-2 max-w-[18rem]">
-					<h3 className="text-lg font-semibold">О нас:</h3>
-					<p className="text-sm text-muted-foreground">
+				<div className="flex max-w-[18rem] flex-col gap-2">
+					<h3 className="font-semibold text-lg">О нас:</h3>
+					<p className="text-muted-foreground text-sm">
 						Продажа запчастей для автомобилей FORD из Турции, Европы и Китая с
 						доставкой по России.
 					</p>
-					<p className="text-sm text-muted-foreground">Опыт работы с 1994 г.</p>
-					<p className="text-sm text-muted-foreground">
+					<p className="text-muted-foreground text-sm">Опыт работы с 1994 г.</p>
+					<p className="text-muted-foreground text-sm">
 						Ассортимент более 16 000 наименований на складе в Севастополе.
 					</p>
 				</div>
 
 				{/* Контакты */}
-				<div className="flex flex-col gap-3 text-sm text-muted-foreground">
-					<h3 className="text-lg font-semibold text-foreground">Адрес:</h3>
+				<div className="flex flex-col gap-3 text-muted-foreground text-sm">
+					<h3 className="font-semibold text-foreground text-lg">Адрес:</h3>
 					<div className="flex items-start gap-2">
-						<MapPin className="h-4 w-4 text-primary mt-0.5" />
+						<MapPin className="mt-0.5 h-4 w-4 text-primary" />
 						<Link href="https://yandex.ru/profile/213863116617?lang=ru&ysclid=mh9krqci6293026905">
 							Севастополь, ул. Хрусталёва, 74Ж
 						</Link>
 					</div>
 					<div className="flex items-start gap-2">
-						<Clock className="h-4 w-4 text-primary mt-0.5" />
+						<Clock className="mt-0.5 h-4 w-4 text-primary" />
 						<div>
 							<p>
 								Пн–Пт: 09:00 – 19:00
@@ -43,10 +43,10 @@ export default function Footer() {
 				</div>
 
 				{/* Телефоны */}
-				<div className="flex flex-col gap-3 text-sm text-muted-foreground">
-					<h3 className="text-lg font-semibold text-foreground">Контакты:</h3>
+				<div className="flex flex-col gap-3 text-muted-foreground text-sm">
+					<h3 className="font-semibold text-foreground text-lg">Контакты:</h3>
 					<div className="flex items-start gap-2">
-						<Mail className="h-4 w-4 text-primary mt-0.5" />
+						<Mail className="mt-0.5 h-4 w-4 text-primary" />
 						<a href="mailto:fordsevas@yandex.ru" className="hover:underline">
 							fordsevas@yandex.ru
 						</a>
@@ -119,11 +119,11 @@ export default function Footer() {
 				</div>
 
 				{/* Оплата */}
-				<div className="flex flex-col gap-3 md:-ml-12 lg:-ml-14">
-					<h3 className="text-lg font-semibold text-foreground">
+				<div className="md:-ml-12 lg:-ml-14 flex flex-col gap-3">
+					<h3 className="font-semibold text-foreground text-lg">
 						Способы оплаты:
 					</h3>
-					<div className="grid grid-cols-3 gap-3 justify-items-stretch sm:grid-cols-3 lg:grid-cols-4">
+					<div className="grid grid-cols-3 justify-items-stretch gap-3 sm:grid-cols-3 lg:grid-cols-4">
 						<Image
 							src="/payments/mir.svg"
 							alt="MIR"
@@ -186,7 +186,7 @@ export default function Footer() {
 
 			{/* Нижняя линия */}
 			<div className="border-t py-4">
-				<div className="container mx-auto flex flex-col items-center justify-between text-xs text-muted-foreground px-4 sm:px-6 md:flex-row 2xl:max-w-[1700px]">
+				<div className="container mx-auto flex flex-col items-center justify-between px-4 text-muted-foreground text-xs sm:px-6 md:flex-row 2xl:max-w-[1700px]">
 					<p>
 						&copy; {`1994 - ${new Date().getFullYear()}`} Торговый центр "Форд".
 						Все права защищены.

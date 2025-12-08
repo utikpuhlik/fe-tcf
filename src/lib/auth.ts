@@ -2,9 +2,11 @@ import { render } from "@react-email/render";
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { nextCookies } from "better-auth/next-js";
+import { jwt } from "better-auth/plugins";
 import { db } from "@/db";
 import * as schema from "@/db/schema";
 import { VerifyEmailTemplate } from "@/emails/verify-email";
+import { env } from "@/env";
 import { resend } from "@/lib/email/resend";
 
 interface SessionCallbackArgs {
@@ -24,8 +26,75 @@ export const auth = betterAuth({
 		},
 	},
 	user: {
-		deleteUser: {
-			enabled: true,
+		additionalFields: {
+			first_name: {
+				type: "string",
+				required: true,
+			},
+			last_name: {
+				type: "string",
+				required: true,
+			},
+		},
+	},
+	databaseHooks: {
+		user: {
+			create: {
+				after: async (user) => {
+					try {
+						await fetch(`${env.NEXT_PUBLIC_API_URL}/webhooks/better-auth`, {
+							method: "POST",
+							headers: {
+								"Content-Type": "application/json",
+								"x-better-auth-secret": env.BETTER_AUTH_WEBHOOK_SECRET,
+							},
+							body: JSON.stringify({
+								type: "user.created",
+								data: {
+									id: user.id,
+									email: user.email,
+									name: user.name,
+									first_name: user.first_name,
+									last_name: user.last_name,
+								},
+							}),
+						});
+					} catch (error) {
+						console.error(
+							"[BetterAuth] Error sending user.created webhook",
+							error,
+						);
+					}
+				},
+			},
+			update: {
+				after: async (user) => {
+					try {
+						await fetch(`${env.NEXT_PUBLIC_API_URL}/webhooks/better-auth`, {
+							method: "POST",
+							headers: {
+								"Content-Type": "application/json",
+								"x-better-auth-secret": env.BETTER_AUTH_WEBHOOK_SECRET,
+							},
+							body: JSON.stringify({
+								type: "user.updated",
+								data: {
+									id: user.id,
+									email: user.email,
+									name: user.name,
+									first_name: user.first_name,
+									last_name: user.last_name,
+								},
+							}),
+						});
+					} catch (error) {
+						console.error(
+							"[BetterAuth] Error sending user.updated webhook",
+							error,
+						);
+					}
+				},
+			},
 		},
 	},
 
@@ -54,7 +123,7 @@ export const auth = betterAuth({
 		autoSignInAfterVerification: true,
 	},
 
-	plugins: [nextCookies()],
+	plugins: [jwt(), nextCookies()],
 
 	callbacks: {
 		async session({ session, token }: SessionCallbackArgs) {

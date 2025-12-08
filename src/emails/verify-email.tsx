@@ -29,37 +29,37 @@ export const VerifyEmailTemplate = ({
 				}}
 			>
 				<Body className="bg-[#f6f6f6] py-10 font-sans">
-					<Container className="bg-white rounded-lg p-8 shadow-md mx-auto max-w-[480px]">
+					<Container className="mx-auto max-w-[480px] rounded-lg bg-white p-8 shadow-md">
 						<Section>
-							<Heading className="text-xl font-semibold mb-4 text-black">
+							<Heading className="mb-4 font-semibold text-black text-xl">
 								Подтвердите вашу почту
 							</Heading>
 
-							<Text className="text-[14px] leading-[22px] text-[#444] mb-4">
+							<Text className="mb-4 text-[#444] text-[14px] leading-[22px]">
 								Здравствуйте, {name}! Добро пожаловать в TCF 👋
 							</Text>
 
-							<Text className="text-[14px] leading-[22px] text-[#444] mb-6">
+							<Text className="mb-6 text-[#444] text-[14px] leading-[22px]">
 								Чтобы завершить регистрацию, нажмите кнопку ниже.
 							</Text>
 
-							<Section className="text-center my-6">
+							<Section className="my-6 text-center">
 								<Button
 									href={link}
-									className="bg-black text-white px-5 py-3 rounded-lg text-sm font-medium inline-block"
+									className="inline-block rounded-lg bg-black px-5 py-3 font-medium text-sm text-white"
 								>
 									Подтвердить email
 								</Button>
 							</Section>
 
-							<Text className="text-[12px] text-[#777] leading-[20px] mt-6">
+							<Text className="mt-6 text-[#777] text-[12px] leading-[20px]">
 								Если вы не запрашивали создание аккаунта — просто игнорируйте
 								письмо.
 							</Text>
 
 							<Row className="mt-8">
 								<Column align="center">
-									<Text className="text-[12px] text-[#999] text-center">
+									<Text className="text-center text-[#999] text-[12px]">
 										© {new Date().getFullYear()} TCF — Ford запчасти
 									</Text>
 								</Column>

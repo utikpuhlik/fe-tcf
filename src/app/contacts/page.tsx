@@ -10,10 +10,10 @@ export default function MapWithContactInfo() {
 	return (
 		<div className="container mx-auto px-4 py-12 md:px-6 md:py-12 lg:py-16 2xl:max-w-[1400px]">
 			<div className="mb-10 text-center">
-				<h2 className="mb-2 text-3xl font-bold tracking-tight sm:text-4xl">
+				<h2 className="mb-2 font-bold text-3xl tracking-tight sm:text-4xl">
 					Как нас найти:
 				</h2>
-				<p className="text-muted-foreground mx-auto max-w-2xl">
+				<p className="mx-auto max-w-2xl text-muted-foreground">
 					Находимся в Севастополе.
 					<br className="block sm:hidden" />
 					<span className="hidden sm:inline">&nbsp;</span>
@@ -23,7 +23,7 @@ export default function MapWithContactInfo() {
 
 			<div className="grid gap-8 lg:grid-cols-5">
 				{/* Map Section - 3/5 width on large screens */}
-				<div className="bg-muted h-[400px] overflow-hidden rounded-lg lg:col-span-3 lg:h-full">
+				<div className="h-[400px] overflow-hidden rounded-lg bg-muted lg:col-span-3 lg:h-full">
 					<iframe
 						src="https://yandex.ru/map-widget/v1/?ll=33.522279%2C44.556992&z=17&pt=33.522279%2C44.556992%2Cpm2rdm&l=map"
 						className="h-full w-full border-0"
@@ -37,14 +37,11 @@ export default function MapWithContactInfo() {
 				<div className="lg:col-span-2">
 					<Card className="h-full">
 						<CardContent>
-							<h3 className="mb-6 text-xl font-semibold">Контакты</h3>
+							<h3 className="mb-6 font-semibold text-xl">Контакты</h3>
 
 							<div className="space-y-4">
-								<div
-									className="flex items-start gap-3 text-sm text-muted-
-    foreground"
-								>
-									<MapPin className="text-primary mt-1 size-5 flex-shrink-0" />
+								<div className="foreground flex items-start gap-3 text-muted- text-sm">
+									<MapPin className="mt-1 size-5 flex-shrink-0 text-primary" />
 									<div className="text-left">
 										<h4 className="font-medium">Адрес</h4>
 										<p className="text-muted-foreground text-sm">
@@ -55,8 +52,8 @@ export default function MapWithContactInfo() {
 										</p>
 									</div>
 								</div>
-								<div className="flex items-start gap-3 text-sm text-muted-foreground">
-									<Phone className="text-primary mt-1 size-5 flex-shrink-0" />
+								<div className="flex items-start gap-3 text-muted-foreground text-sm">
+									<Phone className="mt-1 size-5 flex-shrink-0 text-primary" />
 									<div>
 										<h4 className="font-medium text-foreground">Телефоны</h4>
 										<div className="mt-2 space-y-3">
@@ -64,7 +61,7 @@ export default function MapWithContactInfo() {
 												<span>Розничный отдел</span>
 												<a
 													href="tel:+79780424666"
-													className="text-muted-foreground hover:text-primary transition-colors"
+													className="text-muted-foreground transition-colors hover:text-primary"
 												>
 													+7 (978) 042-46-66
 												</a>
@@ -73,7 +70,7 @@ export default function MapWithContactInfo() {
 												<span>Оптовый отдел</span>
 												<a
 													href="tel:+79183002622"
-													className="text-muted-foreground hover:text-primary transition-colors"
+													className="text-muted-foreground transition-colors hover:text-primary"
 												>
 													+7 (918) 300-26-22
 												</a>
@@ -81,20 +78,20 @@ export default function MapWithContactInfo() {
 										</div>
 									</div>
 								</div>
-								<div className="flex items-start gap-3 text-sm text-muted-foreground">
-									<Mail className="text-primary mt-1 size-5 flex-shrink-0" />
+								<div className="flex items-start gap-3 text-muted-foreground text-sm">
+									<Mail className="mt-1 size-5 flex-shrink-0 text-primary" />
 									<div>
 										<h4 className="font-medium text-foreground">Email</h4>
 										<a
 											href="mailto:fordsevas@yandex.ru"
-											className="text-muted-foreground hover:text-primary transition-colors"
+											className="text-muted-foreground transition-colors hover:text-primary"
 										>
 											fordsevas@yandex.ru
 										</a>
 									</div>
 								</div>
-								<div className="flex items-start gap-3 text-sm text-muted-foreground">
-									<Smartphone className="text-primary mt-1 size-5 flex-shrink-0" />
+								<div className="flex items-start gap-3 text-muted-foreground text-sm">
+									<Smartphone className="mt-1 size-5 flex-shrink-0 text-primary" />
 									<div className="flex flex-col gap-2">
 										<h4 className="font-medium text-foreground">
 											Свяжитесь с нами!

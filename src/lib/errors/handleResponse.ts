@@ -1,4 +1,4 @@
-import { notFound } from "next/navigation";
+import { notFound, unauthorized } from "next/navigation";
 import { AppError } from "@/lib/errors/AppError";
 
 export async function handleResponse<T>(response: Response): Promise<T> {
@@ -13,7 +13,11 @@ export async function handleResponse<T>(response: Response): Promise<T> {
 		notFound();
 	}
 
-	// 3. Other Errors: (401, 403, 500)
+	// Handle 401 and 403 Unauthorized/Forbidden
+	if (response.status === 401 || response.status === 403) {
+		unauthorized();
+	}
+	// 3. Other Errors: (500, etc.)
 	// We throw an error to be caught by error.tsx
 	let errorMessage = "Произошла неизвестная ошибка";
 	try {

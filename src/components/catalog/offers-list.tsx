@@ -15,18 +15,14 @@ export function OffersList({ offers, className }: OffersListProps) {
 	return (
 		<section
 			className={cn(
-				"flex flex-col border border-border rounded-none divide-y divide-border",
+				"flex flex-col divide-y divide-border rounded-none border border-border",
 				className,
 			)}
 		>
 			{offers.map((offer) => (
 				<Card
 					key={offer.id}
-					className="
-            flex flex-row items-center gap-4
-            border-0 rounded-none px-4 py-4
-            hover:bg-muted/40 transition-colors
-          "
+					className="flex flex-row items-center gap-4 rounded-none border-0 px-4 py-4 transition-colors hover:bg-muted/40"
 				>
 					{/* IMAGE */}
 					<div className="relative h-16 w-16 flex-shrink-0">
@@ -40,16 +36,16 @@ export function OffersList({ offers, className }: OffersListProps) {
 					</div>
 
 					{/* MAIN INFO */}
-					<div className="flex flex-col flex-1 min-w-0 leading-tight">
-						<span className="font-medium text-sm truncate">
+					<div className="flex min-w-0 flex-1 flex-col leading-tight">
+						<span className="truncate font-medium text-sm">
 							{offer.product.name}
 						</span>
 
-						<span className="text-xs text-muted-foreground">
+						<span className="text-muted-foreground text-xs">
 							Производитель: {offer.brand}
 						</span>
 
-						<span className="text-xs text-muted-foreground">
+						<span className="text-muted-foreground text-xs">
 							Артикул: {offer.manufacturer_number}
 						</span>
 					</div>
@@ -63,8 +59,8 @@ export function OffersList({ offers, className }: OffersListProps) {
 						<span
 							className={
 								offer.quantity > 0
-									? "text-xs text-green-600"
-									: "text-xs text-red-500"
+									? "text-green-600 text-xs"
+									: "text-red-500 text-xs"
 							}
 						>
 							{offer.quantity > 0

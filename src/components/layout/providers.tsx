@@ -22,6 +22,30 @@ export function Providers({ children }: { children: ReactNode }) {
 			magicLink
 			passkey
 			Link={Link}
+			additionalFields={{
+				first_name: {
+					label: "Имя",
+					placeholder: "Ваше имя",
+					description: "Укажите ваше имя",
+					required: true,
+					type: "string",
+					instructions:
+						"Имя должно содержать только буквы и быть от 2 до 32 символов.",
+				},
+				last_name: {
+					label: "Фамилия",
+					placeholder: "Ваша фамилия",
+					description: "Укажите вашу фамилию",
+					required: true,
+					type: "string",
+					instructions:
+						"Фамилия должна содержать только буквы и быть от 2 до 32 символов.",
+				},
+			}}
+			// какие поля показывать в аккаунте
+			account={{
+				fields: ["first_name", "last_name"],
+			}}
 			localization={{
 				ACCOUNT: "Аккаунт",
 				SECURITY: "Безопасность",
