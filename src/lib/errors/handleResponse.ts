@@ -1,4 +1,4 @@
-import {forbidden, notFound, unauthorized} from "next/navigation";
+import { forbidden, notFound, unauthorized } from "next/navigation";
 import { AppError } from "@/lib/errors/AppError";
 
 export async function handleResponse<T>(response: Response): Promise<T> {
