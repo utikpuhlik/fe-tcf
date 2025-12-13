@@ -10,7 +10,6 @@ import {
 /** Single user */
 export const zUserSchema = z.object({
 	id: z.uuid(),
-	clerk_id: z.string(),
 	first_name: z.string(),
 	last_name: z.string(),
 	email: z.email(),

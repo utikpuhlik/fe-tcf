@@ -4,9 +4,9 @@ import "./globals.css";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { AuthProvider } from "@/components/layout/auth-provider";
 import Footer from "@/components/layout/footer/footer";
 import { Header } from "@/components/layout/header/header";
-import { Providers } from "@/components/layout/providers";
 import { ThemedTopLoader } from "@/components/layout/top-loader";
 
 export const metadata: Metadata = {
@@ -22,7 +22,7 @@ export default function RootLayout({
 	return (
 		<html lang="en" className={GeistSans.className}>
 			<body>
-				<Providers>
+				<AuthProvider>
 					<ThemedTopLoader />
 					<Header />
 					{children}
@@ -30,7 +30,7 @@ export default function RootLayout({
 					<SpeedInsights />
 					<Analytics />
 					<Footer />
-				</Providers>
+				</AuthProvider>
 			</body>
 		</html>
 	);

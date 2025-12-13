@@ -20,7 +20,7 @@ import {
 	FieldLabel,
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
-import { signUpAction } from "@/lib/actions/auth";
+import { signUpAction } from "@/lib/actions/authAction";
 
 import {
 	type SignUpSchema,

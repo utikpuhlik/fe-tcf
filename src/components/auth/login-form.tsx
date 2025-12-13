@@ -18,8 +18,7 @@ import {
 	FieldLabel,
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
-import { signInAction } from "@/lib/actions/auth";
-
+import { authClient } from "@/lib/auth-client";
 import {
 	type SignInSchema,
 	zSignInSchema,
@@ -42,15 +41,18 @@ export function LoginForm({
 	const onSubmit = async (values: SignInSchema): Promise<void> => {
 		form.clearErrors("root");
 
-		try {
-			await signInAction(values.email, values.password);
-		} catch (err: unknown) {
-			const message =
-				err instanceof Error
-					? err.message
-					: "Не удалось войти. Попробуйте ещё раз.";
+		const res = await authClient.signIn.email({
+			email: values.email,
+			password: values.password,
+			callbackURL: "/",
+		});
 
-			form.setError("root", { type: "server", message });
+		if (res.error) {
+			form.setError("root", {
+				type: "server",
+				message: "Не удалось войти. Попробуйте ещё раз.",
+			});
+			return;
 		}
 	};
 

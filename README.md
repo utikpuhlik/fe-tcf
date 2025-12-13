@@ -33,7 +33,7 @@ Finally, open [http://localhost:3000](http://localhost:3000) with your browser t
 
 ### DB Migrations for BetterAuth
 ```
-# Create auth.ts and configure it to generate a Schema with:
+# Create authAction.ts and configure it to generate a Schema with:
 $ npx @better-auth/cli generate
 
 # Setup drizzle config file
