@@ -42,15 +42,7 @@ export function TileGrid<T extends TileItem>({
 		>
 			{merged.map((item) => (
 				<Link key={item.id} href={makeHref(item)} className="block">
-					<Card
-						className="
-              flex flex-row items-center gap-4
-              border border-border border-t-0 border-l-0
-              rounded-none px-4 py-3
-              hover:bg-muted/40 transition-colors
-              h-[70px]
-            "
-					>
+					<Card className="flex h-[70px] flex-row items-center gap-4 rounded-none border border-border border-t-0 border-l-0 px-4 py-3 transition-colors hover:bg-muted/40">
 						<div className="relative h-12 w-12 flex-shrink-0">
 							<Image
 								src={item.image_url}
@@ -61,12 +53,12 @@ export function TileGrid<T extends TileItem>({
 							/>
 						</div>
 
-						<div className="flex flex-col justify-center items-start leading-tight">
-							<span className="text-sm font-medium group-hover:text-primary">
+						<div className="flex flex-col items-start justify-center leading-tight">
+							<span className="font-medium text-sm group-hover:text-primary">
 								{item.name}
 							</span>
 
-							<span className="text-xs text-muted-foreground">
+							<span className="text-muted-foreground text-xs">
 								{item.products_count} товаров
 							</span>
 						</div>

@@ -17,7 +17,26 @@
 		"enabled": true,
 		"rules": {
 			"recommended": true,
-			"a11y": "off"
+			"a11y": "off",
+			"correctness": {
+				"noUnusedFunctionParameters": "off",
+				"noUnusedImports": {
+					"fix": "safe",
+					"level": "info",
+					"options": {}
+				},
+				"useParseIntRadix": "off",
+				"useHookAtTopLevel": "off"
+			},
+			"nursery": {
+				"useSortedClasses": {
+					"fix": "safe",
+					"level": "info",
+					"options": {
+						"functions": ["cn"]
+					}
+				}
+			}
 		},
 		"domains": {
 			"next": "recommended"

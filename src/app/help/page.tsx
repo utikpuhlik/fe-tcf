@@ -40,10 +40,10 @@ const faqs = [
 
 export default function CenterAlignedWithActiveBackgroundGray() {
 	return (
-		<div className="max-w-[85rem] container mx-auto px-4 md:px-6 2xl:max-w-[1400px] py-24 lg:py-32">
+		<div className="container mx-auto max-w-[85rem] px-4 py-24 md:px-6 lg:py-32 2xl:max-w-[1400px]">
 			{/* Title */}
-			<div className="max-w-2xl mx-auto text-center mb-10 lg:mb-14">
-				<h2 className="text-2xl font-bold md:text-4xl md:leading-tight">
+			<div className="mx-auto mb-10 max-w-2xl text-center lg:mb-14">
+				<h2 className="font-bold text-2xl md:text-4xl md:leading-tight">
 					Your questions, answered
 				</h2>
 				<p className="mt-1 text-muted-foreground">
@@ -52,14 +52,14 @@ export default function CenterAlignedWithActiveBackgroundGray() {
 			</div>
 			{/* End Title */}
 
-			<div className="max-w-2xl mx-auto">
+			<div className="mx-auto max-w-2xl">
 				<Accordion type="single" collapsible className="w-full">
 					{faqs.map((faq, index) => (
 						<AccordionItem value={`item-${index}`} key={faq.question}>
-							<AccordionTrigger className="text-lg font-semibold text-left">
+							<AccordionTrigger className="text-left font-semibold text-lg">
 								{faq.question}
 							</AccordionTrigger>
-							<AccordionContent className="text-muted-foreground text-base">
+							<AccordionContent className="text-base text-muted-foreground">
 								{faq.answer}
 							</AccordionContent>
 						</AccordionItem>

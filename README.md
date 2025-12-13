@@ -17,12 +17,36 @@ Finally, open [http://localhost:3000](http://localhost:3000) with your browser t
 
 ## Project Overview
 
+### Tech Stack
+* **Framework**: Next.js 16 (App Router)
+* **Language**: TypeScript
+* **Database**: PostgreSQL with Drizzle ORM (used only for BetterAuth sessions)
+* **Authentication**: BetterAuth + BetterAuthUI
+* **Email Sending**: Resend with `react-email` components
+
 ### Theme & Design
 * Tailwind CSS
 * **Components**: Shadcn UI
 * **Icons**: lucide-icons (radix ui)
 * **Font**: Geist with cyrillic support
 * **Theme**: Only light theme for now + prussian blue primary color (bg-blue-900)
+
+### DB Migrations for BetterAuth
+```
+# Create authAction.ts and configure it to generate a Schema with:
+$ npx @better-auth/cli generate
+
+# Setup drizzle config file
+$ drizzle-kit init
+
+# Copy the generated schema to scghema.ts Drizzle file
+
+# Generate migration
+$ drizzle-kit generate
+
+# Run migration
+$ drizzle-kit migrate
+```
 
 ### Release & Deployment
 Now vercel is used for deployment. You can deploy your own version by pushing your branch to repository.

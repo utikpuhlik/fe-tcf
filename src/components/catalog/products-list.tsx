@@ -15,7 +15,7 @@ export function ProductsList({ products, className }: ProductsListProps) {
 	return (
 		<section
 			className={cn(
-				"flex flex-col border border-border rounded-none divide-y divide-border",
+				"flex flex-col divide-y divide-border rounded-none border border-border",
 				className,
 			)}
 		>
@@ -25,13 +25,7 @@ export function ProductsList({ products, className }: ProductsListProps) {
 					href={`/catalog/ford/${product.sub_category.category.slug}/${product.sub_category.slug}/${product.slug}`}
 					className="block"
 				>
-					<Card
-						className="
-              flex flex-row items-center gap-4
-              rounded-none border-0 px-4 py-4
-              hover:bg-muted/40 transition-colors
-            "
-					>
+					<Card className="flex flex-row items-center gap-4 rounded-none border-0 px-4 py-4 transition-colors hover:bg-muted/40">
 						{/* IMAGE */}
 						<div className="relative h-16 w-16 flex-shrink-0">
 							<Image
@@ -44,13 +38,13 @@ export function ProductsList({ products, className }: ProductsListProps) {
 						</div>
 
 						{/* INFO */}
-						<div className="flex flex-col flex-1 min-w-0 leading-tight">
-							<span className="font-medium text-sm truncate">
+						<div className="flex min-w-0 flex-1 flex-col leading-tight">
+							<span className="truncate font-medium text-sm">
 								{product.name}
 							</span>
 
 							{product.cross_number && (
-								<span className="text-xs text-muted-foreground truncate">
+								<span className="truncate text-muted-foreground text-xs">
 									Кросс-номер: {product.cross_number}
 								</span>
 							)}

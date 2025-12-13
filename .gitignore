@@ -18,6 +18,9 @@
 /.next/
 /out/
 
+# drizzle
+/drizzle
+
 # production
 /build
 
@@ -144,6 +147,3 @@ fabric.properties
 
 # Sentry Config File
 .env.sentry-build-plugin
-
-# clerk configuration (can include secrets)
-/.clerk/

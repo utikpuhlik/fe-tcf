@@ -14,8 +14,8 @@ export function ContactsInfoCard() {
 			<div className="space-y-3">
 				<p>г. Севастополь</p>
 				<p>ул. Хрусталёва, 74Ж</p>
-				<div className="text-sm text-neutral-500">
-					<p className="leading-7 font-medium text-neutral-700">График</p>
+				<div className="text-neutral-500 text-sm">
+					<p className="font-medium text-neutral-700 leading-7">График</p>
 					{WORKING_HOURS.map((item) => (
 						<p key={item}>{item}</p>
 					))}

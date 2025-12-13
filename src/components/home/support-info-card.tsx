@@ -28,12 +28,12 @@ const messengerBaseClasses =
 export function SupportInfoCard() {
 	return (
 		<InfoCard icon={Headset} title="Помощь и консультации">
-			<div className="space-y-3 text-sm leading-6 text-neutral-600 sm:text-base">
+			<div className="space-y-3 text-neutral-600 text-sm leading-6 sm:text-base">
 				<div className="flex flex-col gap-1">
 					<span className="font-medium text-neutral-800">Телефоны</span>
 					<a
 						href="tel:+79780424666"
-						className="flex w-fit rounded-full bg-neutral-900 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-white transition hover:bg-neutral-700"
+						className="flex w-fit rounded-full bg-neutral-900 px-3 py-1 font-semibold text-white text-xs uppercase tracking-[0.18em] transition hover:bg-neutral-700"
 					>
 						+7 (978) 042-46-66
 					</a>
