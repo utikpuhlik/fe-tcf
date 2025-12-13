@@ -1,6 +1,6 @@
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
-import { SignupForm } from "@/components/signup-form";
+import { LoginForm } from "@/components/login-form";
 import { auth } from "@/lib/auth";
 
 export default async function Page() {
@@ -13,7 +13,7 @@ export default async function Page() {
 	return (
 		<div className="flex min-h-svh w-full items-center justify-center p-6 md:p-10">
 			<div className="w-full max-w-sm">
-				<SignupForm />
+				<LoginForm />
 			</div>
 		</div>
 	);

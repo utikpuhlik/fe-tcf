@@ -1,5 +1,5 @@
 import { headers } from "next/headers";
-import { redirect } from "next/navigation";
+import { unauthorized } from "next/navigation";
 import { auth } from "@/lib/auth";
 
 export default async function FavoritesPage() {
@@ -7,7 +7,7 @@ export default async function FavoritesPage() {
 		headers: await headers(),
 	});
 	if (!session) {
-		redirect("/auth/sign-in");
+		unauthorized();
 	}
 
 	return (
