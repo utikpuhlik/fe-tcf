@@ -4,7 +4,7 @@ import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { nextCookies } from "better-auth/next-js";
 import { jwt } from "better-auth/plugins";
 import { db } from "@/db";
-import * as schema from "@/db/schema";
+import { schema } from "@/db/schema";
 import VerifyUserEmail from "@/emails/verify-email";
 import { env } from "@/env";
 import { resend } from "@/lib/email/resend";

@@ -5,12 +5,12 @@ import { redirect } from "next/navigation";
 
 import { auth } from "@/lib/auth";
 
-export async function signUpAction(formData: FormData) {
-	const email = formData.get("email") as string;
-	const password = formData.get("password") as string;
-	const first_name = formData.get("first_name") as string;
-	const last_name = formData.get("last_name") as string;
-
+export async function signUpAction(
+	email: string,
+	password: string,
+	first_name: string,
+	last_name: string,
+): Promise<void> {
 	const name = `${first_name} ${last_name}`;
 
 	await auth.api.signUpEmail({
@@ -23,13 +23,10 @@ export async function signUpAction(formData: FormData) {
 		},
 	});
 
-	redirect("/");
+	redirect(`/auth/check-email?email=${encodeURIComponent(email)}`);
 }
 
-export async function signInAction(formData: FormData) {
-	const email = formData.get("email") as string;
-	const password = formData.get("password") as string;
-
+export async function signInAction(email: string, password: string) {
 	await auth.api.signInEmail({
 		body: {
 			email,

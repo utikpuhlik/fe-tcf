@@ -24,7 +24,10 @@ export default function Footer() {
 					<h3 className="font-semibold text-foreground text-lg">Адрес:</h3>
 					<div className="flex items-start gap-2">
 						<MapPin className="mt-0.5 h-4 w-4 text-primary" />
-						<Link href="https://yandex.ru/profile/213863116617?lang=ru&ysclid=mh9krqci6293026905">
+						<Link
+							className="hover:underline"
+							href="https://yandex.ru/profile/213863116617?lang=ru&ysclid=mh9krqci6293026905"
+						>
 							Севастополь, ул. Хрусталёва, 74Ж
 						</Link>
 					</div>
