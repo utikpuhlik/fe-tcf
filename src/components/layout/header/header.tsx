@@ -20,6 +20,21 @@ export function Header() {
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
 	const dropdownRef = useRef<HTMLDivElement | null>(null);
 
+	const additionalLinks = [
+		{
+			href: "/profile",
+			label: "Профиль",
+			icon: <User />,
+			signedIn: true,
+		},
+		{
+			href: "/orders",
+			label: "Заказы",
+			icon: <ShoppingCart />,
+			signedIn: true,
+		},
+	];
+
 	useEffect(() => {
 		const handleClickOutside = (event: MouseEvent) => {
 			if (!dropdownRef.current?.contains(event.target as Node)) {
@@ -60,16 +75,7 @@ export function Header() {
 						/>
 					</Link>
 					<div className="-translate-x-2 flex items-center gap-2 sm:hidden md:gap-4">
-						<Link href="/profile">
-							<Button
-								variant="ghost"
-								size="icon"
-								className="h-11 w-11 rounded-full sm:h-10 sm:w-10"
-								aria-label="Личный кабинет"
-							>
-								<User className="size-6 sm:size-5" />
-							</Button>
-						</Link>
+						<UserButton size="icon" additionalLinks={additionalLinks} />
 
 						<Link href="/favorites">
 							<Button
@@ -177,7 +183,7 @@ export function Header() {
 				</div>
 
 				<div className="hidden items-center gap-2 sm:flex sm:flex-shrink-0 sm:justify-end md:gap-4">
-					<UserButton size="icon" />
+					<UserButton size="icon" additionalLinks={additionalLinks} />
 					<Link href="/favorites">
 						<Button
 							variant="ghost"
