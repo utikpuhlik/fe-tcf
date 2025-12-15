@@ -1,29 +1,108 @@
-import { Button, Heading, Text } from "@react-email/components";
-import { EmailLayout } from "./layout";
+import {
+	Body,
+	Button,
+	Container,
+	Head,
+	Heading,
+	Hr,
+	Html,
+	Img,
+	Link,
+	Preview,
+	pixelBasedPreset,
+	Section,
+	Tailwind,
+	Text,
+} from "@react-email/components";
 
-export const ResetPasswordTemplate = ({
+interface ResetPasswordEmailProps {
+	name?: string;
+	email?: string;
+	link?: string;
+	headingText: string;
+}
+
+const baseUrl = "https://fe-tcf.vercel.app";
+
+export const ResetPasswordEmail = ({
 	name,
 	link,
-}: {
-	name: string;
-	link: string;
-}) => (
-	<EmailLayout>
-		<Heading className="mb-4 font-semibold text-xl">Сброс пароля 🔐</Heading>
+	headingText,
+}: ResetPasswordEmailProps) => {
+	const previewText = `Сброс пароля | TCF`;
 
-		<Text className="mb-4 text-gray-700">
-			Привет, {name}! Поступил запрос на сброс пароля.
-		</Text>
+	return (
+		<Html>
+			<Head />
+			<Tailwind
+				config={{
+					presets: [pixelBasedPreset],
+				}}
+			>
+				<Body className="mx-auto my-auto bg-white px-2 font-sans">
+					<Preview>{previewText}</Preview>
+					<Container className="mx-auto my-[40px] max-w-[465px] rounded border border-[#eaeaea] border-solid p-[20px]">
+						<Section className="mt-[24px]">
+							<Img
+								src={`${baseUrl}/logo/logo.png`}
+								width="128"
+								height="40"
+								alt="Logo"
+								className="mx-auto my-0"
+							/>
+						</Section>
+						<Heading className="mx-0 my-[30px] p-0 text-center font-normal text-[18px] text-black">
+							<Hr />
+							{headingText}
+							<Hr />
+						</Heading>
 
-		<Button
-			href={link}
-			className="rounded-lg bg-black px-5 py-3 font-medium text-sm text-white"
-		>
-			Сбросить пароль
-		</Button>
+						<Text className="text-[14px] text-black leading-[24px]">
+							Здравствуйте, {name}!
+						</Text>
+						<Text>
+							Вы создали новую учётную запись клиента{" "}
+							<Link href={"https://ford-parts.com.ru"}>TCF</Link>. Вам осталось
+							только активировать её, нажав на кнопку ниже.
+						</Text>
+						<Section className="mt-[32px] mb-[32px] text-center">
+							<Button
+								className="rounded bg-[#000000] px-5 py-3 text-center font-semibold text-[12px] text-white no-underline"
+								href={link}
+							>
+								Подтвердить
+							</Button>
+						</Section>
+						<Text className="text-[14px] text-black leading-[24px]">
+							или скопируйте URL ссылку и вставьте в вашем браузере:{" "}
+							<Link href={link} className="text-blue-600 no-underline">
+								{link}
+							</Link>
+						</Text>
+						<Hr className="mx-0 my-[26px] w-full border border-[#eaeaea] border-solid" />
+						<Text className="text-[#666666] text-[12px] leading-[24px]">
+							Если вы не ожидали это увидеть, проигнорируйте письмо. Если у вас
+							есть вопросы, ответьте на это письмо или свяжитесь с нами по
+							адресу:{" "}
+							<Link
+								href="mailto:fordsevas@yandex.ru"
+								className="text-blue-600 no-underline"
+							>
+								fordsevas@yandex.ru
+							</Link>
+							.
+						</Text>
+					</Container>
+				</Body>
+			</Tailwind>
+		</Html>
+	);
+};
 
-		<Text className="mt-6 text-gray-500">
-			Если это были не вы — просто проигнорируйте это письмо.
-		</Text>
-	</EmailLayout>
-);
+ResetPasswordEmail.PreviewProps = {
+	name: "Владислав",
+	link: "https://fe-tcf.vercel.app",
+	headingText: "Восстановление пароля",
+} as ResetPasswordEmailProps;
+
+export default ResetPasswordEmail;

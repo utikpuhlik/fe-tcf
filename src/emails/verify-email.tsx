@@ -44,10 +44,10 @@ export const VerifyUserEmail = ({
 					<Container className="mx-auto my-[40px] max-w-[465px] rounded border border-[#eaeaea] border-solid p-[20px]">
 						<Section className="mt-[24px]">
 							<Img
-								src={`${baseUrl}/logo/logo.svg`}
+								src={`${baseUrl}/logo/logo.png`}
 								width="128"
 								height="40"
-								alt="Vercel Logo"
+								alt="Logo"
 								className="mx-auto my-0"
 							/>
 						</Section>
@@ -101,7 +101,7 @@ export const VerifyUserEmail = ({
 
 VerifyUserEmail.PreviewProps = {
 	name: "Владислав",
-	link: "https://vercel.com",
+	link: "https://fe-tcf.vercel.app",
 	headingText: "Подтвердите адрес электронной почты",
 } as VerifyUserEmailProps;
 

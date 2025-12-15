@@ -5,6 +5,7 @@ import { nextCookies } from "better-auth/next-js";
 import { jwt } from "better-auth/plugins";
 import { db } from "@/db";
 import { schema } from "@/db/schema";
+import ResetPasswordEmail from "@/emails/reset-password";
 import VerifyUserEmail from "@/emails/verify-email";
 import { env } from "@/env";
 import { resend } from "@/lib/email/resend";
@@ -101,6 +102,21 @@ export const auth = betterAuth({
 	emailAndPassword: {
 		enabled: true,
 		requireEmailVerification: true,
+		sendResetPassword: async ({ user, url, token }) => {
+			const emailHtml = await render(
+				ResetPasswordEmail({
+					name: user.name || "User",
+					link: url,
+					headingText: "Восстановление пароля",
+				}),
+			);
+			await resend.emails.send({
+				from: "Торговый центр Форд <info@info.eucalytics.uk>",
+				to: user.email,
+				subject: "Восстановление пароля | TCF",
+				html: emailHtml,
+			});
+		},
 	},
 	emailVerification: {
 		sendVerificationEmail: async ({ user, url }) => {
@@ -115,7 +131,7 @@ export const auth = betterAuth({
 				}),
 			);
 			await resend.emails.send({
-				from: "Торговый центр Форд <no-reply@info.eucalytics.uk>",
+				from: "Торговый центр Форд <info@info.eucalytics.uk>",
 				to: user.email,
 				subject: "Активация учетной записи | TCF",
 				html: emailHtml,
