@@ -61,16 +61,16 @@ export const ResetPasswordEmail = ({
 							Здравствуйте, {name}!
 						</Text>
 						<Text>
-							Вы создали новую учётную запись клиента{" "}
-							<Link href={"https://ford-parts.com.ru"}>TCF</Link>. Вам осталось
-							только активировать её, нажав на кнопку ниже.
+							Вы запросили сброс пароля для учётной записи клиента TCF{" "}
+							<Link href={"https://ford-parts.com.ru"}>TCF</Link>. Вы можете сбросить пароль,
+							нажав на кнопку ниже.
 						</Text>
 						<Section className="mt-[32px] mb-[32px] text-center">
 							<Button
 								className="rounded bg-[#000000] px-5 py-3 text-center font-semibold text-[12px] text-white no-underline"
 								href={link}
 							>
-								Подтвердить
+								Восстановить
 							</Button>
 						</Section>
 						<Text className="text-[14px] text-black leading-[24px]">

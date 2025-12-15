@@ -71,6 +71,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 				RESET_PASSWORD_ACTION: "Сбросить пароль",
 				SIGN_IN_DESCRIPTION:
 					"Введите свои учетные данные, чтобы войти в систему.",
+				UPDATED_SUCCESSFULLY: "Успешно изменён",
+				IS_THE_SAME: "Одинаковый",
+				CURRENT_PASSWORD: "Актуальный пароль",
+				CURRENT_PASSWORD_PLACEHOLDER: "Актуальный пароль",
+				NEW_PASSWORD: "Новый пароль",
+				NEW_PASSWORD_PLACEHOLDER: "Новый пароль",
+				CHANGE_PASSWORD_SUCCESS: "Пароль был успешно изменён",
 			}}
 		>
 			{children}
