@@ -8,7 +8,7 @@ import { AuthProvider } from "@/components/layout/auth-provider";
 import Footer from "@/components/layout/footer/footer";
 import { Header } from "@/components/layout/header/header";
 import { ThemedTopLoader } from "@/components/layout/top-loader";
-import {Toaster} from "@/components/ui/sonner";
+import { Toaster } from "@/components/ui/sonner";
 
 export const metadata: Metadata = {
 	title: "Магазин автозапчастей Ford | TCF",

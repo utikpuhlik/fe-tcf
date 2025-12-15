@@ -62,8 +62,8 @@ export const ResetPasswordEmail = ({
 						</Text>
 						<Text>
 							Вы запросили сброс пароля для учётной записи клиента TCF{" "}
-							<Link href={"https://ford-parts.com.ru"}>TCF</Link>. Вы можете сбросить пароль,
-							нажав на кнопку ниже.
+							<Link href={"https://ford-parts.com.ru"}>TCF</Link>. Вы можете
+							сбросить пароль, нажав на кнопку ниже.
 						</Text>
 						<Section className="mt-[32px] mb-[32px] text-center">
 							<Button
