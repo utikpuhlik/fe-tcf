@@ -2,7 +2,7 @@ import { render } from "@react-email/render";
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { nextCookies } from "better-auth/next-js";
-import { jwt } from "better-auth/plugins";
+import { captcha, jwt } from "better-auth/plugins";
 import { db } from "@/db";
 import { schema } from "@/db/schema";
 import ResetPasswordEmail from "@/emails/reset-password";
@@ -102,7 +102,7 @@ export const auth = betterAuth({
 	emailAndPassword: {
 		enabled: true,
 		requireEmailVerification: true,
-		sendResetPassword: async ({ user, url, token }) => {
+		sendResetPassword: async ({ user, url }) => {
 			const emailHtml = await render(
 				ResetPasswordEmail({
 					name: user.name || "User",
@@ -140,7 +140,14 @@ export const auth = betterAuth({
 		autoSignInAfterVerification: true,
 	},
 
-	plugins: [jwt(), nextCookies()],
+	plugins: [
+		jwt(),
+		captcha({
+			provider: "cloudflare-turnstile",
+			secretKey: env.TURNSTILE_SECRET_KEY,
+		}),
+		nextCookies(),
+	],
 
 	callbacks: {
 		async session({ session, token }: SessionCallbackArgs) {
