@@ -10,6 +10,7 @@ export const env = createEnv({
 		DATABASE_URL: z.string(),
 		BETTER_AUTH_WEBHOOK_SECRET: z.string(),
 		TURNSTILE_SECRET_KEY: z.string(),
+		YANDEX_GEOCODER_API_KEY: z.string(),
 	},
 	client: {
 		NEXT_PUBLIC_API_URL: z.url(),
@@ -24,6 +25,7 @@ export const env = createEnv({
 		DATABASE_URL: process.env.DATABASE_URL,
 		BETTER_AUTH_WEBHOOK_SECRET: process.env.BETTER_AUTH_WEBHOOK_SECRET,
 		TURNSTILE_SECRET_KEY: process.env.TURNSTILE_SECRET_KEY,
+		YANDEX_GEOCODER_API_KEY: process.env.YANDEX_GEOCODER_API_KEY,
 		NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL,
 		NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL,
 		NEXT_PUBLIC_TURNSTILE_SITE_KEY: process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY,
