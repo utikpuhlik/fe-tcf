@@ -1,4 +1,5 @@
 import { OffersList } from "@/components/catalog/offers-list";
+import ProductOverview from "@/components/catalog/product-overview";
 import Breadcrumbs from "@/components/shared/breadcrumbs";
 import { offersApi } from "@/lib/api/offerApi";
 import { productsApi } from "@/lib/api/productApi";
@@ -41,6 +42,8 @@ export default async function OffersPage({ params }: Props) {
 					]}
 				/>
 			</div>
+
+			<ProductOverview product={product} />
 
 			<OffersList offers={offers.items} />
 		</main>
