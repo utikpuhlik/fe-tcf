@@ -45,7 +45,7 @@ export type CustomerTypeEnum = z.infer<typeof zCustomerTypeEnum>;
 export type WaybillTypeEnum = z.infer<typeof zWaybillTypeEnum>;
 export type OrderStatusEnum = z.infer<typeof zOrderStatusEnum>;
 export type ShippingMethodEnum = z.infer<typeof zShippingMethodEnum>;
-export type CurreancyEnum = z.infer<typeof zCurrencyEnum>;
+export type CurrencyEnum = z.infer<typeof zCurrencyEnum>;
 export type UserBalanceChangeReasonEnum = z.infer<
 	typeof zUserBalanceChangeReasonEnum
 >;
