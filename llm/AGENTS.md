@@ -1,5 +1,10 @@
 # Repository Guidelines
 
+## General
+- instruction are stored in `llm/` folder
+- documentation for external backend is placed under [backend_openapi.json](backend_openapi.json)
+- always run `biome check --write` after making changes (permission don't needed)
+
 ## Project Structure & Module Organization
 - Next.js App Router lives in `src/app` (routes, layouts, server actions).
 - Reusable UI lives in `src/components` using the `@/*` alias.
