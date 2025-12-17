@@ -1,46 +1,67 @@
 import Image from "next/image";
-
+import { Badge } from "@/components/ui/badge";
+import { Card, CardContent } from "@/components/ui/card";
 import type { ProductSchema } from "@/lib/schemas/productSchema";
+import { cn, formatCurrency } from "@/lib/utils";
+
+interface ProductOverviewProps {
+	product: ProductSchema;
+	minPriceRub: number | null;
+	totalQuantity: number | null;
+}
 
 export default function ProductOverview({
 	product,
-}: {
-	product: ProductSchema;
-}) {
+	minPriceRub,
+	totalQuantity,
+}: ProductOverviewProps) {
+	const qty = totalQuantity ?? 0;
+	const inStock = qty > 0;
+
+	const priceLabel =
+		minPriceRub == null
+			? "цена не указана"
+			: `от: ${formatCurrency(minPriceRub)}`;
+
 	return (
-		<div className="mx-auto w-full max-w-7xl p-6">
-			{/*
-				Placeholder pricing and availability until real data is wired.
-				Animate the status dot green when stock exists, red otherwise.
-			*/}
-			<div className="flex flex-col gap-6 md:flex-row md:items-start">
-				<div className="relative aspect-square w-full max-w-[233px] overflow-hidden rounded-lg bg-muted">
+		<Card className="w-full">
+			<CardContent className="flex gap-4 p-4">
+				<div className="relative h-24 w-24 shrink-0 overflow-hidden rounded-md bg-muted">
 					<Image
 						src={product.image_url}
 						alt={product.name}
 						fill
-						className="h-full w-full object-cover"
-						sizes="(min-width: 768px) 233px, 80vw"
+						className="object-cover"
+						sizes="96px"
 					/>
 				</div>
 
-				<div className="space-y-3 md:pl-4">
-					<h1 className="font-bold text-3xl">{product.name}</h1>
+				<div className="min-w-0 flex-1 space-y-1">
+					<h1 className="truncate font-semibold text-lg">{product.name}</h1>
+
 					<p className="text-muted-foreground text-sm">
-						Cross number: {product.cross_number ?? "Not specified"}
+						Кросс-номер: {product.cross_number ?? "Not specified"}
 					</p>
-					<div className="space-y-1">
-						<p className="font-semibold text-base">от: 3000 руб</p>
-						<div className="flex items-center gap-2 text-sm">
-							<span className="relative flex h-3 w-3">
-								<span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-500 opacity-75"></span>
-								<span className="relative inline-flex h-3 w-3 rounded-full bg-emerald-500"></span>
-							</span>
-							<span className="text-muted-foreground">в наличии: 5</span>
-						</div>
+
+					<p className="font-medium text-sm">{priceLabel}</p>
+
+					<div className="flex items-center gap-2">
+						<span
+							className={cn(
+								"h-2.5 w-2.5 rounded-full",
+								inStock ? "bg-emerald-500" : "bg-rose-500",
+							)}
+							aria-hidden
+						/>
+						<Badge
+							variant={inStock ? "secondary" : "destructive"}
+							className="font-normal"
+						>
+							{inStock ? `в наличии: ${qty}` : "нет в наличии"}
+						</Badge>
 					</div>
 				</div>
-			</div>
-		</div>
+			</CardContent>
+		</Card>
 	);
 }

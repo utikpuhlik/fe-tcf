@@ -1,5 +1,6 @@
 "use client";
 
+import { ShoppingCart } from "lucide-react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -25,7 +26,7 @@ export function OffersList({ offers, className }: OffersListProps) {
 					className="flex flex-row items-center gap-4 rounded-none border-0 px-4 py-4 transition-colors hover:bg-muted/40"
 				>
 					{/* IMAGE */}
-					<div className="relative h-16 w-16 flex-shrink-0">
+					<div className="relative h-16 w-16 shrink-0">
 						<Image
 							src={offer.image_url}
 							alt={offer.product.name}
@@ -71,8 +72,8 @@ export function OffersList({ offers, className }: OffersListProps) {
 
 					{/* ADD TO CART */}
 					<div className="ml-4">
-						<Button size="sm" variant="default">
-							В корзину
+						<Button size="sm" variant="outline">
+							<ShoppingCart />
 						</Button>
 					</div>
 				</Card>

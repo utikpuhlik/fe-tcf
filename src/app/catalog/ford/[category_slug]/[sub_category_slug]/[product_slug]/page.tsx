@@ -3,6 +3,7 @@ import ProductOverview from "@/components/catalog/product-overview";
 import Breadcrumbs from "@/components/shared/breadcrumbs";
 import { offersApi } from "@/lib/api/offerApi";
 import { productsApi } from "@/lib/api/productApi";
+import { GetMinPriceAndQuantity } from "@/lib/utils/offers";
 
 interface Props {
 	params: Promise<{ product_slug: string }>;
@@ -15,6 +16,8 @@ export default async function OffersPage({ params }: Props) {
 		productsApi.fetchBySlug(product_slug),
 		offersApi.fetchByProductSlug(product_slug),
 	]);
+
+	const { minPriceRub, totalQuantity } = GetMinPriceAndQuantity(offers.items);
 
 	const sub_category_slug = product.sub_category.slug;
 	const category_slug = product.sub_category.category.slug;
@@ -43,7 +46,11 @@ export default async function OffersPage({ params }: Props) {
 				/>
 			</div>
 
-			<ProductOverview product={product} />
+			<ProductOverview
+				product={product}
+				minPriceRub={minPriceRub}
+				totalQuantity={totalQuantity}
+			/>
 
 			<OffersList offers={offers.items} />
 		</main>
