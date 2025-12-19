@@ -3,10 +3,13 @@
 import { Turnstile } from "@marsidev/react-turnstile";
 import { useFormContext } from "react-hook-form";
 import { env } from "@/env";
-import type { SignInSchema } from "@/lib/schemas/forms/authSchema";
+
+type TurnstileFormValues = {
+	turnstileToken: string;
+};
 
 export function TurnstileField() {
-	const { setValue, clearErrors } = useFormContext<SignInSchema>();
+	const { setValue, clearErrors } = useFormContext<TurnstileFormValues>();
 
 	return (
 		<Turnstile
