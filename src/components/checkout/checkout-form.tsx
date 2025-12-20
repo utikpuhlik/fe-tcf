@@ -1,9 +1,9 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
+import { MapPin, Van } from "lucide-react";
 import * as React from "react";
 import { useForm, useWatch } from "react-hook-form";
-
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Field, FieldContent, FieldLabel } from "@/components/ui/field";
@@ -43,7 +43,7 @@ type CheckoutFormProps = {
 
 const DEFAULT_PICKUP_POINT = {
 	id: "pickup-sevastopol-khrustaleva-74zh",
-	title: "Севастополь",
+	title: "Россия, Севастополь",
 	subtitle: "Хрусталева 74ж",
 } as const;
 
@@ -182,8 +182,13 @@ export function CheckoutForm({ autofill }: CheckoutFormProps) {
 						}}
 					>
 						<TabsList className="grid w-full grid-cols-2">
-							<TabsTrigger value="pickup">Самовывоз</TabsTrigger>
-							<TabsTrigger value="delivery">Доставка</TabsTrigger>
+							<TabsTrigger value="pickup">
+								<MapPin /> Самовывоз
+							</TabsTrigger>
+							<TabsTrigger value="delivery">
+								<Van />
+								Доставка
+							</TabsTrigger>
 						</TabsList>
 					</Tabs>
 				</CardHeader>
@@ -200,6 +205,7 @@ export function CheckoutForm({ autofill }: CheckoutFormProps) {
 										id="firstName"
 										autoComplete="given-name"
 										{...form.register("contact.firstName")}
+										placeholder="Кирилл"
 									/>
 									{form.formState.errors.contact?.firstName?.message ? (
 										<p className="text-destructive text-xs">
@@ -216,6 +222,7 @@ export function CheckoutForm({ autofill }: CheckoutFormProps) {
 										id="lastName"
 										autoComplete="family-name"
 										{...form.register("contact.lastName")}
+										placeholder="Иванов"
 									/>
 									{form.formState.errors.contact?.lastName?.message ? (
 										<p className="text-destructive text-xs">
@@ -233,6 +240,7 @@ export function CheckoutForm({ autofill }: CheckoutFormProps) {
 										type="email"
 										autoComplete="email"
 										{...form.register("contact.email")}
+										placeholder="example@mail.com"
 									/>
 									{form.formState.errors.contact?.email?.message ? (
 										<p className="text-destructive text-xs">
@@ -250,6 +258,7 @@ export function CheckoutForm({ autofill }: CheckoutFormProps) {
 										type="tel"
 										autoComplete="tel"
 										{...form.register("contact.phone")}
+										placeholder="+79780424666"
 									/>
 									{form.formState.errors.contact?.phone?.message ? (
 										<p className="text-destructive text-xs">
@@ -339,11 +348,18 @@ export function CheckoutForm({ autofill }: CheckoutFormProps) {
 								<Field>
 									<FieldLabel htmlFor="country">Страна</FieldLabel>
 									<FieldContent>
-										<Input
+										<select
 											id="country"
 											autoComplete="country-name"
+											className="h-9 w-full min-w-0 rounded-md border border-input bg-transparent px-3 py-1 text-base shadow-xs outline-none transition-[color,box-shadow] selection:bg-primary selection:text-primary-foreground placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-destructive/20 md:text-sm dark:bg-input/30 dark:aria-invalid:ring-destructive/40"
 											{...form.register("delivery.country")}
-										/>
+										>
+											<option value="">Выберите страну</option>
+											<option value="Россия">Россия</option>
+											<option value="Армения">Армения</option>
+											<option value="Казахстана">Казахстана</option>
+											<option value="Турция">Турция</option>
+										</select>
 										{form.formState.errors.delivery?.country?.message ? (
 											<p className="text-destructive text-xs">
 												{form.formState.errors.delivery.country.message}
@@ -359,6 +375,7 @@ export function CheckoutForm({ autofill }: CheckoutFormProps) {
 											id="city"
 											autoComplete="address-level2"
 											{...form.register("delivery.city")}
+											placeholder="Севастополь"
 										/>
 										{form.formState.errors.delivery?.city?.message ? (
 											<p className="text-destructive text-xs">
@@ -375,6 +392,7 @@ export function CheckoutForm({ autofill }: CheckoutFormProps) {
 											id="street"
 											autoComplete="address-line1"
 											{...form.register("delivery.street")}
+											placeholder="Хрусталёва"
 										/>
 										{form.formState.errors.delivery?.street?.message ? (
 											<p className="text-destructive text-xs">
@@ -391,6 +409,7 @@ export function CheckoutForm({ autofill }: CheckoutFormProps) {
 											id="houseNumber"
 											autoComplete="address-line2"
 											{...form.register("delivery.houseNumber")}
+											placeholder="74ж"
 										/>
 										{form.formState.errors.delivery?.houseNumber?.message ? (
 											<p className="text-destructive text-xs">
