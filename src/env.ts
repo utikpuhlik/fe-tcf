@@ -18,6 +18,7 @@ export const env = createEnv({
 		NEXT_PUBLIC_TURNSTILE_SITE_KEY: z
 			.string()
 			.default("0x4AAAAAACG1ODz69-SuZrCY"),
+		NEXT_PUBLIC_CART_STORAGE_KEY: z.string().default("cart-store"),
 	},
 	runtimeEnv: {
 		APP_ENV: process.env.APP_ENV,
@@ -29,5 +30,6 @@ export const env = createEnv({
 		NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL,
 		NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL,
 		NEXT_PUBLIC_TURNSTILE_SITE_KEY: process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY,
+		NEXT_PUBLIC_CART_STORAGE_KEY: process.env.NEXT_PUBLIC_CART_STORAGE_KEY,
 	},
 });

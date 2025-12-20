@@ -1,10 +1,22 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { zodResolver } from "@hookform/resolvers/zod";
+import * as React from "react";
+import { useForm, useWatch } from "react-hook-form";
+
 import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Field, FieldContent, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { Separator } from "@/components/ui/separator";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import type {
+	CheckoutSchema,
+	DeliveryMethod,
+} from "@/lib/schemas/forms/checkoutSchema";
+import { zCheckoutSchema } from "@/lib/schemas/forms/checkoutSchema";
 
 type Suggestion = {
 	label: string;
@@ -18,262 +30,403 @@ type Suggestion = {
 	postalCode?: string;
 };
 
-type CheckoutFormState = {
-	firstName: string;
-	lastName: string;
-	email: string;
-	phone: string;
-	country: string;
-	city: string;
-	street: string;
-	houseNumber: string;
+export type CheckoutAutofill = {
+	firstName?: string | null;
+	lastName?: string | null;
+	email?: string | null;
+	phone?: string | null;
 };
 
-const initialForm: CheckoutFormState = {
-	firstName: "",
-	lastName: "",
-	email: "",
-	phone: "",
-	country: "",
-	city: "",
-	street: "",
-	houseNumber: "",
+type CheckoutFormProps = {
+	autofill?: CheckoutAutofill;
 };
 
-export function CheckoutForm() {
-	const [form, setForm] = useState<CheckoutFormState>(initialForm);
-	const [query, setQuery] = useState("");
-	const [suggestions, setSuggestions] = useState<Suggestion[]>([]);
-	const [isLoading, setIsLoading] = useState(false);
-	const [error, setError] = useState<string | null>(null);
+const DEFAULT_PICKUP_POINT = {
+	id: "pickup-sevastopol-khrustaleva-74zh",
+	title: "Севастополь",
+	subtitle: "Хрусталева 74ж",
+} as const;
 
-	useEffect(() => {
-		if (!query.trim()) {
+export function CheckoutForm({ autofill }: CheckoutFormProps) {
+	const form = useForm<CheckoutSchema>({
+		resolver: zodResolver(zCheckoutSchema),
+		defaultValues: {
+			method: "delivery",
+			contact: {
+				firstName: autofill?.firstName ?? "",
+				lastName: autofill?.lastName ?? "",
+				email: autofill?.email ?? "",
+				phone: autofill?.phone ?? "",
+			},
+			delivery: {
+				addressQuery: "",
+				country: "",
+				city: "",
+				street: "",
+				houseNumber: "",
+				postalCode: "",
+			},
+			pickup: {
+				pickupPointId: DEFAULT_PICKUP_POINT.id,
+			},
+		},
+		mode: "onBlur",
+	});
+
+	const method: DeliveryMethod = useWatch({
+		control: form.control,
+		name: "method",
+	});
+
+	const [suggestions, setSuggestions] = React.useState<Suggestion[]>([]);
+	const [isLoading, setIsLoading] = React.useState<boolean>(false);
+	const [lookupError, setLookupError] = React.useState<string | null>(null);
+
+	const addressQuery: string =
+		useWatch({ control: form.control, name: "delivery.addressQuery" }) ?? "";
+
+	React.useEffect(() => {
+		if (method !== "delivery") return;
+
+		if (!addressQuery.trim()) {
 			setSuggestions([]);
-			setError(null);
+			setLookupError(null);
 			return;
 		}
 
-		const controller = new AbortController();
-		const timeout = setTimeout(async () => {
+		const controller: AbortController = new AbortController();
+		const timeout: number = window.setTimeout(async () => {
 			setIsLoading(true);
 			try {
-				const res = await fetch(
-					`/api/geocode?q=${encodeURIComponent(query)}&limit=5`,
+				const res: Response = await fetch(
+					`/api/geocode?q=${encodeURIComponent(addressQuery)}&limit=5`,
 					{ signal: controller.signal },
 				);
 
-				if (!res.ok) {
-					throw new Error("Lookup failed");
-				}
+				if (!res.ok) throw new Error("Lookup failed");
 
-				const data = await res.json();
-				setSuggestions(
-					Array.isArray(data?.suggestions) ? data.suggestions : [],
-				);
-				setError(null);
-			} catch (lookupError) {
+				const data: unknown = await res.json();
+				const next: Suggestion[] =
+					typeof data === "object" &&
+					data !== null &&
+					"suggestions" in data &&
+					Array.isArray((data as { suggestions: unknown }).suggestions)
+						? ((data as { suggestions: Suggestion[] }).suggestions ?? [])
+						: [];
+
+				setSuggestions(next);
+				setLookupError(null);
+			} catch (e) {
 				if (controller.signal.aborted) return;
-				console.error(lookupError);
+				console.error(e);
 				setSuggestions([]);
-				setError("Не удалось получить подсказки");
+				setLookupError("Не удалось получить подсказки");
 			} finally {
-				if (!controller.signal.aborted) {
-					setIsLoading(false);
-				}
+				if (!controller.signal.aborted) setIsLoading(false);
 			}
 		}, 300);
 
 		return () => {
 			controller.abort();
-			clearTimeout(timeout);
+			window.clearTimeout(timeout);
 		};
-	}, [query]);
+	}, [addressQuery, method]);
 
-	const handleSelect = (suggestion: Suggestion) => {
-		setForm((prev) => ({
-			...prev,
-			country: suggestion.country ?? prev.country,
-			city: suggestion.city ?? prev.city,
-			street: suggestion.street ?? prev.street,
-			houseNumber:
-				suggestion.houseNumber ??
-				suggestion.addressLine1?.replace(suggestion.street ?? "", "").trim() ??
-				prev.houseNumber,
-		}));
-		setQuery(suggestion.value);
+	const handleSelectSuggestion = (s: Suggestion) => {
+		form.setValue("delivery.addressQuery", s.value, {
+			shouldDirty: true,
+			shouldValidate: true,
+		});
+		form.setValue("delivery.country", s.country ?? "", { shouldDirty: true });
+		form.setValue("delivery.city", s.city ?? "", { shouldDirty: true });
+		form.setValue("delivery.street", s.street ?? "", { shouldDirty: true });
+
+		const houseFromLine: string =
+			s.houseNumber ?? s.addressLine1?.replace(s.street ?? "", "").trim() ?? "";
+
+		form.setValue("delivery.houseNumber", houseFromLine, { shouldDirty: true });
+		form.setValue("delivery.postalCode", s.postalCode ?? "", {
+			shouldDirty: true,
+		});
+
 		setSuggestions([]);
 	};
 
-	const updateField =
-		<Key extends keyof CheckoutFormState>(key: Key) =>
-		(event: React.ChangeEvent<HTMLInputElement>) => {
-			setForm((prev) => ({ ...prev, [key]: event.target.value }));
-		};
+	const onSubmit = async (values: CheckoutSchema) => {
+		console.log("checkout submit", values);
+	};
 
 	return (
-		<section className="space-y-8">
-			<div className="grid gap-6 md:grid-cols-2">
-				<Field>
-					<FieldLabel htmlFor="firstName">Имя</FieldLabel>
-					<FieldContent>
-						<Input
-							id="firstName"
-							value={form.firstName}
-							onChange={updateField("firstName")}
-							placeholder="Иван"
-							autoComplete="given-name"
-						/>
-					</FieldContent>
-				</Field>
-				<Field>
-					<FieldLabel htmlFor="lastName">Фамилия</FieldLabel>
-					<FieldContent>
-						<Input
-							id="lastName"
-							value={form.lastName}
-							onChange={updateField("lastName")}
-							placeholder="Иванов"
-							autoComplete="family-name"
-						/>
-					</FieldContent>
-				</Field>
-				<Field>
-					<FieldLabel htmlFor="email">Email</FieldLabel>
-					<FieldContent>
-						<Input
-							id="email"
-							type="email"
-							value={form.email}
-							onChange={updateField("email")}
-							placeholder="you@example.com"
-							autoComplete="email"
-						/>
-					</FieldContent>
-				</Field>
-				<Field>
-					<FieldLabel htmlFor="phone">Телефон</FieldLabel>
-					<FieldContent>
-						<Input
-							id="phone"
-							type="tel"
-							value={form.phone}
-							onChange={updateField("phone")}
-							placeholder="+7 999 123-45-67"
-							autoComplete="tel"
-						/>
-					</FieldContent>
-				</Field>
-			</div>
+		<form className="space-y-6" onSubmit={form.handleSubmit(onSubmit)}>
+			<Card>
+				<CardHeader className="space-y-2">
+					<CardTitle className="text-xl">Оформление заказа</CardTitle>
 
-			<div className="space-y-3">
-				<Label htmlFor="addressSearch">Адрес доставки</Label>
-				<Input
-					id="addressSearch"
-					value={query}
-					onChange={(event) => setQuery(event.target.value)}
-					placeholder="Начните вводить адрес — подсказки появятся ниже"
-					autoComplete="street-address"
-				/>
-				<p className="text-muted-foreground text-sm">
-					При выборе подсказки страна, город и адрес заполнятся автоматически.
-				</p>
+					<Tabs
+						value={method}
+						onValueChange={(v) => {
+							const nextMethod = v as DeliveryMethod;
+							form.setValue("method", nextMethod, {
+								shouldDirty: true,
+							});
+							setSuggestions([]);
+							setLookupError(null);
+							if (nextMethod !== "delivery") {
+								form.resetField("delivery.addressQuery");
+								form.resetField("delivery.country");
+								form.resetField("delivery.city");
+								form.resetField("delivery.street");
+								form.resetField("delivery.houseNumber");
+								form.resetField("delivery.postalCode");
+							}
+						}}
+					>
+						<TabsList className="grid w-full grid-cols-2">
+							<TabsTrigger value="pickup">Самовывоз</TabsTrigger>
+							<TabsTrigger value="delivery">Доставка</TabsTrigger>
+						</TabsList>
+					</Tabs>
+				</CardHeader>
 
-				<div className="space-y-2">
-					{isLoading ? (
-						<p className="text-muted-foreground text-sm">Ищем адрес…</p>
+				<CardContent className="space-y-6">
+					{/* CONTACT */}
+					<div className="space-y-4">
+						<Label className="font-medium text-sm">Контактные данные</Label>
+						<div className="grid gap-4 md:grid-cols-2">
+							<Field>
+								<FieldLabel htmlFor="firstName">Имя</FieldLabel>
+								<FieldContent>
+									<Input
+										id="firstName"
+										autoComplete="given-name"
+										{...form.register("contact.firstName")}
+									/>
+									{form.formState.errors.contact?.firstName?.message ? (
+										<p className="text-destructive text-xs">
+											{form.formState.errors.contact.firstName.message}
+										</p>
+									) : null}
+								</FieldContent>
+							</Field>
+
+							<Field>
+								<FieldLabel htmlFor="lastName">Фамилия</FieldLabel>
+								<FieldContent>
+									<Input
+										id="lastName"
+										autoComplete="family-name"
+										{...form.register("contact.lastName")}
+									/>
+									{form.formState.errors.contact?.lastName?.message ? (
+										<p className="text-destructive text-xs">
+											{form.formState.errors.contact.lastName.message}
+										</p>
+									) : null}
+								</FieldContent>
+							</Field>
+
+							<Field>
+								<FieldLabel htmlFor="email">Email</FieldLabel>
+								<FieldContent>
+									<Input
+										id="email"
+										type="email"
+										autoComplete="email"
+										{...form.register("contact.email")}
+									/>
+									{form.formState.errors.contact?.email?.message ? (
+										<p className="text-destructive text-xs">
+											{form.formState.errors.contact.email.message}
+										</p>
+									) : null}
+								</FieldContent>
+							</Field>
+
+							<Field>
+								<FieldLabel htmlFor="phone">Телефон</FieldLabel>
+								<FieldContent>
+									<Input
+										id="phone"
+										type="tel"
+										autoComplete="tel"
+										{...form.register("contact.phone")}
+									/>
+									{form.formState.errors.contact?.phone?.message ? (
+										<p className="text-destructive text-xs">
+											{form.formState.errors.contact.phone.message}
+										</p>
+									) : null}
+								</FieldContent>
+							</Field>
+						</div>
+					</div>
+
+					<Separator />
+
+					{/* PICKUP (default, not selectable) */}
+					{method === "pickup" ? (
+						<div className="space-y-3">
+							<Label className="font-medium text-sm">Пункт самовывоза</Label>
+
+							<div className="rounded-lg border p-4">
+								<div className="font-medium text-sm">
+									{DEFAULT_PICKUP_POINT.title}
+								</div>
+								<div className="text-muted-foreground text-xs">
+									{DEFAULT_PICKUP_POINT.subtitle}
+								</div>
+							</div>
+						</div>
 					) : null}
-					{error ? <p className="text-destructive text-sm">{error}</p> : null}
-					{suggestions.length > 0 ? (
-						<ul className="divide-y divide-border rounded-lg border">
-							{suggestions.map((suggestion) => (
-								<li key={suggestion.value}>
-									<button
-										type="button"
-										onClick={() => handleSelect(suggestion)}
-										className="flex w-full items-start justify-between gap-3 px-4 py-3 text-left text-sm transition hover:bg-muted focus:bg-muted focus:outline-none"
-									>
-										<div className="space-y-1">
-											<p className="font-medium">{suggestion.label}</p>
-											<div className="text-muted-foreground text-xs">
-												{suggestion.city ?? "Город не найден"} •{" "}
-												{suggestion.country ?? "Страна не найдена"}
-											</div>
-										</div>
-										{suggestion.position ? (
-											<span className="text-[11px] text-muted-foreground uppercase tracking-wide">
-												{suggestion.position.lat}, {suggestion.position.lon}
-											</span>
+
+					{/* DELIVERY */}
+					{method === "delivery" ? (
+						<div className="space-y-4">
+							<Label className="font-medium text-sm">Адрес доставки</Label>
+
+							<div className="space-y-2">
+								<Input
+									id="addressSearch"
+									placeholder="Начните вводить адрес — подсказки появятся ниже"
+									autoComplete="street-address"
+									{...form.register("delivery.addressQuery")}
+								/>
+
+								{isLoading ? (
+									<p className="text-muted-foreground text-xs">Ищем адрес…</p>
+								) : null}
+								{lookupError ? (
+									<p className="text-destructive text-xs">{lookupError}</p>
+								) : null}
+
+								{suggestions.length > 0 ? (
+									<Card className="border-dashed">
+										<CardContent className="p-2">
+											<ScrollArea className="h-48">
+												<div className="grid gap-1">
+													{suggestions.map((s) => (
+														<Button
+															key={s.value}
+															type="button"
+															variant="ghost"
+															className="h-auto justify-start px-3 py-2"
+															onClick={() => handleSelectSuggestion(s)}
+														>
+															<div className="text-left">
+																<div className="font-medium text-sm">
+																	{s.label}
+																</div>
+																<div className="text-muted-foreground text-xs">
+																	{s.city ?? "Город"} • {s.country ?? "Страна"}
+																</div>
+															</div>
+														</Button>
+													))}
+												</div>
+											</ScrollArea>
+										</CardContent>
+									</Card>
+								) : null}
+
+								{form.formState.errors.delivery?.addressQuery?.message ? (
+									<p className="text-destructive text-xs">
+										{form.formState.errors.delivery.addressQuery.message}
+									</p>
+								) : null}
+							</div>
+
+							<div className="grid gap-4 md:grid-cols-2">
+								<Field>
+									<FieldLabel htmlFor="country">Страна</FieldLabel>
+									<FieldContent>
+										<Input
+											id="country"
+											autoComplete="country-name"
+											{...form.register("delivery.country")}
+										/>
+										{form.formState.errors.delivery?.country?.message ? (
+											<p className="text-destructive text-xs">
+												{form.formState.errors.delivery.country.message}
+											</p>
 										) : null}
-									</button>
-								</li>
-							))}
-						</ul>
-					) : query.trim() && !isLoading && !error ? (
-						<p className="text-muted-foreground text-sm">
-							Нет подсказок для этого запроса.
-						</p>
+									</FieldContent>
+								</Field>
+
+								<Field>
+									<FieldLabel htmlFor="city">Город</FieldLabel>
+									<FieldContent>
+										<Input
+											id="city"
+											autoComplete="address-level2"
+											{...form.register("delivery.city")}
+										/>
+										{form.formState.errors.delivery?.city?.message ? (
+											<p className="text-destructive text-xs">
+												{form.formState.errors.delivery.city.message}
+											</p>
+										) : null}
+									</FieldContent>
+								</Field>
+
+								<Field>
+									<FieldLabel htmlFor="street">Улица</FieldLabel>
+									<FieldContent>
+										<Input
+											id="street"
+											autoComplete="address-line1"
+											{...form.register("delivery.street")}
+										/>
+										{form.formState.errors.delivery?.street?.message ? (
+											<p className="text-destructive text-xs">
+												{form.formState.errors.delivery.street.message}
+											</p>
+										) : null}
+									</FieldContent>
+								</Field>
+
+								<Field>
+									<FieldLabel htmlFor="houseNumber">Дом</FieldLabel>
+									<FieldContent>
+										<Input
+											id="houseNumber"
+											autoComplete="address-line2"
+											{...form.register("delivery.houseNumber")}
+										/>
+										{form.formState.errors.delivery?.houseNumber?.message ? (
+											<p className="text-destructive text-xs">
+												{form.formState.errors.delivery.houseNumber.message}
+											</p>
+										) : null}
+									</FieldContent>
+								</Field>
+
+								<Field>
+									<FieldLabel htmlFor="postalCode">Индекс</FieldLabel>
+									<FieldContent>
+										<Input
+											id="postalCode"
+											autoComplete="postal-code"
+											{...form.register("delivery.postalCode")}
+										/>
+										{form.formState.errors.delivery?.postalCode?.message ? (
+											<p className="text-destructive text-xs">
+												{form.formState.errors.delivery.postalCode.message}
+											</p>
+										) : null}
+									</FieldContent>
+								</Field>
+							</div>
+						</div>
 					) : null}
-				</div>
-			</div>
 
-			<div className="grid gap-4 md:grid-cols-2">
-				<Field>
-					<FieldLabel htmlFor="country">Страна</FieldLabel>
-					<FieldContent>
-						<Input
-							id="country"
-							value={form.country}
-							onChange={updateField("country")}
-							placeholder="Россия"
-							autoComplete="country-name"
-						/>
-					</FieldContent>
-				</Field>
-				<Field>
-					<FieldLabel htmlFor="city">Город</FieldLabel>
-					<FieldContent>
-						<Input
-							id="city"
-							value={form.city}
-							onChange={updateField("city")}
-							placeholder="Москва"
-							autoComplete="address-level2"
-						/>
-					</FieldContent>
-				</Field>
-				<Field>
-					<FieldLabel htmlFor="street">Улица</FieldLabel>
-					<FieldContent>
-						<Input
-							id="street"
-							value={form.street}
-							onChange={updateField("street")}
-							placeholder="Улица"
-							autoComplete="address-line1"
-						/>
-					</FieldContent>
-				</Field>
-				<Field>
-					<FieldLabel htmlFor="houseNumber">Дом / кв.</FieldLabel>
-					<FieldContent>
-						<Input
-							id="houseNumber"
-							value={form.houseNumber}
-							onChange={updateField("houseNumber")}
-							placeholder="55, кв. 12"
-							autoComplete="address-line2"
-						/>
-					</FieldContent>
-				</Field>
-			</div>
-
-			<div className="flex items-center gap-3">
-				<Button type="button">Сохранить адрес</Button>
-				<p className="text-muted-foreground text-sm">
-					Сохранение не отправляет заказ — это демо формы.
-				</p>
-			</div>
-		</section>
+					<div className="flex items-center gap-3">
+						<Button type="submit">Продолжить</Button>
+						<p className="text-muted-foreground text-sm">
+							Пока просто валидируем форму (демо).
+						</p>
+					</div>
+				</CardContent>
+			</Card>
+		</form>
 	);
 }
