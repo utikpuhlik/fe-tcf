@@ -1,9 +1,7 @@
 "use client";
 
-import Image from "next/image";
-import Link from "next/link";
 import * as React from "react";
-
+import { CartItem } from "@/components/cart/cart-item";
 import { useCartStore } from "@/components/layout/cart-store-provider";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -49,45 +47,7 @@ export function CartSummary() {
 				<ScrollArea className="h-72">
 					<div className="space-y-3">
 						{items.map((it) => (
-							<div
-								key={it.id}
-								className="flex items-start justify-between gap-3 rounded-lg border p-3"
-							>
-								<div className="flex min-w-0 items-start gap-3">
-									<Link
-										href={`/catalog/${it.product.slug}`}
-										className="relative mt-0.5 h-12 w-12 shrink-0 overflow-hidden rounded-md border bg-muted focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
-										aria-label={`Открыть ${it.product.name}`}
-									>
-										<Image
-											src={it.image_url}
-											alt={it.product.name}
-											fill
-											sizes="48px"
-											className="object-cover"
-										/>
-									</Link>
-
-									<div className="min-w-0">
-										<Link
-											href={`/catalog/${it.product.slug}`}
-											className="truncate font-medium text-sm hover:underline"
-										>
-											{it.product.name}
-										</Link>
-										<div className="text-muted-foreground text-xs">
-											Производитель: {it.brand}
-										</div>
-										<div className="text-muted-foreground text-xs">
-											{it.quantity} x {formatCurrency(it.price_rub)}
-										</div>
-									</div>
-								</div>
-
-								<div className="shrink-0 font-medium text-sm">
-									{formatCurrency(it.price_rub * it.quantity)}
-								</div>
-							</div>
+							<CartItem key={it.id} offer={it} variant="summary" />
 						))}
 
 						{items.length === 0 ? (

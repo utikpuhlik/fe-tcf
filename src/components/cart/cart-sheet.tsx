@@ -2,7 +2,7 @@
 
 import { ShoppingCart, Trash2 } from "lucide-react";
 import Link from "next/link";
-import { CartItemCard } from "@/components/cart/cart-item-card";
+import { CartItem } from "@/components/cart/cart-item";
 import { CartSummaryCard } from "@/components/cart/cart-summary-card";
 import { useCartStore } from "@/components/layout/cart-store-provider";
 import { Button } from "@/components/ui/button";
@@ -16,7 +16,7 @@ import {
 	SheetTitle,
 	SheetTrigger,
 } from "@/components/ui/sheet";
-import type { OfferSchema } from "@/lib/schemas/offerSchema";
+import type { CartItem as CartItemType } from "@/lib/stores/useCartStore";
 
 export function CartSheet() {
 	const items = useCartStore((state) => state.items);
@@ -54,8 +54,8 @@ export function CartSheet() {
 				{/* важно: flex-1 чтобы футер прижимался вниз */}
 				<ScrollArea className="mt-4 min-h-0 flex-1 pr-2">
 					<div className="space-y-4">
-						{items.map((item: OfferSchema) => (
-							<CartItemCard
+						{items.map((item: CartItemType) => (
+							<CartItem
 								key={item.id}
 								offer={item}
 								onIncrement={increment}

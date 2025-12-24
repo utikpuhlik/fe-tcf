@@ -40,7 +40,7 @@ export default function ProductOverview({
 					<h1 className="truncate font-semibold text-lg">{product.name}</h1>
 
 					<p className="text-muted-foreground text-sm">
-						Кросс-номер: {product.cross_number ?? "Not specified"}
+						Кросс-номер: {product.cross_number ?? "отсутствует"}
 					</p>
 
 					<p className="font-medium text-sm">{priceLabel}</p>

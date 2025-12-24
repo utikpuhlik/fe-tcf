@@ -356,6 +356,7 @@ export function CheckoutForm({ autofill }: CheckoutFormProps) {
 										>
 											<option value="">Выберите страну</option>
 											<option value="Россия">Россия</option>
+											<option value="Беларусь">Беларусь</option>
 											<option value="Армения">Армения</option>
 											<option value="Казахстана">Казахстана</option>
 											<option value="Турция">Турция</option>

@@ -3,7 +3,10 @@ import { createStore } from "zustand/vanilla";
 import { env } from "@/env";
 import type { OfferSchema } from "@/lib/schemas/offerSchema";
 
-export type CartItem = OfferSchema & { quantity: number };
+export type CartItem = OfferSchema & {
+	quantity: number;
+	stock_quantity?: number;
+};
 
 export type CartState = {
 	items: CartItem[];
@@ -30,11 +33,22 @@ export const createCartStore = () =>
 						if (exists) {
 							return {
 								items: state.items.map((i) =>
-									i.id === item.id ? { ...i, quantity: i.quantity + 1 } : i,
+									i.id === item.id
+										? {
+												...i,
+												quantity: i.quantity + 1,
+												stock_quantity: item.quantity,
+											}
+										: i,
 								),
 							};
 						}
-						return { items: [...state.items, { ...item, quantity: 1 }] };
+						return {
+							items: [
+								...state.items,
+								{ ...item, quantity: 1, stock_quantity: item.quantity },
+							],
+						};
 					}),
 				remove: (id) =>
 					set((state) => ({

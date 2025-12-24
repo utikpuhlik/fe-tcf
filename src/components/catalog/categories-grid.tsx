@@ -2,6 +2,7 @@
 
 import { TileGrid } from "@/components/catalog/tile-grid";
 import type { CategorySchema } from "@/lib/schemas/categorySchema";
+import { buildCatalogPath } from "@/lib/utils";
 
 interface CategoriesGridProps {
 	categories: CategorySchema[];
@@ -19,7 +20,7 @@ export function CategoriesGrid({
 			items={categories}
 			facets={facets}
 			className={className}
-			makeHref={(c) => `/catalog/ford/${c.slug}`}
+			makeHref={(c) => buildCatalogPath(c)}
 		/>
 	);
 }

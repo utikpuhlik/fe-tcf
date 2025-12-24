@@ -82,6 +82,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 				NEW_PASSWORD: "Новый пароль",
 				NEW_PASSWORD_PLACEHOLDER: "Новый пароль",
 				CHANGE_PASSWORD_SUCCESS: "Пароль был успешно изменён",
+				CHANGE_PASSWORD: "Сменть пароль",
 			}}
 		>
 			{children}

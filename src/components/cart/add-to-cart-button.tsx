@@ -35,6 +35,7 @@ export function AddToCartButtonWithQuantity({ offer }: { offer: OfferSchema }) {
 			description: `${offer.product.name} — ${offer.brand} (${quantity} шт)`,
 		});
 	};
+
 	return (
 		<form onSubmit={handleSubmit(onSubmit)} className="flex items-center gap-1">
 			<Input
@@ -43,11 +44,17 @@ export function AddToCartButtonWithQuantity({ offer }: { offer: OfferSchema }) {
 				step={1}
 				{...register("quantity", { valueAsNumber: true })}
 				className="h-9 w-12 text-sm"
+				disabled={offer.quantity <= 0}
 			/>
 			{errors.quantity && (
 				<p className="text-red-500 text-xs">{errors.quantity.message}</p>
 			)}
-			<Button type="submit" size="default" variant="outline">
+			<Button
+				type="submit"
+				size="default"
+				variant="outline"
+				disabled={offer.quantity <= 0}
+			>
 				<ShoppingCart className="h-3 w-3" /> Добавить в корзину
 			</Button>
 		</form>
