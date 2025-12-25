@@ -81,12 +81,18 @@ export function CheckoutForm({ autofill }: CheckoutFormProps) {
 	const [suggestions, setSuggestions] = React.useState<Suggestion[]>([]);
 	const [isLoading, setIsLoading] = React.useState<boolean>(false);
 	const [lookupError, setLookupError] = React.useState<string | null>(null);
+	const skipNextLookupRef = React.useRef(false);
+	const suggestionsRef = React.useRef<HTMLDivElement | null>(null);
 
 	const addressQuery: string =
 		useWatch({ control: form.control, name: "delivery.addressQuery" }) ?? "";
 
 	React.useEffect(() => {
 		if (method !== "delivery") return;
+		if (skipNextLookupRef.current) {
+			skipNextLookupRef.current = false;
+			return;
+		}
 
 		if (!addressQuery.trim()) {
 			setSuggestions([]);
@@ -133,6 +139,7 @@ export function CheckoutForm({ autofill }: CheckoutFormProps) {
 	}, [addressQuery, method]);
 
 	const handleSelectSuggestion = (s: Suggestion) => {
+		skipNextLookupRef.current = true;
 		form.setValue("delivery.addressQuery", s.value, {
 			shouldDirty: true,
 			shouldValidate: true,
@@ -299,6 +306,16 @@ export function CheckoutForm({ autofill }: CheckoutFormProps) {
 									placeholder="Начните вводить адрес — подсказки появятся ниже"
 									autoComplete="street-address"
 									{...form.register("delivery.addressQuery")}
+									onBlur={(event) => {
+										if (
+											suggestionsRef.current &&
+											event.relatedTarget instanceof Node &&
+											suggestionsRef.current.contains(event.relatedTarget)
+										) {
+											return;
+										}
+										setSuggestions([]);
+									}}
 								/>
 
 								{isLoading ? (
@@ -309,8 +326,8 @@ export function CheckoutForm({ autofill }: CheckoutFormProps) {
 								) : null}
 
 								{suggestions.length > 0 ? (
-									<Card className="border-dashed">
-										<CardContent className="p-2">
+									<Card className="border-dashed gap-0 py-0">
+										<CardContent className="p-2" ref={suggestionsRef}>
 											<ScrollArea className="h-48">
 												<div className="grid gap-1">
 													{suggestions.map((s) => (
