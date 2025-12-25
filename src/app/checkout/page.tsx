@@ -1,9 +1,11 @@
 import { CartSummary } from "@/components/cart/cart-summary";
+import { CheckoutCartReconciler } from "@/components/checkout/checkout-cart-reconciler";
 import { CheckoutForm } from "@/components/checkout/checkout-form";
 
-export default function CheckoutPage() {
+export default async function CheckoutPage() {
 	return (
 		<main className="min-h-screen bg-neutral-50 px-6 py-12 text-neutral-900">
+			<CheckoutCartReconciler />
 			<div className="mx-auto w-full max-w-6xl">
 				<header className="mb-6 space-y-1">
 					<h1 className="font-semibold text-2xl">Адрес и контактные данные</h1>

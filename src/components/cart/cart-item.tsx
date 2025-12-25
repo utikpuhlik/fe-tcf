@@ -28,7 +28,7 @@ export function CartItem({
 
 	if (variant === "summary") {
 		return (
-			<div className="flex items-start justify-between gap-3 rounded-lg border p-3">
+			<div className="flex items-stretch justify-between gap-3 rounded-lg border p-3">
 				<div className="flex min-w-0 items-start gap-3">
 					<Link
 						href={buildCatalogPath(offer)}
@@ -57,11 +57,15 @@ export function CartItem({
 						<div className="text-muted-foreground text-xs">
 							{offer.quantity} x {formatCurrency(offer.price_rub)}
 						</div>
+						{offer.has_cart_mismatch ? (
+							<div className="pt-1 text-amber-600 text-xs">
+								Цена или количество изменено
+							</div>
+						) : null}
+						<div className="pt-1 font-medium text-sm">
+							{formatCurrency(offer.price_rub * offer.quantity)}
+						</div>
 					</div>
-				</div>
-
-				<div className="shrink-0 font-medium text-sm">
-					{formatCurrency(offer.price_rub * offer.quantity)}
 				</div>
 			</div>
 		);

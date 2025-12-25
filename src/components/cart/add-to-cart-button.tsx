@@ -1,62 +1,102 @@
 "use client";
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import { ShoppingCart } from "lucide-react";
-import { useForm } from "react-hook-form";
+import { Minus, Plus, ShoppingCart } from "lucide-react";
+import * as React from "react";
 import { toast } from "sonner";
+
 import { useCartStore } from "@/components/layout/cart-store-provider";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import {
-	type QuantityFormSchema,
-	zQuantityFormSchema,
-} from "@/lib/schemas/commonSchema";
 import type { OfferSchema } from "@/lib/schemas/offerSchema";
 
-export function AddToCartButtonWithQuantity({ offer }: { offer: OfferSchema }) {
+type AddToCartButtonWithQuantityProps = {
+	offer: OfferSchema;
+};
+
+export function AddToCartButtonWithQuantity({
+	offer,
+}: AddToCartButtonWithQuantityProps) {
 	const add = useCartStore((state) => state.add);
 
-	const form = useForm<QuantityFormSchema>({
-		resolver: zodResolver(zQuantityFormSchema),
-		defaultValues: { quantity: 1 },
-	});
-	const {
-		register,
-		handleSubmit,
-		formState: { errors },
-	} = form;
+	const inCartQty: number = useCartStore(
+		(state) => state.items.find((i) => i.id === offer.id)?.quantity ?? 0,
+	);
 
-	const onSubmit = ({ quantity }: QuantityFormSchema) => {
-		for (let i = 0; i < quantity; i++) {
-			add(offer);
+	const remaining: number = Math.max(0, offer.quantity - inCartQty);
+	const isDisabled: boolean = remaining <= 0;
+
+	const [quantity, setQuantity] = React.useState<number>(1);
+
+	// если остаток уменьшился (например, корзина/остатки обновились) — подожмём инпут
+	React.useEffect(() => {
+		if (isDisabled) {
+			setQuantity(1);
+			return;
 		}
 
+		if (quantity > remaining) {
+			setQuantity(remaining);
+		}
+	}, [remaining, isDisabled, quantity]);
+
+	const onAdd = () => {
+		const safeQty: number = Math.min(Math.max(1, quantity), remaining);
+
+		if (safeQty <= 0) {
+			toast("Недостаточно товара на складе", {
+				description: "Попробуйте уменьшить количество или обновить корзину.",
+			});
+			return;
+		}
+
+		// важно: store должен поддерживать add(offer, qty)
+		add(offer, safeQty);
+
 		toast("Добавлено в корзину", {
-			description: `${offer.product.name} — ${offer.brand} (${quantity} шт)`,
+			description: `${offer.product.name} — ${offer.brand} (${safeQty} шт)`,
 		});
+
+		setQuantity(1);
 	};
 
 	return (
-		<form onSubmit={handleSubmit(onSubmit)} className="flex items-center gap-1">
-			<Input
-				type="number"
-				min={1}
-				step={1}
-				{...register("quantity", { valueAsNumber: true })}
-				className="h-9 w-12 text-sm"
-				disabled={offer.quantity <= 0}
-			/>
-			{errors.quantity && (
-				<p className="text-red-500 text-xs">{errors.quantity.message}</p>
-			)}
+		<div className="flex items-center gap-2">
+			<div className="flex items-center gap-1">
+				<Button
+					type="button"
+					variant="outline"
+					size="icon"
+					disabled={isDisabled || quantity <= 1}
+					onClick={() => setQuantity((current) => Math.max(1, current - 1))}
+				>
+					<Minus className="h-4 w-4" />
+				</Button>
+				<span className="min-w-[36px] text-center text-sm tabular-nums">
+					{Math.min(quantity, Math.max(1, remaining))}
+				</span>
+				<Button
+					type="button"
+					variant="outline"
+					size="icon"
+					disabled={isDisabled || quantity >= Math.max(1, remaining)}
+					onClick={() =>
+						setQuantity((current) =>
+							Math.min(Math.max(1, current + 1), Math.max(1, remaining)),
+						)
+					}
+				>
+					<Plus className="h-4 w-4" />
+				</Button>
+			</div>
+
 			<Button
-				type="submit"
-				size="default"
+				type="button"
 				variant="outline"
-				disabled={offer.quantity <= 0}
+				disabled={isDisabled}
+				onClick={onAdd}
 			>
-				<ShoppingCart className="h-3 w-3" /> Добавить в корзину
+				<ShoppingCart className="mr-2 h-3 w-3" />
+				Добавить
 			</Button>
-		</form>
+		</div>
 	);
 }

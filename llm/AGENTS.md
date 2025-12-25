@@ -1,6 +1,7 @@
 # Repository Guidelines
 
 ## General
+- read https://ui.shadcn.com/llms.txt
 - instruction are stored in `llm/` folder
 - documentation for external backend is placed under [backend_openapi.json](backend_openapi.json)
 - always run `biome check --write` after making changes (permission don't needed)

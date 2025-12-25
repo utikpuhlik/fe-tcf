@@ -240,7 +240,7 @@ export function CheckoutForm({ autofill }: CheckoutFormProps) {
 										type="email"
 										autoComplete="email"
 										{...form.register("contact.email")}
-										placeholder="example@mail.com"
+										placeholder="fordsevas@yandex.ru"
 									/>
 									{form.formState.errors.contact?.email?.message ? (
 										<p className="text-destructive text-xs">
@@ -427,6 +427,7 @@ export function CheckoutForm({ autofill }: CheckoutFormProps) {
 											id="postalCode"
 											autoComplete="postal-code"
 											{...form.register("delivery.postalCode")}
+											placeholder="299053"
 										/>
 										{form.formState.errors.delivery?.postalCode?.message ? (
 											<p className="text-destructive text-xs">
