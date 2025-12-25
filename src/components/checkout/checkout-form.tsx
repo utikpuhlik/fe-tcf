@@ -326,7 +326,7 @@ export function CheckoutForm({ autofill }: CheckoutFormProps) {
 								) : null}
 
 								{suggestions.length > 0 ? (
-									<Card className="border-dashed gap-0 py-0">
+									<Card className="gap-0 border-dashed py-0">
 										<CardContent className="p-2" ref={suggestionsRef}>
 											<ScrollArea className="h-48">
 												<div className="grid gap-1">
