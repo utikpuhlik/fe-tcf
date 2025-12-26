@@ -1,7 +1,6 @@
 import { z } from "zod";
 
-import { zAddressSchema } from "@/lib/schemas/addressSchema";
-import { zOrderStatusEnum, zPaginatedSchema } from "@/lib/schemas/commonSchema";
+import {zOrderStatusEnum, zPaginatedSchema, zShippingMethodEnum} from "@/lib/schemas/commonSchema";
 import {
 	zOrderOfferPostSchema,
 	zOrderOfferSchema,
@@ -10,15 +9,25 @@ import { zUserSchema } from "@/lib/schemas/userSchema";
 import { zWaybillSchema } from "@/lib/schemas/waybillSchema";
 
 const zOrderBaseSchema = z.object({
-	address_id: z.uuid(),
 	status: zOrderStatusEnum,
 	note: z.string().nullable(),
+	country: z.string().nullable(),
+	city: z.string().nullable(),
+	street: z.string().nullable(),
+	house: z.string().nullable(),
+	postal_code: z.string().nullable(),
+
+	shipping_method: zShippingMethodEnum.nullable(),
+	shipping_company: z.string().nullable(),
+
+	first_name: z.string(),
+	last_name: z.string(),
+	phone: z.string(),
 });
 
 export const zOrderSchema = zOrderBaseSchema.extend({
 	id: z.uuid(),
 	user: zUserSchema,
-	address: zAddressSchema,
 	waybill: zWaybillSchema.nullable(),
 	order_offers: zOrderOfferSchema.array(),
 	created_at: z.iso.datetime(),

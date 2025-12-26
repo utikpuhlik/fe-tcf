@@ -26,7 +26,6 @@ export const zUserSchema = z.object({
 	note: z.string().nullable(),
 	shipping_method: zShippingMethodEnum.nullable(),
 	shipping_company: z.string().nullable(),
-	// addresses: z.array(zAddressSchema),
 });
 
 export const zUserPaginatedSchema = zPaginatedSchema.extend({

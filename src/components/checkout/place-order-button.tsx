@@ -13,10 +13,8 @@ import {
 } from "@/lib/schemas/orderSchema";
 
 export function PlaceOrderButton({
-	address_id,
 	items,
 }: {
-	address_id: string;
 	items: OfferSchema[];
 }) {
 	const [isPending, startTransition] = useTransition();
@@ -32,9 +30,18 @@ export function PlaceOrderButton({
 
 	const handleCreate = () => {
 		const payload: OrderWithOffersPostSchema = {
-			address_id,
 			status: "NEW",
 			note: null,
+			country: null,
+			city: null,
+			street: null,
+			house: null,
+			postal_code: null,
+			shipping_company: null,
+			shipping_method: "CARGO",
+			first_name: "user",
+			last_name: "system",
+			phone: "+7978791111",
 			order_offers: defaultOffers,
 		};
 
