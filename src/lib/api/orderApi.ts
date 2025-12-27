@@ -4,6 +4,7 @@ import { apiRequest } from "@/lib/api/generic/request";
 import { fetchWithAuthAndParse } from "@/lib/api/utils/fetchJson";
 import { type CountSchema, zCountSchema } from "@/lib/schemas/commonSchema";
 import {
+	type OrderPaginatedSchema,
 	type OrderPostSchema,
 	type OrderSchema,
 	type OrderWithOffersPostSchema,
@@ -13,19 +14,12 @@ import {
 
 const ENTITY = "orders";
 
-interface FetchOrdersOptions {
-	searchParams: URLSearchParams;
-}
-
 export const ordersApi = {
 	// -------------------------------
 	// Fetchers
 	// -------------------------------
-	fetch(options: FetchOrdersOptions) {
-		const url = new URL(env.NEXT_PUBLIC_API_URL);
-		url.pathname += `${ENTITY}`;
-		url.search = options.searchParams.toString();
-
+	fetchByUserId(user_id: string): Promise<OrderPaginatedSchema> {
+		const url = `${env.NEXT_PUBLIC_API_URL}/${ENTITY}?user_id=${user_id}`;
 		return fetchWithAuthAndParse(url, zOrderPaginatedSchema);
 	},
 	fetchById(id: string): Promise<OrderSchema> {
