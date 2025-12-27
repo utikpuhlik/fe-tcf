@@ -3,7 +3,14 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 
-export default function CheckoutSuccessPage() {
+type Props = {
+	searchParams: Promise<{ order_id?: string }>;
+};
+
+export default async function CheckoutSuccessPage({ searchParams }: Props) {
+	const { order_id } = await searchParams;
+	const detailsHref = order_id ? `/orders/${order_id}` : "/orders";
+
 	return (
 		<main className="min-h-screen bg-neutral-50 px-6 py-12 text-neutral-900">
 			<div className="mx-auto flex w-full max-w-2xl flex-col items-center">
@@ -26,7 +33,7 @@ export default function CheckoutSuccessPage() {
 								<Link href="/">Вернуться на главную</Link>
 							</Button>
 							<Button variant="outline" asChild>
-								<Link href="/catalog/ford">Продолжить покупки</Link>
+								<Link href={detailsHref}>Детали заказа</Link>
 							</Button>
 						</div>
 					</CardContent>

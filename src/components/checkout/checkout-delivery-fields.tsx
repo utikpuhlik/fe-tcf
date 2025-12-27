@@ -147,20 +147,22 @@ export function CheckoutDeliveryFields({
 				) : null}
 
 				{suggestions.length > 0 ? (
-					<Card className="gap-0 border-dashed py-0">
-						<CardContent className="p-2" ref={suggestionsRef}>
-							<ScrollArea className="h-48">
-								<div className="grid gap-1">
+					<Card className="w-full max-w-full gap-0 border-dashed py-0">
+						<CardContent className="w-full p-2" ref={suggestionsRef}>
+							<ScrollArea className="h-48 w-full">
+								<div className="grid w-full gap-1">
 									{suggestions.map((s) => (
 										<Button
 											key={s.value}
 											type="button"
 											variant="ghost"
-											className="h-auto justify-start px-3 py-2"
+											className="h-auto w-full justify-start whitespace-normal px-3 py-2 text-left"
 											onClick={() => handleSelectSuggestion(s)}
 										>
-											<div className="text-left">
-												<div className="font-medium text-sm">{s.label}</div>
+											<div className="min-w-0 text-left">
+												<div className="break-words font-medium text-sm">
+													{s.label}
+												</div>
 												<div className="text-muted-foreground text-xs">
 													{s.city ?? "Город"} • {s.country ?? "Страна"}
 												</div>

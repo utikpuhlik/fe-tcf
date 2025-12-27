@@ -120,9 +120,9 @@ export function CheckoutForm({ autofill }: CheckoutFormProps) {
 
 		startTransition(async () => {
 			try {
-				await createOrderAction(payloadValidated);
+				const createdOrder = await createOrderAction(payloadValidated);
 				clearCart();
-				router.replace("/checkout/success");
+				router.replace(`/checkout/success?order_id=${createdOrder.id}`);
 			} catch (_error) {
 				toast("Неизвестная ошибка", { description: "Что-то пошло не так.." });
 			}
