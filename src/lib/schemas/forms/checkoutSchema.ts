@@ -27,11 +27,7 @@ export const zCheckoutSchema = z
 			.optional(),
 
 		// Для самовывоза
-		pickup: z
-			.object({
-				pickupPointId: z.string().min(1, "Выберите пункт самовывоза"),
-			})
-			.optional(),
+		pickup: z.object({}).optional(),
 	})
 	.superRefine((val, ctx) => {
 		if (val.method === "delivery") {
@@ -45,15 +41,7 @@ export const zCheckoutSchema = z
 			}
 		}
 
-		if (val.method === "pickup") {
-			if (!val.pickup?.pickupPointId) {
-				ctx.addIssue({
-					code: "custom",
-					path: ["pickup", "pickupPointId"],
-					message: "Выберите пункт самовывоза",
-				});
-			}
-		}
+		if (val.method === "pickup") return;
 	});
 
 export type CheckoutSchema = z.infer<typeof zCheckoutSchema>;

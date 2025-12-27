@@ -1,8 +1,18 @@
+import { RedirectToSignIn } from "@daveyplate/better-auth-ui";
+import { headers } from "next/headers";
 import { CartSummary } from "@/components/cart/cart-summary";
 import { CheckoutCartReconciler } from "@/components/checkout/checkout-cart-reconciler";
 import { CheckoutForm } from "@/components/checkout/checkout-form";
+import { auth } from "@/lib/auth";
 
 export default async function CheckoutPage() {
+	const session = await auth.api.getSession({
+		headers: await headers(),
+	});
+	if (!session) {
+		return <RedirectToSignIn />;
+	}
+
 	return (
 		<main className="min-h-screen bg-neutral-50 px-6 py-12 text-neutral-900">
 			<CheckoutCartReconciler />

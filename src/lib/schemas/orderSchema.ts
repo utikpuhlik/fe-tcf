@@ -1,6 +1,10 @@
 import { z } from "zod";
 
-import {zOrderStatusEnum, zPaginatedSchema, zShippingMethodEnum} from "@/lib/schemas/commonSchema";
+import {
+	zOrderStatusEnum,
+	zPaginatedSchema,
+	zShippingMethodEnum,
+} from "@/lib/schemas/commonSchema";
 import {
 	zOrderOfferPostSchema,
 	zOrderOfferSchema,
@@ -22,6 +26,7 @@ const zOrderBaseSchema = z.object({
 
 	first_name: z.string(),
 	last_name: z.string(),
+	email: z.string(),
 	phone: z.string(),
 });
 
