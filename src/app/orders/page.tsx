@@ -1,7 +1,7 @@
 import { RedirectToSignIn } from "@daveyplate/better-auth-ui";
+import { ChevronRight } from "lucide-react";
 import { headers } from "next/headers";
 import Link from "next/link";
-import { ChevronRight } from "lucide-react";
 import { OrderBadge } from "@/components/orders/order-badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ordersApi } from "@/lib/api/orderApi";
@@ -58,7 +58,7 @@ export default async function OrdersPage() {
 									</div>
 									<Link
 										href={`/orders/${order.id}`}
-										className="inline-flex items-center gap-1  text-sm font-medium hover:underline"
+										className="inline-flex items-center gap-1 font-medium text-sm hover:underline"
 									>
 										Подробности
 										<ChevronRight className="size-4" />
