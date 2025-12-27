@@ -3,6 +3,7 @@ import Breadcrumbs from "@/components/shared/breadcrumbs";
 import { categoriesApi } from "@/lib/api/categoryApi";
 import { productsApi } from "@/lib/api/productApi";
 import { subCategoriesApi } from "@/lib/api/subCategoryApi";
+import { buildCatalogPath } from "@/lib/utils";
 
 interface Props {
 	params: Promise<{ category_slug: string }>;
@@ -22,10 +23,10 @@ export default async function SubCategoriesPage({ params }: Props) {
 		<main className="space-y-4">
 			<Breadcrumbs
 				breadcrumbs={[
-					{ label: "Каталог", href: "/catalog/ford" },
+					{ label: "Каталог", href: buildCatalogPath() },
 					{
 						label: category.name,
-						href: `/catalog/ford/${category_slug}`,
+						href: buildCatalogPath(category),
 						active: true,
 					},
 				]}

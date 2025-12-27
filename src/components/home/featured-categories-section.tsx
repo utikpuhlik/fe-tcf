@@ -2,6 +2,7 @@ import {
 	ThreeColumnPreview,
 	type ThreeColumnPreviewCategory,
 } from "@/components/ui/three-column-preview";
+import { buildCatalogPath } from "@/lib/utils";
 
 const FEATURED_CATEGORIES: ThreeColumnPreviewCategory[] = [
 	{
@@ -10,7 +11,7 @@ const FEATURED_CATEGORIES: ThreeColumnPreviewCategory[] = [
 			"Оригинальные запчасти Ford и их альтернативные аналоги в наличии и под заказ по VIN-номеру.",
 		image: "/main/car-parts-1.jpg",
 		productCount: 9790,
-		href: "/catalog/ford",
+		href: buildCatalogPath(),
 	},
 	{
 		title: "Разное",

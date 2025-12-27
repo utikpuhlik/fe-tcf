@@ -8,6 +8,7 @@ import { useEffect, useRef, useState } from "react";
 import { CartSheet } from "@/components/cart/cart-sheet";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { buildCatalogPath } from "@/lib/utils";
 
 export function Header() {
 	const [searchValue, setSearchValue] = useState("");
@@ -89,7 +90,7 @@ export function Header() {
 				<div className="flex w-full flex-wrap items-center gap-x-0 gap-y-3 sm:flex-1 sm:flex-nowrap sm:items-center sm:justify-between sm:gap-10">
 					<nav className="order-1 flex basis-1/2 items-center justify-center gap-4 text-center font-semibold text-base sm:order-1 sm:ml-4 sm:basis-auto sm:justify-start sm:text-left sm:text-sm">
 						<Link
-							href="/catalog/ford"
+							href={buildCatalogPath()}
 							className="transition hover:text-primary"
 						>
 							Каталог

@@ -2,6 +2,7 @@ import { ProductsList } from "@/components/catalog/products-list";
 import Breadcrumbs from "@/components/shared/breadcrumbs";
 import { productsApi } from "@/lib/api/productApi";
 import { subCategoriesApi } from "@/lib/api/subCategoryApi";
+import { buildCatalogPath } from "@/lib/utils";
 
 interface Props {
 	params: Promise<{ sub_category_slug: string }>;
@@ -19,14 +20,14 @@ export default async function ProductsPage({ params }: Props) {
 		<main className="space-y-4">
 			<Breadcrumbs
 				breadcrumbs={[
-					{ label: "Каталог", href: "/catalog/ford" },
+					{ label: "Каталог", href: buildCatalogPath() },
 					{
 						label: sub_category.category.name,
-						href: `/catalog/ford/${sub_category.category.slug}`,
+						href: buildCatalogPath(sub_category.category),
 					},
 					{
 						label: sub_category.name,
-						href: `/catalog/ford/${sub_category.category.slug}/${sub_category_slug}`,
+						href: buildCatalogPath(sub_category),
 						active: true,
 					},
 				]}

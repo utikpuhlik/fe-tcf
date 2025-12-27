@@ -39,9 +39,13 @@ type CatalogPathInput =
 	| OfferSchema;
 
 export function buildCatalogPath(
-	input: CatalogPathInput,
+	input?: CatalogPathInput,
 	basePath = "/catalog/ford",
 ) {
+	if (!input) {
+		return basePath;
+	}
+
 	const segments = [basePath];
 
 	if ("product" in input) {

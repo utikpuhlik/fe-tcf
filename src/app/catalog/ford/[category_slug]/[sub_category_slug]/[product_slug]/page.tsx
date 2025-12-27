@@ -3,6 +3,7 @@ import ProductOverview from "@/components/catalog/product-overview";
 import Breadcrumbs from "@/components/shared/breadcrumbs";
 import { offersApi } from "@/lib/api/offerApi";
 import { productsApi } from "@/lib/api/productApi";
+import { buildCatalogPath } from "@/lib/utils";
 import { GetMinPriceAndQuantity } from "@/lib/utils/offers";
 
 interface Props {
@@ -19,27 +20,23 @@ export default async function OffersPage({ params }: Props) {
 
 	const { minPriceRub, totalQuantity } = GetMinPriceAndQuantity(offers.items);
 
-	const sub_category_slug = product.sub_category.slug;
-	const category_slug = product.sub_category.category.slug;
-	const catalog_base_path = "/catalog/ford";
-
 	return (
 		<main className="space-y-4">
 			<div className="mb-4">
 				<Breadcrumbs
 					breadcrumbs={[
-						{ label: "Каталог", href: catalog_base_path },
+						{ label: "Каталог", href: buildCatalogPath() },
 						{
 							label: product.sub_category.category.name,
-							href: `${catalog_base_path}/${category_slug}`,
+							href: buildCatalogPath(product.sub_category.category),
 						},
 						{
 							label: product.sub_category.name,
-							href: `${catalog_base_path}/${category_slug}/${sub_category_slug}`,
+							href: buildCatalogPath(product.sub_category),
 						},
 						{
 							label: product.name,
-							href: `${catalog_base_path}/${category_slug}/${sub_category_slug}/${product_slug}`,
+							href: buildCatalogPath(product),
 							active: true,
 						},
 					]}
