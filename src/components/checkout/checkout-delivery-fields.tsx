@@ -214,7 +214,7 @@ export function CheckoutDeliveryFields({
 							id="city"
 							autoComplete="address-level2"
 							{...form.register("delivery.city")}
-							placeholder="Севастополь"
+							placeholder="Москва"
 						/>
 						{form.formState.errors.delivery?.city?.message ? (
 							<p className="text-destructive text-xs">
@@ -231,7 +231,7 @@ export function CheckoutDeliveryFields({
 							id="street"
 							autoComplete="address-line1"
 							{...form.register("delivery.street")}
-							placeholder="Хрусталёва"
+							placeholder="Красная площадь"
 						/>
 						{form.formState.errors.delivery?.street?.message ? (
 							<p className="text-destructive text-xs">
@@ -249,7 +249,7 @@ export function CheckoutDeliveryFields({
 								id="houseNumber"
 								autoComplete="address-line2"
 								{...form.register("delivery.houseNumber")}
-								placeholder="74ж"
+								placeholder="1"
 							/>
 							{form.formState.errors.delivery?.houseNumber?.message ? (
 								<p className="text-destructive text-xs">
@@ -266,7 +266,7 @@ export function CheckoutDeliveryFields({
 								id="postalCode"
 								autoComplete="postal-code"
 								{...form.register("delivery.postalCode")}
-								placeholder="299053"
+								placeholder="000000"
 							/>
 							{form.formState.errors.delivery?.postalCode?.message ? (
 								<p className="text-destructive text-xs">
