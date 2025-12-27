@@ -1,4 +1,5 @@
 import { env } from "@/env";
+import { apiRequest } from "@/lib/api/generic/request";
 import { fetchAndParse } from "@/lib/api/utils/fetchJson";
 import { type CountSchema, zCountSchema } from "@/lib/schemas/commonSchema";
 import {
@@ -16,6 +17,15 @@ export const offersApi = {
 	fetchByProductSlug(product_slug: string): Promise<OfferPaginatedSchema> {
 		const url = `${env.NEXT_PUBLIC_API_URL}/${ENTITY}?product_slug=${product_slug}`;
 		return fetchAndParse(url, zOfferPaginatedSchema);
+	},
+	fetchByIds(ids: string[]): Promise<OfferPaginatedSchema> {
+		const url = `${env.NEXT_PUBLIC_API_URL}/${ENTITY}/by-ids`;
+		return apiRequest(
+			url,
+			{ method: "POST", body: JSON.stringify(ids) },
+			zOfferPaginatedSchema,
+			false,
+		);
 	},
 	fetchCount(
 		product_id?: string,

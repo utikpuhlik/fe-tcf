@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Card } from "@/components/ui/card";
 import type { ProductSchema } from "@/lib/schemas/productSchema";
-import { cn } from "@/lib/utils";
+import { buildCatalogPath, cn } from "@/lib/utils";
 
 interface ProductsListProps {
 	products: ProductSchema[];
@@ -22,7 +22,7 @@ export function ProductsList({ products, className }: ProductsListProps) {
 			{products.map((product) => (
 				<Link
 					key={product.id}
-					href={`/catalog/ford/${product.sub_category.category.slug}/${product.sub_category.slug}/${product.slug}`}
+					href={buildCatalogPath(product)}
 					className="block"
 				>
 					<Card className="flex flex-row items-center gap-4 rounded-none border-0 px-4 py-4 transition-colors hover:bg-muted/40">

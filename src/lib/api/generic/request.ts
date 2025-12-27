@@ -7,6 +7,7 @@ export async function apiRequest<T>(
 	url: string,
 	options: RequestInit,
 	schema: ZodSchema<T> | null,
+	auth: boolean = true,
 ): Promise<T> {
 	const res = await fetch(url, {
 		...options,
@@ -15,7 +16,7 @@ export async function apiRequest<T>(
 			...(options.body instanceof FormData
 				? {}
 				: { "Content-Type": "application/json" }),
-			...(await getAuthHeader()),
+			...(auth ? await getAuthHeader() : {}),
 			...(options.headers ?? {}),
 		},
 	});

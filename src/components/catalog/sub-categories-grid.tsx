@@ -2,6 +2,7 @@
 
 import { TileGrid } from "@/components/catalog/tile-grid";
 import type { SubCategorySchema } from "@/lib/schemas/subCategorySchema";
+import { buildCatalogPath } from "@/lib/utils";
 
 interface SubCategoriesGridProps {
 	categories: SubCategorySchema[];
@@ -19,7 +20,7 @@ export function SubCategoriesGrid({
 			items={categories}
 			facets={facets}
 			className={className}
-			makeHref={(c) => `/catalog/ford/${c.category.slug}/${c.slug}`}
+			makeHref={(c) => buildCatalogPath(c)}
 		/>
 	);
 }

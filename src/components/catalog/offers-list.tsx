@@ -1,8 +1,7 @@
 "use client";
 
-import { ShoppingCart } from "lucide-react";
 import Image from "next/image";
-import { Button } from "@/components/ui/button";
+import { AddToCartButtonWithQuantity } from "@/components/cart/add-to-cart-button";
 import { Card } from "@/components/ui/card";
 import type { OfferSchema } from "@/lib/schemas/offerSchema";
 import { cn } from "@/lib/utils";
@@ -72,9 +71,7 @@ export function OffersList({ offers, className }: OffersListProps) {
 
 					{/* ADD TO CART */}
 					<div className="ml-4">
-						<Button size="sm" variant="outline">
-							<ShoppingCart />
-						</Button>
+						<AddToCartButtonWithQuantity offer={offer} />
 					</div>
 				</Card>
 			))}

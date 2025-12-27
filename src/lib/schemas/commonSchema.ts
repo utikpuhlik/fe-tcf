@@ -11,6 +11,10 @@ export const zCountSchema = z.object({
 	count: z.number().gte(0),
 });
 
+export const zQuantityFormSchema = z.object({
+	quantity: z.number().int("Только целые числа").min(1, "Минимум 1 шт."),
+});
+
 export const zRoleEnum = z.enum(["ADMIN", "EMPLOYEE", "USER"]);
 export const zWaybillTypeEnum = z.enum([
 	"WAYBILL_IN",
@@ -39,6 +43,7 @@ export const zUserBalanceChangeReasonEnum = z.enum([
 	"OTHER",
 ]);
 
+export type QuantityFormSchema = z.infer<typeof zQuantityFormSchema>;
 export type CountSchema = z.infer<typeof zCountSchema>;
 export type RoleEnum = z.infer<typeof zRoleEnum>;
 export type CustomerTypeEnum = z.infer<typeof zCustomerTypeEnum>;

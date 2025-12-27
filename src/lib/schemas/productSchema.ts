@@ -18,7 +18,7 @@ export const zProductPutSchema = zProductBaseSchema.extend({
 export const zProductSchema = zProductBaseSchema.extend({
 	id: z.uuid(),
 	bitrix_id: z.string().optional().nullable(),
-	slug: z.string().nullable(),
+	slug: z.string(),
 	image_url: z.url(),
 	sub_category: zSubCategorySchema,
 });

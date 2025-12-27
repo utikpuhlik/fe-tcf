@@ -5,15 +5,9 @@ import { ChevronDown, Heart, Search, ShoppingCart, User } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+import { CartSheet } from "@/components/cart/cart-sheet";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import {
-	Sheet,
-	SheetContent,
-	SheetHeader,
-	SheetTitle,
-	SheetTrigger,
-} from "@/components/ui/sheet";
 
 export function Header() {
 	const [searchValue, setSearchValue] = useState("");
@@ -88,26 +82,7 @@ export function Header() {
 							</Button>
 						</Link>
 
-						<Sheet>
-							<SheetTrigger asChild>
-								<Button
-									variant="ghost"
-									size="icon"
-									className="h-11 w-11 rounded-full sm:h-10 sm:w-10"
-									aria-label="Открыть корзину"
-								>
-									<ShoppingCart className="size-6 sm:size-5" />
-								</Button>
-							</SheetTrigger>
-							<SheetContent>
-								<SheetHeader>
-									<SheetTitle>Корзина</SheetTitle>
-								</SheetHeader>
-								<div className="px-4 text-muted-foreground text-sm">
-									Корзина пока пустая.
-								</div>
-							</SheetContent>
-						</Sheet>
+						<CartSheet />
 					</div>
 				</div>
 
@@ -195,26 +170,7 @@ export function Header() {
 						</Button>
 					</Link>
 
-					<Sheet>
-						<SheetTrigger asChild>
-							<Button
-								variant="ghost"
-								size="icon"
-								className="rounded-full"
-								aria-label="Открыть корзину"
-							>
-								<ShoppingCart className="size-5" />
-							</Button>
-						</SheetTrigger>
-						<SheetContent>
-							<SheetHeader>
-								<SheetTitle>Корзина</SheetTitle>
-							</SheetHeader>
-							<div className="px-4 text-muted-foreground text-sm">
-								Корзина пока пустая.
-							</div>
-						</SheetContent>
-					</Sheet>
+					<CartSheet />
 				</div>
 			</div>
 		</header>
