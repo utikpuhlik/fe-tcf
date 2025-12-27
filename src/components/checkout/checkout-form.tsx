@@ -2,6 +2,7 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { MapPin, Van } from "lucide-react";
+import { useRouter } from "next/navigation";
 import * as React from "react";
 import { useForm, useWatch } from "react-hook-form";
 import { toast } from "sonner";
@@ -40,6 +41,7 @@ const DEFAULT_PICKUP_POINT = {
 
 export function CheckoutForm({ autofill }: CheckoutFormProps) {
 	const [isPending, startTransition] = React.useTransition();
+	const router = useRouter();
 	const form = useForm<CheckoutSchema>({
 		resolver: zodResolver(zCheckoutSchema),
 		shouldUnregister: true,
@@ -119,10 +121,8 @@ export function CheckoutForm({ autofill }: CheckoutFormProps) {
 		startTransition(async () => {
 			try {
 				await createOrderAction(payloadValidated);
-				toast("Заказ оформлен", {
-					description: "Наши менеджеры свяжутся с вами в ближайшее время",
-				});
 				clearCart();
+				router.replace("/checkout/success");
 			} catch (_error) {
 				toast("Неизвестная ошибка", { description: "Что-то пошло не так.." });
 			}

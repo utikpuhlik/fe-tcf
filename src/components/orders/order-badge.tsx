@@ -1,0 +1,31 @@
+import { Badge } from "@/components/ui/badge";
+import {
+	ORDER_STATUS_LABELS,
+	type OrderStatusEnum,
+} from "@/lib/schemas/commonSchema";
+
+interface OrderBadgeProps {
+	orderStatus: OrderStatusEnum;
+}
+
+export function OrderBadge({ orderStatus }: OrderBadgeProps) {
+	const orderMap: Record<
+		OrderStatusEnum,
+		"warning" | "info" | "success" | "attention" | "destructive"
+	> = {
+		NEW: "attention",
+		IN_PROGRESS: "info",
+		SHIPPING: "warning",
+		COMPLETED: "success",
+		CANCELED: "destructive",
+	};
+
+	const label = ORDER_STATUS_LABELS[orderStatus] ?? orderStatus;
+	const orderClass = orderMap[orderStatus] ?? "outline";
+
+	return (
+		<Badge variant={orderClass} className="capitalize">
+			{label}
+		</Badge>
+	);
+}
