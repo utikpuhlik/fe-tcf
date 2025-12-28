@@ -34,6 +34,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function Page({ params }: Props) {
 	const { order_id } = await params;
 	const order: OrderSchema = await ordersApi.fetchById(order_id);
+	console.log(order);
 
 	return (
 		<div className="mx-auto max-w-screen-lg space-y-4 lg:mt-10">
@@ -52,13 +53,8 @@ export default async function Page({ params }: Props) {
 						<div className="space-y-4">
 							<div className="space-y-2">
 								<h3 className="mb-1 font-semibold">Информация о клиенте</h3>
-								<Link
-									href={`/users/${order.user.id}`}
-									className="hover:underline"
-								>
-									{order.user.first_name} {order.user.last_name}
-								</Link>
-								<p>{order.user.email}</p>
+								{order.first_name} {order.last_name}
+								<p>{order.email}</p>
 								<p className="text-muted-foreground text-sm">
 									{order.country}, {order.city}, {order.street}, {order.house}
 								</p>

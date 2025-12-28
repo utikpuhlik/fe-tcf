@@ -16,6 +16,7 @@ export default async function CheckoutPage() {
 			}
 		: undefined;
 	const showLoginHint = !session;
+	const userId = session?.user?.id ?? null;
 
 	return (
 		<main className="min-h-screen bg-neutral-50 px-6 py-12 text-neutral-900">
@@ -31,7 +32,11 @@ export default async function CheckoutPage() {
 
 				<div className="grid gap-6 lg:grid-cols-[1fr_380px]">
 					{/* LEFT */}
-					<CheckoutForm autofill={autofill} showLoginHint={showLoginHint} />
+					<CheckoutForm
+						autofill={autofill}
+						showLoginHint={showLoginHint}
+						userId={userId}
+					/>
 
 					{/* RIGHT */}
 					<div className="lg:sticky lg:top-8">

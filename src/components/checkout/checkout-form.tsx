@@ -33,6 +33,7 @@ export type CheckoutAutofill = {
 type CheckoutFormProps = {
 	autofill?: CheckoutAutofill;
 	showLoginHint?: boolean;
+	userId?: string | null;
 };
 
 const DEFAULT_PICKUP_POINT = {
@@ -40,7 +41,11 @@ const DEFAULT_PICKUP_POINT = {
 	subtitle: "Хрусталева 74ж",
 } as const;
 
-export function CheckoutForm({ autofill, showLoginHint }: CheckoutFormProps) {
+export function CheckoutForm({
+	autofill,
+	showLoginHint,
+	userId,
+}: CheckoutFormProps) {
 	const [isPending, startTransition] = React.useTransition();
 	const router = useRouter();
 	const form = useForm<CheckoutSchema>({
@@ -54,23 +59,15 @@ export function CheckoutForm({ autofill, showLoginHint }: CheckoutFormProps) {
 				email: autofill?.email ?? "",
 				phone: autofill?.phone ?? "",
 			},
-			delivery: {
-				addressQuery: "",
-				country: "",
-				city: "",
-				street: "",
-				houseNumber: "",
-				postalCode: "",
-			},
 		},
 		mode: "onBlur",
 	});
 
-	const method: DeliveryMethod = useWatch({
+	const method = useWatch({
 		control: form.control,
 		name: "method",
 		defaultValue: "pickup",
-	});
+	}) as DeliveryMethod;
 	const cartItems = useCartStore((state) => state.items);
 	const clearCart = useCartStore((state) => state.clear);
 
@@ -102,6 +99,7 @@ export function CheckoutForm({ autofill, showLoginHint }: CheckoutFormProps) {
 			postal_code: isDelivery ? (delivery?.postalCode ?? null) : null,
 			shipping_method: isDelivery ? "CARGO" : "SELF_PICKUP",
 			shipping_company: null,
+			user_id: userId ?? null,
 			first_name: values.contact.firstName,
 			last_name: values.contact.lastName,
 			email: values.contact.email,
@@ -132,6 +130,7 @@ export function CheckoutForm({ autofill, showLoginHint }: CheckoutFormProps) {
 
 	return (
 		<form className="space-y-6" onSubmit={form.handleSubmit(onSubmit)}>
+			<input type="hidden" {...form.register("method")} />
 			<Card>
 				<CardHeader className="space-y-2">
 					<CardTitle className="text-xl">Оформление заказа</CardTitle>
@@ -144,6 +143,9 @@ export function CheckoutForm({ autofill, showLoginHint }: CheckoutFormProps) {
 								shouldDirty: true,
 							});
 							if (nextMethod !== "delivery") {
+								form.setValue("delivery", undefined, {
+									shouldDirty: true,
+								});
 								form.resetField("delivery.addressQuery");
 								form.resetField("delivery.country");
 								form.resetField("delivery.city");

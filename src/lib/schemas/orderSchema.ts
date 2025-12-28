@@ -21,7 +21,7 @@ const zOrderBaseSchema = z.object({
 	house: z.string().nullable(),
 	postal_code: z.string().nullable(),
 
-	shipping_method: zShippingMethodEnum.nullable(),
+	shipping_method: zShippingMethodEnum,
 	shipping_company: z.string().nullable(),
 
 	first_name: z.string(),
@@ -32,7 +32,7 @@ const zOrderBaseSchema = z.object({
 
 export const zOrderSchema = zOrderBaseSchema.extend({
 	id: z.uuid(),
-	user: zUserSchema,
+	user: zUserSchema.nullable(),
 	waybill: zWaybillSchema.nullable(),
 	order_offers: zOrderOfferSchema.array(),
 	created_at: z.iso.datetime(),
@@ -48,6 +48,7 @@ export const zOrderPostSchema = zOrderBaseSchema.extend({});
 export const zOrderWithOffersPostSchema = zOrderBaseSchema.extend({
 	// workaround with optional to use default value
 	order_offers: z.array(zOrderOfferPostSchema).default([]).optional(),
+	user_id: z.uuid().nullable(),
 });
 
 export const zOrderPutSchema = zOrderBaseSchema.extend({});

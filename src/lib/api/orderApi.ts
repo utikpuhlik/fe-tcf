@@ -23,7 +23,7 @@ export const ordersApi = {
 		return fetchWithAuthAndParse(url, zOrderPaginatedSchema);
 	},
 	fetchById(id: string): Promise<OrderSchema> {
-		return fetchEntityById<OrderSchema>(id, zOrderSchema, ENTITY, true);
+		return fetchEntityById<OrderSchema>(id, zOrderSchema, ENTITY);
 	},
 
 	fetchCount(): Promise<CountSchema> {
@@ -41,6 +41,7 @@ export const ordersApi = {
 			url,
 			{ method: "POST", body: JSON.stringify(data) },
 			zOrderSchema,
+			false,
 		);
 	},
 	// -------------------------------
