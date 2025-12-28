@@ -1,4 +1,3 @@
-import { RedirectToSignIn } from "@daveyplate/better-auth-ui";
 import { headers } from "next/headers";
 import { CartSummary } from "@/components/cart/cart-summary";
 import { CheckoutCartReconciler } from "@/components/checkout/checkout-cart-reconciler";
@@ -9,9 +8,14 @@ export default async function CheckoutPage() {
 	const session = await auth.api.getSession({
 		headers: await headers(),
 	});
-	if (!session) {
-		return <RedirectToSignIn />;
-	}
+	const autofill = session
+		? {
+				firstName: session.user.first_name,
+				lastName: session.user.last_name,
+				email: session.user.email,
+			}
+		: undefined;
+	const showLoginHint = !session;
 
 	return (
 		<main className="min-h-screen bg-neutral-50 px-6 py-12 text-neutral-900">
@@ -27,7 +31,7 @@ export default async function CheckoutPage() {
 
 				<div className="grid gap-6 lg:grid-cols-[1fr_380px]">
 					{/* LEFT */}
-					<CheckoutForm />
+					<CheckoutForm autofill={autofill} showLoginHint={showLoginHint} />
 
 					{/* RIGHT */}
 					<div className="lg:sticky lg:top-8">

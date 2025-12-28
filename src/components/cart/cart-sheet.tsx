@@ -3,7 +3,7 @@
 import { ShoppingCart, Trash2 } from "lucide-react";
 import Link from "next/link";
 import { CartItem } from "@/components/cart/cart-item";
-import { CartSummaryCard } from "@/components/cart/cart-summary-card";
+import { CartTotals } from "@/components/cart/cart-totals";
 import { useCartStore } from "@/components/layout/cart-store-provider";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -24,6 +24,10 @@ export function CartSheet() {
 	const clear = useCartStore((state) => state.clear);
 	const increment = useCartStore((state) => state.increment);
 	const decrement = useCartStore((state) => state.decrement);
+	const subtotalRub = items.reduce(
+		(total, item) => total + item.price_rub * item.quantity,
+		0,
+	);
 
 	return (
 		<Sheet>
@@ -68,20 +72,7 @@ export function CartSheet() {
 
 				{/* свой футер вместо SheetFooter */}
 				<div className="mt-4 space-y-4 border-t pt-4 pb-4">
-					<CartSummaryCard
-						total_sum_retail={items.reduce(
-							(s, i) => s + i.price_rub * i.quantity,
-							0,
-						)}
-						total_sum_wholesale={items.reduce(
-							(s, i) => s + i.wholesale_price_rub * i.quantity,
-							0,
-						)}
-						total_sum_super_wholesale={items.reduce(
-							(s, i) => s + i.super_wholesale_price_rub * i.quantity,
-							0,
-						)}
-					/>
+					<CartTotals subtotalRub={subtotalRub} />
 
 					<div className="flex items-center gap-3">
 						<div className="flex flex-1 gap-3">

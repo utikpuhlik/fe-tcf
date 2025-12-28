@@ -32,6 +32,7 @@ export type CheckoutAutofill = {
 
 type CheckoutFormProps = {
 	autofill?: CheckoutAutofill;
+	showLoginHint?: boolean;
 };
 
 const DEFAULT_PICKUP_POINT = {
@@ -39,7 +40,7 @@ const DEFAULT_PICKUP_POINT = {
 	subtitle: "Хрусталева 74ж",
 } as const;
 
-export function CheckoutForm({ autofill }: CheckoutFormProps) {
+export function CheckoutForm({ autofill, showLoginHint }: CheckoutFormProps) {
 	const [isPending, startTransition] = React.useTransition();
 	const router = useRouter();
 	const form = useForm<CheckoutSchema>({
@@ -166,7 +167,7 @@ export function CheckoutForm({ autofill }: CheckoutFormProps) {
 
 				<CardContent className="space-y-6">
 					{/* CONTACT */}
-					<CheckoutContactFields form={form} />
+					<CheckoutContactFields form={form} showLoginHint={showLoginHint} />
 
 					<Separator />
 
