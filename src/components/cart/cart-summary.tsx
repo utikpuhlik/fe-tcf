@@ -25,7 +25,7 @@ export function CartSummary() {
 			<CardContent className="space-y-4">
 				<CartTotals subtotalRub={subtotalRub} shippingRub={shippingRub} />
 
-				<ScrollArea className="h-72">
+				<ScrollArea className="h-56 sm:h-72">
 					<div className="space-y-3">
 						{items.map((it) => (
 							<CartItem key={it.id} offer={it} variant="summary" />

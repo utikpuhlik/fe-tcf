@@ -21,12 +21,14 @@ export default async function CheckoutPage() {
 	const userId = session?.user?.id ?? null;
 
 	return (
-		<main className="min-h-screen bg-neutral-50 px-6 py-12 text-neutral-900">
+		<main className="min-h-screen bg-neutral-50 px-4 py-8 text-neutral-900 sm:px-6 sm:py-12 lg:px-8">
 			<CheckoutCartReconciler />
 			<CheckoutLoginDialog open={showLoginHint} />
 			<div className="mx-auto w-full max-w-6xl">
 				<header className="mb-6 space-y-1">
-					<h1 className="font-semibold text-2xl">Адрес и контактные данные</h1>
+					<h1 className="font-semibold text-xl sm:text-2xl">
+						Адрес и контактные данные
+					</h1>
 					{showLoginHint ? (
 						<p className="text-neutral-600 text-sm">
 							<Link
@@ -39,7 +41,7 @@ export default async function CheckoutPage() {
 					) : null}
 				</header>
 
-				<div className="grid gap-6 lg:grid-cols-[1fr_380px]">
+				<div className="grid gap-4 sm:gap-6 lg:grid-cols-[1fr_380px]">
 					{/* LEFT */}
 					<CheckoutForm autofill={autofill} userId={userId} />
 

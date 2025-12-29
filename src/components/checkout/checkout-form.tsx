@@ -181,6 +181,7 @@ export function CheckoutForm({ autofill, userId }: CheckoutFormProps) {
 							type="submit"
 							isLoading={isPending}
 							disabled={cartItems.length === 0}
+							className="w-full sm:w-auto"
 						>
 							Оформить заказ
 						</LoadingButton>
