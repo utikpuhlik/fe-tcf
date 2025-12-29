@@ -75,21 +75,20 @@ export function CartSheet() {
 					<CartTotals subtotalRub={subtotalRub} />
 
 					<div className="flex items-center gap-3">
-						<div className="flex flex-1 gap-3">
-							<SheetClose asChild>
-								<Link href="/checkout">
-									<Button>Перейти к оформлению заказа</Button>
-								</Link>
-							</SheetClose>
-						</div>
+						<SheetClose asChild>
+							<Link href="/checkout" className="flex-1">
+								<Button className="w-full">Перейти к оформлению заказа</Button>
+							</Link>
+						</SheetClose>
 						<Button
-							variant="secondary"
-							size="icon"
+							variant="outline"
+							className="flex-1"
 							onClick={clear}
 							disabled={items.length === 0}
 							aria-label="Очистить корзину"
 						>
-							<Trash2 className="h-4 w-4" />
+							Очистить корзину
+							<Trash2 />
 						</Button>
 					</div>
 				</div>

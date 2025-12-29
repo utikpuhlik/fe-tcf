@@ -2,8 +2,6 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormProvider, useForm } from "react-hook-form";
-import { TurnstileField } from "@/components/auth/turnstile-field";
-import { Button } from "@/components/ui/button";
 import {
 	Card,
 	CardContent,
@@ -18,6 +16,7 @@ import {
 	FieldLabel,
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
+import { LoadingButton } from "@/components/ui/loading-button";
 import { authClient } from "@/lib/auth-client";
 import {
 	type SignInSchema,
@@ -25,18 +24,24 @@ import {
 } from "@/lib/schemas/forms/authSchema";
 import { cn } from "@/lib/utils";
 
+type LoginFormProps = React.ComponentProps<"div"> & {
+	showHeader?: boolean;
+	showFooter?: boolean;
+};
+
 export function LoginForm({
 	className,
+	showHeader = true,
+	showFooter = true,
 	...props
-}: React.ComponentProps<"div">) {
+}: LoginFormProps) {
 	const form = useForm<SignInSchema>({
 		resolver: zodResolver(zSignInSchema),
 		defaultValues: {
 			email: "",
 			password: "",
-			turnstileToken: "",
 		},
-		mode: "onBlur",
+		mode: "onSubmit",
 	});
 
 	const onSubmit = async (values: SignInSchema): Promise<void> => {
@@ -46,11 +51,6 @@ export function LoginForm({
 			email: values.email,
 			password: values.password,
 			callbackURL: "/",
-			fetchOptions: {
-				headers: {
-					"x-captcha-response": values.turnstileToken,
-				},
-			},
 		});
 		if (res.error) {
 			form.setError("root", {
@@ -70,12 +70,14 @@ export function LoginForm({
 	return (
 		<div className={cn("flex flex-col gap-6", className)} {...props}>
 			<Card>
-				<CardHeader>
-					<CardTitle>Вход в аккаунт</CardTitle>
-					<CardDescription>
-						Введите email ниже, чтобы войти в аккаунт
-					</CardDescription>
-				</CardHeader>
+				{showHeader && (
+					<CardHeader>
+						<CardTitle>Вход в аккаунт</CardTitle>
+						<CardDescription>
+							Введите email ниже, чтобы войти в аккаунт
+						</CardDescription>
+					</CardHeader>
+				)}
 
 				<CardContent>
 					<FormProvider {...form}>
@@ -141,32 +143,25 @@ export function LoginForm({
 								)}
 
 								<Field>
-									<TurnstileField />
-									{form.formState.errors.turnstileToken?.message && (
-										<FieldDescription className="text-destructive">
-											{form.formState.errors.turnstileToken.message}
-										</FieldDescription>
-									)}
-								</Field>
-
-								<Field>
-									<Button
+									<LoadingButton
 										type="submit"
 										className="w-full"
-										disabled={isSubmitting}
+										isLoading={isSubmitting}
 									>
-										{isSubmitting ? "Входим..." : "Войти"}
-									</Button>
+										Войти
+									</LoadingButton>
 
-									<FieldDescription className="text-center">
-										Нет аккаунта?{" "}
-										<a
-											href="/auth/sign-up"
-											className="underline underline-offset-4"
-										>
-											Зарегистрироваться
-										</a>
-									</FieldDescription>
+									{showFooter && (
+										<FieldDescription className="text-center">
+											Нет аккаунта?{" "}
+											<a
+												href="/auth/sign-up"
+												className="underline underline-offset-4"
+											>
+												Зарегистрироваться
+											</a>
+										</FieldDescription>
+									)}
 								</Field>
 							</FieldGroup>
 						</form>

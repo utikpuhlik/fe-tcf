@@ -30,7 +30,7 @@ export default async function CheckoutPage() {
 					{showLoginHint ? (
 						<p className="text-neutral-600 text-sm">
 							<Link
-								className="text-neutral-600 transition-colors hover:text-primary hover:underline"
+								className="text-neutral-600 underline underline-offset-4 transition-colors hover:text-primary"
 								href="/auth/sign-in"
 							>
 								Войдите, чтобы заполнить автоматически

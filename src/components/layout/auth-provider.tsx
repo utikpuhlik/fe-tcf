@@ -4,7 +4,6 @@ import { AuthUIProvider } from "@daveyplate/better-auth-ui";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import type { ReactNode } from "react";
-import { env } from "@/env";
 import { authClient } from "@/lib/auth-client";
 
 export function AuthProvider({ children }: { children: ReactNode }) {
@@ -18,11 +17,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 			onSessionChange={() => {
 				// Clear router cache (protected routes)
 				router.refresh();
-			}}
-			captcha={{
-				provider: "cloudflare-turnstile",
-				siteKey: env.NEXT_PUBLIC_TURNSTILE_SITE_KEY,
-				hideBadge: true,
 			}}
 			passkey
 			Link={Link}

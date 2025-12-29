@@ -77,7 +77,7 @@ export function CheckoutContactFields({ form }: CheckoutContactFieldsProps) {
 							type="tel"
 							autoComplete="tel"
 							{...form.register("contact.phone")}
-							placeholder="+79780424666"
+							placeholder="Формат: +79780424666"
 						/>
 						{form.formState.errors.contact?.phone?.message ? (
 							<p className="text-destructive text-xs">

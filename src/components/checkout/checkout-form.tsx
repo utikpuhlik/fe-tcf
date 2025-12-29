@@ -10,8 +10,8 @@ import { CheckoutContactFields } from "@/components/checkout/checkout-contact-fi
 import { CheckoutDeliveryFields } from "@/components/checkout/checkout-delivery-fields";
 import { CheckoutPickupFields } from "@/components/checkout/checkout-pickup-fields";
 import { useCartStore } from "@/components/layout/cart-store-provider";
-import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { LoadingButton } from "@/components/ui/loading-button";
 import { Separator } from "@/components/ui/separator";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { createOrderAction } from "@/lib/actions/orderAction";
@@ -177,12 +177,13 @@ export function CheckoutForm({ autofill, userId }: CheckoutFormProps) {
 					<CheckoutDeliveryFields form={form} method={method} />
 
 					<div className="flex items-center gap-3">
-						<Button
+						<LoadingButton
 							type="submit"
-							disabled={isPending || cartItems.length === 0}
+							isLoading={isPending}
+							disabled={cartItems.length === 0}
 						>
 							Оформить заказ
-						</Button>
+						</LoadingButton>
 					</div>
 				</CardContent>
 			</Card>

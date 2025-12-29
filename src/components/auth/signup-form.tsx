@@ -5,7 +5,6 @@ import { Eye, EyeOff } from "lucide-react";
 import * as React from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
-import { TurnstileField } from "@/components/auth/turnstile-field";
 import { Button } from "@/components/ui/button";
 import {
 	Card,
@@ -21,6 +20,7 @@ import {
 	FieldLabel,
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
+import { LoadingButton } from "@/components/ui/loading-button";
 import { signUpAction } from "@/lib/actions/authAction";
 
 import {
@@ -45,7 +45,6 @@ export function SignupForm({
 			email: "",
 			password: "",
 			confirm_password: "",
-			turnstileToken: "",
 		},
 		mode: "onBlur",
 		reValidateMode: "onChange",
@@ -68,7 +67,6 @@ export function SignupForm({
 				values.password,
 				values.first_name,
 				values.last_name,
-				values.turnstileToken,
 			);
 		} catch (err: unknown) {
 			const message =
@@ -262,22 +260,13 @@ export function SignupForm({
 							)}
 
 							<Field>
-								<TurnstileField />
-								{errors.turnstileToken?.message && (
-									<FieldDescription className="text-destructive">
-										{errors.turnstileToken.message}
-									</FieldDescription>
-								)}
-							</Field>
-
-							<Field>
-								<Button
+								<LoadingButton
 									type="submit"
 									className="w-full"
-									disabled={isSubmitting}
+									isLoading={isSubmitting}
 								>
-									{isSubmitting ? "Создаём аккаунт..." : "Создать аккаунт"}
-								</Button>
+									Создать аккаунт
+								</LoadingButton>
 
 								<FieldDescription className="px-6 text-center">
 									Уже есть аккаунт?{" "}

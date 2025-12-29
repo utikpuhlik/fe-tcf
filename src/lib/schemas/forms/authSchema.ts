@@ -3,7 +3,7 @@ import { z } from "zod";
 const zBaseSchema = z.object({
 	email: z.email("Неверный формат email"),
 	password: z.string().min(8, "Минимально 8 символов"),
-	turnstileToken: z.string().min(1, "Подтвердите, что вы не бот."),
+	// turnstileToken: z.string().min(1, "Подтвердите, что вы не бот."),
 });
 
 export const zSignInSchema = zBaseSchema.extend({});

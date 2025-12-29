@@ -8,7 +8,6 @@ export async function signUpAction(
 	password: string,
 	first_name: string,
 	last_name: string,
-	turnstileToken: string,
 ): Promise<void> {
 	const name = `${first_name} ${last_name}`;
 
@@ -19,9 +18,6 @@ export async function signUpAction(
 			name,
 			first_name,
 			last_name,
-		},
-		headers: {
-			"x-captcha-response": turnstileToken,
 		},
 	});
 
