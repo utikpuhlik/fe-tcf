@@ -1,7 +1,9 @@
 import { headers } from "next/headers";
+import Link from "next/link";
 import { CartSummary } from "@/components/cart/cart-summary";
 import { CheckoutCartReconciler } from "@/components/checkout/checkout-cart-reconciler";
 import { CheckoutForm } from "@/components/checkout/checkout-form";
+import { CheckoutLoginDialog } from "@/components/checkout/checkout-login-dialog";
 import { auth } from "@/lib/auth";
 
 export default async function CheckoutPage() {
@@ -21,22 +23,25 @@ export default async function CheckoutPage() {
 	return (
 		<main className="min-h-screen bg-neutral-50 px-6 py-12 text-neutral-900">
 			<CheckoutCartReconciler />
+			<CheckoutLoginDialog open={showLoginHint} />
 			<div className="mx-auto w-full max-w-6xl">
 				<header className="mb-6 space-y-1">
 					<h1 className="font-semibold text-2xl">Адрес и контактные данные</h1>
-					<p className="text-neutral-600 text-sm">
-						Подсказки адресов приходят из Yandex Geocoder через наш API
-						(`/api/geocode`).
-					</p>
+					{showLoginHint ? (
+						<p className="text-neutral-600 text-sm">
+							<Link
+								className="text-neutral-600 transition-colors hover:text-primary hover:underline"
+								href="/auth/sign-in"
+							>
+								Войдите, чтобы заполнить автоматически
+							</Link>
+						</p>
+					) : null}
 				</header>
 
 				<div className="grid gap-6 lg:grid-cols-[1fr_380px]">
 					{/* LEFT */}
-					<CheckoutForm
-						autofill={autofill}
-						showLoginHint={showLoginHint}
-						userId={userId}
-					/>
+					<CheckoutForm autofill={autofill} userId={userId} />
 
 					{/* RIGHT */}
 					<div className="lg:sticky lg:top-8">

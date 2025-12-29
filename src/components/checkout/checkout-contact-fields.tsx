@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import type { UseFormReturn } from "react-hook-form";
 import { Field, FieldContent, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
@@ -9,29 +8,13 @@ import type { CheckoutSchema } from "@/lib/schemas/forms/checkoutSchema";
 
 type CheckoutContactFieldsProps = {
 	form: UseFormReturn<CheckoutSchema>;
-	showLoginHint?: boolean;
 };
 
-export function CheckoutContactFields({
-	form,
-	showLoginHint,
-}: CheckoutContactFieldsProps) {
+export function CheckoutContactFields({ form }: CheckoutContactFieldsProps) {
 	return (
 		<div className="space-y-4">
 			<div className="space-y-1">
 				<Label className="font-medium text-sm">Контактные данные</Label>
-				{showLoginHint ? (
-					<p className="text-muted-foreground text-xs">
-						Есть аккаунт?{" "}
-						<Link
-							className="text-muted-foreground transition-colors hover:text-primary"
-							href="/auth/sign-in"
-						>
-							Войдите, чтобы заполнить автоматически
-						</Link>
-						.
-					</p>
-				) : null}
 			</div>
 			<div className="grid gap-4 md:grid-cols-2">
 				<Field>
