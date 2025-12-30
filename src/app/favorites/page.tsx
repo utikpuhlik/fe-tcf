@@ -1,14 +1,7 @@
-import { headers } from "next/headers";
-import { unauthorized } from "next/navigation";
-import { auth } from "@/lib/auth";
+import { authGateWithRedirect } from "@/lib/utils/authGate";
 
 export default async function FavoritesPage() {
-	const session = await auth.api.getSession({
-		headers: await headers(),
-	});
-	if (!session) {
-		unauthorized();
-	}
+	await authGateWithRedirect();
 
 	return (
 		<main>

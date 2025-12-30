@@ -67,13 +67,6 @@ export function CheckoutForm({ autofill, userId }: CheckoutFormProps) {
 	const clearCart = useCartStore((state) => state.clear);
 
 	const onSubmit = async (values: CheckoutSchema) => {
-		if (cartItems.length === 0) {
-			toast("Корзина пуста", {
-				description: "Добавьте товары перед оформлением заказа",
-			});
-			return;
-		}
-
 		const isDelivery = values.method === "delivery";
 		const delivery = values.delivery ?? null;
 		const orderOffers = cartItems.map((item) => ({

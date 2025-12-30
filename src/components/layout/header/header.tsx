@@ -153,6 +153,13 @@ export function Header() {
 								>
 									Помощь
 								</Link>
+								<Link
+									href="/delivery"
+									className="block rounded-md px-3 py-2 hover:bg-muted"
+									onClick={() => setIsMenuOpen(false)}
+								>
+									Доставка
+								</Link>
 							</div>
 						) : null}
 					</div>

@@ -10,7 +10,7 @@ const DELIVERY_PARTNERS = [
 
 export function PaymentsInfoCard() {
 	return (
-		<InfoCard icon={Truck} title="Оплата и доставка" href="/payments">
+		<InfoCard icon={Truck} title="Оплата и доставка" href="/delivery">
 			<div className="space-y-6">
 				<p className="text-base leading-8">
 					Самовывоз из пункта выдачи или доставка по всей России.

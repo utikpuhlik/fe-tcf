@@ -1,15 +1,8 @@
-import { headers } from "next/headers";
-import { unauthorized } from "next/navigation";
 import { usersApi } from "@/lib/api/userApi";
-import { auth } from "@/lib/auth";
+import { authGateWithRedirect } from "@/lib/utils/authGate";
 
 export default async function ProfilePage() {
-	const session = await auth.api.getSession({
-		headers: await headers(),
-	});
-	if (!session) {
-		unauthorized();
-	}
+	const session = await authGateWithRedirect();
 
 	const user = await usersApi.fetchById(session.user.id);
 

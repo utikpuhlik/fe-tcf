@@ -1,21 +1,13 @@
-import { RedirectToSignIn } from "@daveyplate/better-auth-ui";
 import { ChevronRight } from "lucide-react";
-import { headers } from "next/headers";
 import Link from "next/link";
 import { OrderBadge } from "@/components/orders/order-badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ordersApi } from "@/lib/api/orderApi";
-import { auth } from "@/lib/auth";
 import { formatCurrency, formatDateToLocal } from "@/lib/utils";
+import { authGateWithRedirect } from "@/lib/utils/authGate";
 
 export default async function OrdersPage() {
-	const session = await auth.api.getSession({
-		headers: await headers(),
-	});
-
-	if (!session) {
-		return <RedirectToSignIn />;
-	}
+	const session = await authGateWithRedirect();
 
 	const orders = await ordersApi.fetchByUserId(session.user.id);
 

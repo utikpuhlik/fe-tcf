@@ -7,34 +7,28 @@ import {
 
 const faqs = [
 	{
-		question: "Can I cancel at anytime?",
+		question: "Отмена заказа и внесение изменений",
 		answer:
-			"Yes, you can cancel anytime no questions are asked while you cancel but we would highly appreciate if you will give us some feedback.",
+			"Вы можете отменить заказ или внести изменения, если он ещё не был перенаправлен в службу доставки. Для этого свяжитесь с нами по телефону или электронной почте.",
 	},
 	{
-		question: "My team has credits. How do we use them?",
+		question: "Возврат денежных средств",
 		answer:
-			"Once your team signs up for a subscription plan. This is where we sit down, grab a cup of coffee and dial in the details.",
+			"Cрок возврата денежных средств зависит от вида оплаты, который изначально выбрал покупатель.\n" +
+			"\n" +
+			"При наличном расчете возврат денежных средств осуществляется на кассе не позднее через через 10 дней после предъявления покупателем требования о возврате.\n" +
+			"\n" +
+			"Зачисление стоимости товара на карту клиента, если был использован безналичный расчёт, происходит сразу после получения требования от покупателя.\n" +
+			"\n" +
+			"При использовании электронных платёжных систем, возврат осуществляется на электронный счёт в течение 10 календарных дней.",
 	},
 	{
-		question: "How does Acme's pricing work?",
+		question: "С какого момента начинается гарантия?",
 		answer:
-			"Our subscriptions are tiered. Understanding the task at hand and ironing out the wrinkles is key.",
-	},
-	{
-		question: "How secure is Acme?",
-		answer:
-			"Protecting the data you trust to Acme is our first priority. This part is really crucial in keeping the project in line to completion.",
-	},
-	{
-		question: "How do I get access to a theme I purchased?",
-		answer:
-			"If you lose the link for a theme you purchased, don't panic! We've got you covered. You can login to your account, tap your avatar in the upper right corner, and tap Purchases. If you didn't create a login or can't remember the information, you can use our handy Redownload page, just remember to use the same email you originally made your purchases with.",
-	},
-	{
-		question: "Upgrade License Type",
-		answer:
-			"There may be times when you need to upgrade your license from the original type you purchased and we have a solution that ensures you can apply your original purchase cost to the new license purchase.",
+			"с момента передачи товара потребителю, если в договоре нет уточнения;\n" +
+			"если нет возможности установить день покупки, то гарантия идёт с момента изготовления;\n" +
+			"на сезонные товары гарантия идёт с момента начала сезона;\n" +
+			"при заказе товара из интернет-магазина гарантия начинается со дня доставки.",
 	},
 ];
 
@@ -44,10 +38,11 @@ export default function CenterAlignedWithActiveBackgroundGray() {
 			{/* Title */}
 			<div className="mx-auto mb-10 max-w-2xl text-center lg:mb-14">
 				<h2 className="font-bold text-2xl md:text-4xl md:leading-tight">
-					Your questions, answered
+					Часто задаваемые вопросы
 				</h2>
 				<p className="mt-1 text-muted-foreground">
-					Answers to the most frequently asked questions.
+					Если ваш вопрос не был освещен здесь, пожалуйста, свяжитесь с нами по
+					телефону или электронной почте.
 				</p>
 			</div>
 			{/* End Title */}
