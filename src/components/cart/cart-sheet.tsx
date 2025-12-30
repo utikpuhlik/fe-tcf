@@ -1,6 +1,6 @@
 "use client";
 
-import { ShoppingCart, Trash2 } from "lucide-react";
+import {ShoppingCart, Trash2} from "lucide-react";
 import Link from "next/link";
 import { CartItem } from "@/components/cart/cart-item";
 import { CartTotals } from "@/components/cart/cart-totals";
@@ -75,11 +75,19 @@ export function CartSheet() {
 					<CartTotals subtotalRub={subtotalRub} />
 
 					<div className="flex flex-col gap-3 sm:flex-row sm:items-center">
-						<SheetClose asChild>
-							<Link href="/checkout" className="w-full sm:flex-1">
-								<Button className="w-full">Перейти к оформлению заказа</Button>
-							</Link>
-						</SheetClose>
+						{items.length === 0 ? (
+							<Button className="w-full sm:flex-1" disabled>
+								Перейти к оформлению заказа
+							</Button>
+						) : (
+							<SheetClose asChild>
+								<Link href="/checkout" className="w-full sm:flex-1">
+									<Button className="w-full">
+										Перейти к оформлению заказа
+									</Button>
+								</Link>
+							</SheetClose>
+						)}
 						<Button
 							variant="outline"
 							className="w-full sm:flex-1"

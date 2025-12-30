@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { SheetClose } from "@/components/ui/sheet";
 import type { CartItem as CartItemType } from "@/lib/stores/useCartStore";
 import { buildCatalogPath, formatCurrency } from "@/lib/utils";
 
@@ -77,25 +78,29 @@ export function CartItem({
 				<div className="flex">
 					{/* Product Image */}
 					<div className="relative h-auto w-28 flex-shrink-0">
-						<Link href={buildCatalogPath(offer)}>
-							<Image
-								src={offer.image_url}
-								alt={offer.product.name}
-								fill
-								className="object-cover"
-								sizes="96px"
-							/>
-						</Link>
+						<SheetClose asChild>
+							<Link href={buildCatalogPath(offer)}>
+								<Image
+									src={offer.image_url}
+									alt={offer.product.name}
+									fill
+									className="object-cover"
+									sizes="96px"
+								/>
+							</Link>
+						</SheetClose>
 					</div>
 
 					{/* Product Details */}
 					<div className="flex-1 p-4">
 						<div className="flex justify-between">
 							<div>
-								<h3 className="font-medium text-sm">
-									<Link href={buildCatalogPath(offer)}>
-										{offer.product.name}
-									</Link>
+								<h3 className="font-medium text-sm hover:underline">
+									<SheetClose asChild>
+										<Link href={buildCatalogPath(offer)}>
+											{offer.product.name}
+										</Link>
+									</SheetClose>
 								</h3>
 								<p className="text-muted-foreground text-xs">
 									<Link href={buildCatalogPath(offer.product.sub_category)}>
