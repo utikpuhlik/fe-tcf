@@ -27,7 +27,7 @@ const rows: DeliveryTimeRow[] = [
 		region: "Урал и Поволжье",
 		cdek: "5-7 рабочих дней",
 		tkKit: "6-9 рабочих дней",
-		postamat: "-",
+		postamat: null,
 		russianPost: "14 дней",
 	},
 	{

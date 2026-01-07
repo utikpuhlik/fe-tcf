@@ -11,7 +11,7 @@ export const zCheckoutSchema = z
 			firstName: z.string().min(1, "Введите имя"),
 			lastName: z.string().min(1, "Введите фамилию"),
 			email: z.email("Некорректный email"),
-			phone: z.string().min(6, "Введите телефон"),
+			phone: z.string().min(6, "Введите телефон в формате +70000000000"),
 		}),
 
 		// Для доставки

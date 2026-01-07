@@ -1,9 +1,8 @@
-import { CreditCard, EditIcon } from "lucide-react";
+import { CreditCard } from "lucide-react";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { OrderProgressTracker } from "@/components/orders/order-progress-tracker";
-import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import {
@@ -66,9 +65,6 @@ export default async function Page({ params }: Props) {
 										<CreditCard className="size-4" /> Visa ending in **** 1234
 									</div>
 								</div>
-								<Button variant="outline">
-									<EditIcon />
-								</Button>
 							</div>
 						</div>
 					</CardContent>
