@@ -90,7 +90,7 @@ export function LoginForm({
 										id="email"
 										type="email"
 										placeholder="m@example.com"
-										autoComplete="email"
+										autoComplete="username"
 										aria-invalid={Boolean(errors.email)}
 										{...register("email")}
 										className={cn(
