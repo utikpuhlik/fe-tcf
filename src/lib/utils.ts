@@ -27,7 +27,7 @@ export function formatCurrency(
 	return new Intl.NumberFormat(locales, {
 		style: "currency",
 		currency: currency,
-		// minimumFractionDigits: 0,
+		minimumFractionDigits: 0,
 		// maximumFractionDigits: 2,
 	}).format(value);
 }

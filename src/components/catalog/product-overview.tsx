@@ -1,8 +1,8 @@
 import Image from "next/image";
-import { Badge } from "@/components/ui/badge";
+import { StockBadge } from "@/components/catalog/stock-badge";
 import { Card, CardContent } from "@/components/ui/card";
 import type { ProductSchema } from "@/lib/schemas/productSchema";
-import { cn, formatCurrency } from "@/lib/utils";
+import { formatCurrency } from "@/lib/utils";
 
 interface ProductOverviewProps {
 	product: ProductSchema;
@@ -16,7 +16,7 @@ export default function ProductOverview({
 	totalQuantity,
 }: ProductOverviewProps) {
 	const qty = totalQuantity ?? 0;
-	const inStock = qty > 0;
+	const _inStock = qty > 0;
 
 	const priceLabel =
 		minPriceRub == null
@@ -46,19 +46,7 @@ export default function ProductOverview({
 					<p className="font-medium text-sm">{priceLabel}</p>
 
 					<div className="flex items-center gap-2">
-						<span
-							className={cn(
-								"h-2.5 w-2.5 rounded-full",
-								inStock ? "bg-emerald-500" : "bg-rose-500",
-							)}
-							aria-hidden
-						/>
-						<Badge
-							variant={inStock ? "secondary" : "destructive"}
-							className="font-normal"
-						>
-							{inStock ? `в наличии: ${qty}` : "нет в наличии"}
-						</Badge>
+						<StockBadge quantity={qty} />
 					</div>
 				</div>
 			</CardContent>

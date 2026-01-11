@@ -2,9 +2,10 @@
 
 import Image from "next/image";
 import { AddToCartButtonWithQuantity } from "@/components/cart/add-to-cart-button";
+import { StockBadge } from "@/components/catalog/stock-badge";
 import { Card } from "@/components/ui/card";
 import type { OfferSchema } from "@/lib/schemas/offerSchema";
-import { cn } from "@/lib/utils";
+import { cn, formatCurrency } from "@/lib/utils";
 
 interface OffersListProps {
 	offers: OfferSchema[];
@@ -36,38 +37,24 @@ export function OffersList({ offers, className }: OffersListProps) {
 					</div>
 
 					{/* MAIN INFO */}
-					<div className="flex min-w-0 flex-1 flex-col leading-tight">
+					<div className="flex min-w-0 flex-1 flex-col items-start leading-tight">
 						<span className="truncate font-medium text-sm">
 							{offer.product.name}
 						</span>
 
-						<span className="text-muted-foreground text-xs">
-							Производитель: {offer.brand}
+						<span className="text-muted-foreground text-xs [&_strong]:font-semibold [&_strong]:text-foreground">
+							Производитель: <strong>{offer.brand}</strong>
 						</span>
 
-						<span className="text-muted-foreground text-xs">
-							Артикул: {offer.manufacturer_number}
+						<span className="mb-1 text-muted-foreground text-xs [&_strong]:font-semibold [&_strong]:text-foreground">
+							Артикул: <strong>{offer.manufacturer_number}</strong>
 						</span>
+						<StockBadge quantity={offer.quantity} />
 					</div>
 
-					{/* PRICE + STOCK */}
-					<div className="flex flex-col items-end justify-center whitespace-nowrap">
-						<span className="font-semibold text-base text-primary">
-							{offer.price_rub} ₽
-						</span>
-
-						<span
-							className={
-								offer.quantity > 0
-									? "text-green-600 text-xs"
-									: "text-red-500 text-xs"
-							}
-						>
-							{offer.quantity > 0
-								? `В наличии: ${offer.quantity}`
-								: "Нет в наличии"}
-						</span>
-					</div>
+					<span className="font-semibold text-base text-primary">
+						{formatCurrency(offer.price_rub)}
+					</span>
 
 					{/* ADD TO CART */}
 					<div className="ml-4">

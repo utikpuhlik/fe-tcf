@@ -25,8 +25,6 @@ export function AddToCartButtonWithQuantity({
 	const isDisabled: boolean = remaining <= 0;
 
 	const [quantity, setQuantity] = React.useState<number>(1);
-
-	// если остаток уменьшился (например, корзина/остатки обновились) — подожмём инпут
 	React.useEffect(() => {
 		if (isDisabled) {
 			setQuantity(1);
@@ -48,7 +46,6 @@ export function AddToCartButtonWithQuantity({
 			return;
 		}
 
-		// важно: store должен поддерживать add(offer, qty)
 		add(offer, safeQty);
 
 		toast("Добавлено в корзину", {

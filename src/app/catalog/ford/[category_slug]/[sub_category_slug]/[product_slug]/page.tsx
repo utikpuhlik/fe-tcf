@@ -33,10 +33,6 @@ export default async function OffersPage({ params }: Props) {
 						{
 							label: product.sub_category.name,
 							href: buildCatalogPath(product.sub_category),
-						},
-						{
-							label: product.name,
-							href: buildCatalogPath(product),
 							active: true,
 						},
 					]}
