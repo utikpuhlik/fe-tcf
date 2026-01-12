@@ -1,7 +1,6 @@
 import { createEnv } from "@t3-oss/env-nextjs";
 import { z } from "zod";
 
-const NEXT_PUBLIC_APP_URL = process.env.NEXT_PUBLIC_APP_URL as string;
 
 export const env = createEnv({
 	server: {
@@ -14,7 +13,7 @@ export const env = createEnv({
 	},
 	client: {
 		NEXT_PUBLIC_API_URL: z.url(),
-		NEXT_PUBLIC_APP_URL: z.string().default(NEXT_PUBLIC_APP_URL),
+		NEXT_PUBLIC_APP_URL: z.string().default("https://fe-tcf.vercel.app"),
 		NEXT_PUBLIC_TURNSTILE_SITE_KEY: z
 			.string()
 			.default("0x4AAAAAACG1ODz69-SuZrCY"),
