@@ -1,4 +1,3 @@
-import { Separator } from "@/components/ui/separator";
 import { formatCurrency } from "@/lib/utils";
 
 type CartTotalsProps = {
@@ -12,19 +11,7 @@ export function CartTotals({ subtotalRub, shippingRub = 0 }: CartTotalsProps) {
 	return (
 		<div className="rounded-lg border p-3 text-sm">
 			<div className="flex items-center justify-between">
-				<span className="text-muted-foreground">Промежуточный итог</span>
-				<span className="font-medium">{formatCurrency(subtotalRub)}</span>
-			</div>
-
-			<div className="flex items-center justify-between">
-				<span className="text-muted-foreground">Доставка</span>
-				<span className="font-medium">{formatCurrency(shippingRub)}</span>
-			</div>
-
-			<Separator className="my-2" />
-
-			<div className="flex items-center justify-between">
-				<span className="font-medium">Итого</span>
+				<span className="font-medium">Итого:</span>
 				<span className="font-semibold">{formatCurrency(totalRub)}</span>
 			</div>
 		</div>

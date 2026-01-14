@@ -12,7 +12,7 @@ export default async function CheckoutSuccessPage({ searchParams }: Props) {
 	const detailsHref = order_id ? `/orders/${order_id}` : "/orders";
 
 	return (
-		<main className="min-h-screen bg-neutral-50 px-6 py-12 text-neutral-900">
+		<main className="min-h-screen bg-neutral-50 text-neutral-900">
 			<div className="mx-auto flex w-full max-w-2xl flex-col items-center">
 				<Card className="w-full">
 					<CardContent className="flex flex-col items-center gap-4 py-12 text-center">

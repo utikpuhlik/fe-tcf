@@ -28,7 +28,9 @@ export default function RootLayout({
 					<ThemedTopLoader />
 					<CartStoreProvider>
 						<Header />
-						{children}
+						<div className="mx-auto w-full max-w-screen-xl px-4 py-6 sm:px-6 sm:py-8 lg:px-8">
+							{children}
+						</div>
 					</CartStoreProvider>
 					<Toaster />
 					<GoogleAnalytics gaId={"G-9X3EXVF7ES"} />

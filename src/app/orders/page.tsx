@@ -12,7 +12,7 @@ export default async function OrdersPage() {
 	const orders = await ordersApi.fetchByUserId(session.user.id);
 
 	return (
-		<main className="min-h-screen bg-neutral-50 px-6 py-12 text-neutral-900">
+		<main className="min-h-screen bg-neutral-50 text-neutral-900">
 			<div className="mx-auto w-full max-w-5xl space-y-6">
 				<header className="space-y-1">
 					<h1 className="font-semibold text-2xl">Мои заказы</h1>

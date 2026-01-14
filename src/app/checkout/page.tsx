@@ -21,7 +21,7 @@ export default async function CheckoutPage() {
 	const userId = session?.user?.id ?? null;
 
 	return (
-		<main className="min-h-screen bg-neutral-50 px-4 py-8 text-neutral-900 sm:px-6 sm:py-12 lg:px-8">
+		<main className="min-h-screen text-neutral-900">
 			<CheckoutCartReconciler />
 			<CheckoutLoginDialog open={showLoginHint} />
 			<div className="mx-auto w-full max-w-6xl">

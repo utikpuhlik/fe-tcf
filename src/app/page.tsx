@@ -6,8 +6,8 @@ import { SupportInfoCard } from "@/components/home/support-info-card";
 
 export default function Home() {
 	return (
-		<main className="min-h-screen px-6 text-neutral-900 lg:py-8">
-			<div className="mx-auto flex w-full max-w-6xl flex-col gap-14 p-6 sm:p-4">
+		<main className="min-h-screen text-neutral-900">
+			<div className="mx-auto flex w-full max-w-6xl flex-col gap-14">
 				<HomeHeader />
 				<FeaturedCategoriesSection />
 				<section className="grid auto-rows-[minmax(0,1fr)] gap-6 md:grid-cols-3">

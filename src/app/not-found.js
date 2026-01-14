@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default function NotFound() {
 	return (
-		<main className="flex flex-col-reverse justify-end gap-12 bg-white px-6 py-8 text-neutral-900 lg:flex-row lg:items-center lg:justify-between lg:px-16">
+		<main className="flex flex-col-reverse justify-end gap-12 bg-white text-neutral-900 lg:flex-row lg:items-center lg:justify-between">
 			<section className="flex max-w-xl flex-col items-center gap-6 text-center lg:items-start lg:text-left">
 				<p className="text-neutral-500 text-sm uppercase tracking-[0.4em]">
 					Ошибка 404

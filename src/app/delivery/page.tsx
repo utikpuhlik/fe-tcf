@@ -16,7 +16,7 @@ const deliveryOptions: DeliveryOption[] = [
 
 export default async function DeliveryPage() {
 	return (
-		<main className="mx-auto w-full max-w-7xl space-y-6 px-4 py-6 md:px-6 md:py-10 lg:px-10">
+		<main className="mx-auto w-full max-w-7xl space-y-6">
 			<header className="space-y-2">
 				<h1 className="font-semibold text-xl tracking-tight md:text-2xl">
 					Условия доставки
