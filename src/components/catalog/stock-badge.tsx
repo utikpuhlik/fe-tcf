@@ -5,7 +5,7 @@ import { Badge } from "@/components/ui/badge";
 interface StockBadgeProps {
 	quantity: number;
 }
-type BadgeVariant = "error" | "warning" | "success";
+type BadgeVariant = "error" | "attention" | "success";
 
 function _getStockConfig(quantity: number): {
 	variant: BadgeVariant;
@@ -14,8 +14,8 @@ function _getStockConfig(quantity: number): {
 	if (quantity <= 0) {
 		return { variant: "error", label: "Нет в наличии" };
 	}
-	if (quantity <= 1) {
-		return { variant: "warning", label: `Есть в наличии: ${quantity}` };
+	if (quantity <= 2) {
+		return { variant: "attention", label: `Есть в наличии: ${quantity}` };
 	}
 	return { variant: "success", label: `Есть в наличии: ${quantity}` };
 }

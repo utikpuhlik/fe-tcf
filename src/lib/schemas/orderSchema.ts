@@ -3,6 +3,8 @@ import { z } from "zod";
 import {
 	zOrderStatusEnum,
 	zPaginatedSchema,
+	zShippingCompanyEnum,
+	zShippingCountryEnum,
 	zShippingMethodEnum,
 } from "@/lib/schemas/commonSchema";
 import {
@@ -15,14 +17,12 @@ import { zWaybillSchema } from "@/lib/schemas/waybillSchema";
 const zOrderBaseSchema = z.object({
 	status: zOrderStatusEnum,
 	note: z.string().nullable(),
-	country: z.string().nullable(),
+	address: z.string().nullable(),
+	country: zShippingCountryEnum.nullable(),
 	city: z.string().nullable(),
-	street: z.string().nullable(),
-	house: z.string().nullable(),
-	postal_code: z.string().nullable(),
 
 	shipping_method: zShippingMethodEnum,
-	shipping_company: z.string().nullable(),
+	shipping_company: zShippingCompanyEnum.nullable(),
 
 	first_name: z.string(),
 	last_name: z.string(),
@@ -60,4 +60,3 @@ export type OrderPostSchema = z.infer<typeof zOrderPostSchema>;
 export type OrderWithOffersPostSchema = z.infer<
 	typeof zOrderWithOffersPostSchema
 >;
-export type OrderPutSchema = z.infer<typeof zOrderPutSchema>;

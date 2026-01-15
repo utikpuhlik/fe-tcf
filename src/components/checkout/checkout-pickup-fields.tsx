@@ -3,20 +3,14 @@
 import { MapPin } from "lucide-react";
 import { Label } from "@/components/ui/label";
 
-type PickupPoint = {
-	title: string;
-	subtitle: string;
-};
-
-type CheckoutPickupFieldsProps = {
-	pickupPoint: PickupPoint;
-};
-
 const MAP_URL = "https://yandex.ru/maps/-/CLT0UGIv";
 
-export function CheckoutPickupFields({
-	pickupPoint,
-}: CheckoutPickupFieldsProps) {
+const DEFAULT_PICKUP_POINT = {
+	title: "Россия, Севастополь",
+	subtitle: "Хрусталева 74ж",
+} as const;
+
+export function CheckoutPickupFields() {
 	return (
 		<div className="space-y-3">
 			<Label className="font-medium text-sm">Пункт самовывоза</Label>
@@ -24,9 +18,11 @@ export function CheckoutPickupFields({
 			<div className="rounded-lg border p-4">
 				<div className="flex items-start justify-between gap-3">
 					<div>
-						<div className="font-medium text-sm">{pickupPoint.title}</div>
+						<div className="font-medium text-sm">
+							{DEFAULT_PICKUP_POINT.title}
+						</div>
 						<div className="text-muted-foreground text-xs">
-							{pickupPoint.subtitle}
+							{DEFAULT_PICKUP_POINT.subtitle}
 						</div>
 					</div>
 					<a

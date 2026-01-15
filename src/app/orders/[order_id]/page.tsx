@@ -55,7 +55,7 @@ export default async function Page({ params }: Props) {
 								{order.first_name} {order.last_name}
 								<p>{order.email}</p>
 								<p className="text-muted-foreground text-sm">
-									{order.country}, {order.city}, {order.street}, {order.house}
+									{order.country}, {order.city}, {order.address}
 								</p>
 							</div>
 							<div className="flex items-center justify-between space-y-2 rounded-md border bg-muted p-4">

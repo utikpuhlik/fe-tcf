@@ -33,7 +33,10 @@ export const zCustomerTypeEnum = z.enum([
 	"USER_WHOLESALE",
 	"USER_SUPER_WHOLESALE",
 ]);
-export const zShippingMethodEnum = z.enum(["SELF_PICKUP", "CARGO", "OTHER"]);
+export const zShippingMethodEnum = z.enum(["SELF_PICKUP", "CARGO"]);
+export const zShippingCountryEnum = z.enum(["ARM", "BLR", "KAZ", "RUS"]);
+
+export const zShippingCompanyEnum = z.enum(["CDEK", "KIT"]);
 
 export const zCurrencyEnum = z.enum(["RUB", "USD", "EUR", "TRY"]);
 export const zUserBalanceChangeReasonEnum = z.enum([
@@ -50,6 +53,9 @@ export type CustomerTypeEnum = z.infer<typeof zCustomerTypeEnum>;
 export type WaybillTypeEnum = z.infer<typeof zWaybillTypeEnum>;
 export type OrderStatusEnum = z.infer<typeof zOrderStatusEnum>;
 export type ShippingMethodEnum = z.infer<typeof zShippingMethodEnum>;
+export type ShippingCountryEnum = z.infer<typeof zShippingCountryEnum>;
+export type ShippingCompnayEnum = z.infer<typeof zShippingCompanyEnum>;
+
 export type CurrencyEnum = z.infer<typeof zCurrencyEnum>;
 export type UserBalanceChangeReasonEnum = z.infer<
 	typeof zUserBalanceChangeReasonEnum
@@ -84,6 +90,17 @@ export const ORDER_STATUS_LABELS: Record<OrderStatusEnum, string> = {
 
 export const SHIPPING_METHOD_LABELS: Record<ShippingMethodEnum, string> = {
 	SELF_PICKUP: "Самовывоз",
-	CARGO: "Курьер",
-	OTHER: "Другое",
+	CARGO: "Доставка",
+};
+
+export const SHIPPING_COUNTRY_LABELS: Record<ShippingCountryEnum, string> = {
+	ARM: "Армения",
+	BLR: "Беларусь",
+	KAZ: "Казахстан",
+	RUS: "Россия",
+};
+
+export const SHIPPING_COMPANY_LABELS: Record<ShippingCompnayEnum, string> = {
+	CDEK: "СДЭК",
+	KIT: "Кит",
 };

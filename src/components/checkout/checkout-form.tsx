@@ -15,10 +15,8 @@ import { LoadingButton } from "@/components/ui/loading-button";
 import { Separator } from "@/components/ui/separator";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { createOrderAction } from "@/lib/actions/orderAction";
-import type {
-	CheckoutSchema,
-	DeliveryMethod,
-} from "@/lib/schemas/forms/checkoutSchema";
+import type { ShippingMethodEnum } from "@/lib/schemas/commonSchema";
+import type { CheckoutSchema } from "@/lib/schemas/forms/checkoutSchema";
 import { zCheckoutSchema } from "@/lib/schemas/forms/checkoutSchema";
 import type { OrderWithOffersPostSchema } from "@/lib/schemas/orderSchema";
 import { zOrderWithOffersPostSchema } from "@/lib/schemas/orderSchema";
@@ -35,11 +33,6 @@ type CheckoutFormProps = {
 	userId?: string | null;
 };
 
-const DEFAULT_PICKUP_POINT = {
-	title: "Россия, Севастополь",
-	subtitle: "Хрусталева 74ж",
-} as const;
-
 export function CheckoutForm({ autofill, userId }: CheckoutFormProps) {
 	const [isPending, startTransition] = React.useTransition();
 	const router = useRouter();
@@ -47,7 +40,7 @@ export function CheckoutForm({ autofill, userId }: CheckoutFormProps) {
 		resolver: zodResolver(zCheckoutSchema),
 		shouldUnregister: true,
 		defaultValues: {
-			method: "pickup",
+			method: "SELF_PICKUP",
 			contact: {
 				firstName: autofill?.firstName ?? "",
 				lastName: autofill?.lastName ?? "",
@@ -61,13 +54,13 @@ export function CheckoutForm({ autofill, userId }: CheckoutFormProps) {
 	const method = useWatch({
 		control: form.control,
 		name: "method",
-		defaultValue: "pickup",
-	}) as DeliveryMethod;
+		defaultValue: "SELF_PICKUP",
+	}) as ShippingMethodEnum;
 	const cartItems = useCartStore((state) => state.items);
 	const clearCart = useCartStore((state) => state.clear);
 
 	const onSubmit = async (values: CheckoutSchema) => {
-		const isDelivery = values.method === "delivery";
+		const isDelivery = values.method === "CARGO";
 		const delivery = values.delivery ?? null;
 		const orderOffers = cartItems.map((item) => ({
 			offer_id: item.id,
@@ -80,13 +73,11 @@ export function CheckoutForm({ autofill, userId }: CheckoutFormProps) {
 		const payload: OrderWithOffersPostSchema = {
 			status: "NEW",
 			note: null,
+			address: isDelivery ? (delivery?.address ?? null) : null,
 			country: isDelivery ? (delivery?.country ?? null) : null,
 			city: isDelivery ? (delivery?.city ?? null) : null,
-			street: isDelivery ? (delivery?.street ?? null) : null,
-			house: isDelivery ? (delivery?.houseNumber ?? null) : null,
-			postal_code: isDelivery ? (delivery?.postalCode ?? null) : null,
-			shipping_method: isDelivery ? "CARGO" : "SELF_PICKUP",
-			shipping_company: null,
+			shipping_method: values.method,
+			shipping_company: isDelivery ? (delivery?.shippingCompany ?? null) : null,
 			user_id: userId ?? null,
 			first_name: values.contact.firstName,
 			last_name: values.contact.lastName,
@@ -109,7 +100,7 @@ export function CheckoutForm({ autofill, userId }: CheckoutFormProps) {
 			try {
 				const createdOrder = await createOrderAction(payloadValidated);
 				clearCart();
-				router.replace(`/checkout/success?order_id=${createdOrder.id}`);
+				router.replace(`/orders/${createdOrder.id}`);
 			} catch (_error) {
 				toast("Неизвестная ошибка", { description: "Что-то пошло не так.." });
 			}
@@ -126,28 +117,26 @@ export function CheckoutForm({ autofill, userId }: CheckoutFormProps) {
 					<Tabs
 						value={method}
 						onValueChange={(v) => {
-							const nextMethod = v as DeliveryMethod;
+							const nextMethod = v as ShippingMethodEnum;
 							form.setValue("method", nextMethod, {
 								shouldDirty: true,
 							});
-							if (nextMethod !== "delivery") {
+							if (nextMethod !== "CARGO") {
 								form.setValue("delivery", undefined, {
 									shouldDirty: true,
 								});
-								form.resetField("delivery.addressQuery");
+								form.resetField("delivery.address");
 								form.resetField("delivery.country");
 								form.resetField("delivery.city");
-								form.resetField("delivery.street");
-								form.resetField("delivery.houseNumber");
-								form.resetField("delivery.postalCode");
+								form.resetField("delivery.shippingCompany");
 							}
 						}}
 					>
 						<TabsList className="grid w-full grid-cols-2">
-							<TabsTrigger value="pickup">
+							<TabsTrigger value="SELF_PICKUP">
 								<MapPin /> Самовывоз
 							</TabsTrigger>
-							<TabsTrigger value="delivery">
+							<TabsTrigger value="CARGO">
 								<Van />
 								Доставка
 							</TabsTrigger>
@@ -162,12 +151,11 @@ export function CheckoutForm({ autofill, userId }: CheckoutFormProps) {
 					<Separator />
 
 					{/* PICKUP (default, not selectable) */}
-					{method === "pickup" ? (
-						<CheckoutPickupFields pickupPoint={DEFAULT_PICKUP_POINT} />
-					) : null}
-
-					{/* DELIVERY */}
-					<CheckoutDeliveryFields form={form} method={method} />
+					{method === "SELF_PICKUP" ? (
+						<CheckoutPickupFields />
+					) : (
+						<CheckoutDeliveryFields form={form} method={method} />
+					)}
 
 					<div className="flex items-center gap-3">
 						<LoadingButton

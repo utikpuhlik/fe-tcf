@@ -1,11 +1,13 @@
 import { z } from "zod";
-
-export const zDeliveryMethod = z.enum(["pickup", "delivery"]);
-export type DeliveryMethod = z.infer<typeof zDeliveryMethod>;
+import {
+	zShippingCompanyEnum,
+	zShippingCountryEnum,
+	zShippingMethodEnum,
+} from "@/lib/schemas/commonSchema";
 
 export const zCheckoutSchema = z
 	.object({
-		method: zDeliveryMethod,
+		method: zShippingMethodEnum,
 
 		contact: z.object({
 			firstName: z.string().min(1, "Введите имя"),
@@ -14,15 +16,12 @@ export const zCheckoutSchema = z
 			phone: z.string().min(6, "Введите телефон в формате +70000000000"),
 		}),
 
-		// Для доставки
 		delivery: z
 			.object({
-				addressQuery: z.string().min(1, "Начните вводить адрес"),
-				country: z.string().min(1, "Укажите страну"),
+				address: z.string().min(1, "Начните вводить адрес"),
+				country: zShippingCountryEnum,
 				city: z.string().min(1, "Укажите город"),
-				street: z.string().min(1, "Укажите улицу"),
-				houseNumber: z.string().min(1, "Укажите дом/кв."),
-				postalCode: z.string().min(1, "Укажите индекс"),
+				shippingCompany: zShippingCompanyEnum,
 			})
 			.optional(),
 
@@ -30,7 +29,7 @@ export const zCheckoutSchema = z
 		pickup: z.object({}).optional(),
 	})
 	.superRefine((val, ctx) => {
-		if (val.method === "delivery") {
+		if (val.method === "CARGO") {
 			if (!val.delivery) {
 				ctx.addIssue({
 					code: "custom",
@@ -41,7 +40,7 @@ export const zCheckoutSchema = z
 			}
 		}
 
-		if (val.method === "pickup") return;
+		if (val.method === "SELF_PICKUP") return;
 	});
 
 export type CheckoutSchema = z.infer<typeof zCheckoutSchema>;
