@@ -38,9 +38,7 @@ export function OffersList({ offers, className }: OffersListProps) {
 
 					{/* MAIN INFO */}
 					<div className="flex min-w-0 flex-1 flex-col items-start leading-tight">
-						<span className="truncate font-medium text-sm">
-							{offer.product.name}
-						</span>
+						<span className="font-medium text-sm">{offer.product.name}</span>
 
 						<span className="text-muted-foreground text-xs [&_strong]:font-semibold [&_strong]:text-foreground">
 							Производитель: <strong>{offer.brand}</strong>

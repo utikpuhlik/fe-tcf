@@ -1,4 +1,4 @@
-import { SubCategoriesGrid } from "@/components/catalog/sub-categories-grid";
+import { CatalogGrid } from "@/components/catalog/catalog-grid";
 import Breadcrumbs from "@/components/shared/breadcrumbs";
 import { categoriesApi } from "@/lib/api/categoryApi";
 import { productsApi } from "@/lib/api/productApi";
@@ -32,7 +32,7 @@ export default async function SubCategoriesPage({ params }: Props) {
 				]}
 			/>
 
-			<SubCategoriesGrid categories={data.items} facets={facets} />
+			<CatalogGrid categories={data.items} facets={facets} />
 		</main>
 	);
 }

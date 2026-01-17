@@ -1,7 +1,7 @@
 "use client";
 
 import { UserButton } from "@daveyplate/better-auth-ui";
-import { ChevronDown, Heart, Search, ShoppingCart, User } from "lucide-react";
+import { ChevronDown, Search, ShoppingCart, User } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
@@ -71,18 +71,6 @@ export function Header() {
 					</Link>
 					<div className="-translate-x-2 flex items-center gap-2 sm:hidden md:gap-4">
 						<UserButton size="icon" additionalLinks={additionalLinks} />
-
-						<Link href="/favorites">
-							<Button
-								variant="ghost"
-								size="icon"
-								className="h-11 w-11 rounded-full sm:h-10 sm:w-10"
-								aria-label="Избранное"
-							>
-								<Heart className="size-6 sm:size-5" />
-							</Button>
-						</Link>
-
 						<CartSheet />
 					</div>
 				</div>
@@ -167,17 +155,6 @@ export function Header() {
 
 				<div className="hidden items-center gap-2 sm:flex sm:flex-shrink-0 sm:justify-end md:gap-4">
 					<UserButton size="icon" additionalLinks={additionalLinks} />
-					<Link href="/favorites">
-						<Button
-							variant="ghost"
-							size="icon"
-							className="rounded-full"
-							aria-label="Избранное"
-						>
-							<Heart className="size-5" />
-						</Button>
-					</Link>
-
 					<CartSheet />
 				</div>
 			</div>

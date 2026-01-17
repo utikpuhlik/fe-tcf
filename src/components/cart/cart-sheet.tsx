@@ -38,7 +38,7 @@ export function CartSheet() {
 					className="relative h-11 w-11 rounded-full sm:h-10 sm:w-10"
 					aria-label="Открыть корзину"
 				>
-					<ShoppingCart className="h-5 w-5" />
+					<ShoppingCart className="size-5 sm:size-5" />
 					{items.length > 0 && (
 						<span className="-right-2 -top-2 absolute flex h-5 w-5 items-center justify-center rounded-full bg-primary text-primary-foreground text-xs">
 							{items.length}

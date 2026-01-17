@@ -1,20 +1,21 @@
 "use client";
 
 import { TileGrid } from "@/components/catalog/tile-grid";
+import type { CategorySchema } from "@/lib/schemas/categorySchema";
 import type { SubCategorySchema } from "@/lib/schemas/subCategorySchema";
 import { buildCatalogPath } from "@/lib/utils";
 
-interface SubCategoriesGridProps {
-	categories: SubCategorySchema[];
+interface CatalogGridProps {
+	categories: CategorySchema[] | SubCategorySchema[];
 	facets: Record<string, number>;
 	className?: string;
 }
 
-export function SubCategoriesGrid({
+export function CatalogGrid({
 	categories,
 	facets,
 	className,
-}: SubCategoriesGridProps) {
+}: CatalogGridProps) {
 	return (
 		<TileGrid
 			items={categories}

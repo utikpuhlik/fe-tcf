@@ -7,7 +7,7 @@ import { formatCurrency } from "@/lib/utils";
 interface ProductOverviewProps {
 	product: ProductSchema;
 	minPriceRub: number | null;
-	totalQuantity: number | null;
+	totalQuantity: number;
 }
 
 export default function ProductOverview({
@@ -15,9 +15,6 @@ export default function ProductOverview({
 	minPriceRub,
 	totalQuantity,
 }: ProductOverviewProps) {
-	const qty = totalQuantity ?? 0;
-	const _inStock = qty > 0;
-
 	const priceLabel =
 		minPriceRub == null
 			? "цена не указана"
@@ -37,7 +34,7 @@ export default function ProductOverview({
 				</div>
 
 				<div className="min-w-0 flex-1 space-y-1">
-					<h1 className="truncate font-semibold text-lg">{product.name}</h1>
+					<h1 className="font-semibold text-lg">{product.name}</h1>
 
 					<p className="text-muted-foreground text-sm">
 						Кросс-номер: {product.cross_number ?? "отсутствует"}
@@ -46,7 +43,7 @@ export default function ProductOverview({
 					<p className="font-medium text-sm">{priceLabel}</p>
 
 					<div className="flex items-center gap-2">
-						<StockBadge quantity={qty} />
+						<StockBadge quantity={totalQuantity} />
 					</div>
 				</div>
 			</CardContent>
