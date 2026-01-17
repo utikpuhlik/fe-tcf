@@ -14,6 +14,9 @@ import { Toaster } from "@/components/ui/sonner";
 export const metadata: Metadata = {
 	title: "Магазин автозапчастей Ford | TCF",
 	description: "Магазин автозапчастей Ford | TCF",
+	other: {
+		"yandex-verification": "79fdf096d4c92ce4",
+	}
 };
 
 export default function RootLayout({
@@ -28,7 +31,7 @@ export default function RootLayout({
 					<ThemedTopLoader />
 					<CartStoreProvider>
 						<Header />
-						<div className="mx-auto w-full max-w-screen-xl px-4 py-6 sm:px-6 sm:py-8 lg:px-8">
+						<div className="mx-auto w-full max-w-7xl px-4 py-6 sm:px-6 sm:py-8 lg:px-8">
 							{children}
 						</div>
 					</CartStoreProvider>
