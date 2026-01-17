@@ -54,7 +54,7 @@ export type WaybillTypeEnum = z.infer<typeof zWaybillTypeEnum>;
 export type OrderStatusEnum = z.infer<typeof zOrderStatusEnum>;
 export type ShippingMethodEnum = z.infer<typeof zShippingMethodEnum>;
 export type ShippingCountryEnum = z.infer<typeof zShippingCountryEnum>;
-export type ShippingCompnayEnum = z.infer<typeof zShippingCompanyEnum>;
+export type ShippingCompanyEnum = z.infer<typeof zShippingCompanyEnum>;
 
 export type CurrencyEnum = z.infer<typeof zCurrencyEnum>;
 export type UserBalanceChangeReasonEnum = z.infer<
@@ -100,7 +100,7 @@ export const SHIPPING_COUNTRY_LABELS: Record<ShippingCountryEnum, string> = {
 	RUS: "Россия",
 };
 
-export const SHIPPING_COMPANY_LABELS: Record<ShippingCompnayEnum, string> = {
+export const SHIPPING_COMPANY_LABELS: Record<ShippingCompanyEnum, string> = {
 	CDEK: "СДЭК",
 	KIT: "Кит",
 };
