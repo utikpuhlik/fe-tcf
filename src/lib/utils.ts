@@ -36,7 +36,7 @@ export function generateMeta({
 	const metadata: Metadata = {
 		title: `${title} | TCF`,
 		description: description,
-		metadataBase: new URL(`https://fe-tcf.vercel.app`),
+		metadataBase: new URL(env.NEXT_PUBLIC_APP_URL),
 		openGraph: {
 			images: [ogImageUrl],
 		},
