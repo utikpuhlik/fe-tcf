@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { env } from "@/env";
 
 export default function sitemap(): MetadataRoute.Sitemap {
 	// call the API that returns catalog paths
@@ -8,8 +9,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 	// Last modified - updated_at field
 	// Priority - ?
 	// Change frequency - weekly
-	const baseUrl =
-		process.env.NEXT_PUBLIC_APP_URL || "https://fe-tcf.vercel.app";
+	const baseUrl = env.NEXT_PUBLIC_APP_URL;
 	return [
 		{
 			url: baseUrl,
