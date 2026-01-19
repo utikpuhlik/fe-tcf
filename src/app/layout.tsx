@@ -15,6 +15,7 @@ export const metadata: Metadata = {
 	title: "Магазин автозапчастей Ford | TCF",
 	description: "Магазин автозапчастей Ford | TCF",
 	other: {
+		"google-site-verification": "EtF4AEicf8JSNWnctwcJh-vbwmK1DF920YrUEphcenU",
 		"yandex-verification": "7f8a52896845683c",
 	},
 };
