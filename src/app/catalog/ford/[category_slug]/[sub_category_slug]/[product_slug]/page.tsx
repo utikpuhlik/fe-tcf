@@ -16,7 +16,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 	const data = await productsApi.fetchBySlug(product_slug);
 	return generateMeta({
 		title: data.name,
-		description: `Предложения для товаров ${data.name}`,
+		description: `Приобрести ${data.name.toLowerCase()} | Продажа автозапчастей Ford с доставкой по России`,
 	});
 }
 
