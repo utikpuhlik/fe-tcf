@@ -1,6 +1,15 @@
+import type { Metadata } from "next";
 import { CatalogGrid } from "@/components/catalog/catalog-grid";
 import { categoriesApi } from "@/lib/api/categoryApi";
 import { productsApi } from "@/lib/api/productApi";
+import { generateMeta } from "@/lib/utils";
+
+export async function generateMetadata(): Promise<Metadata> {
+	return generateMeta({
+		title: "Каталог",
+		description: "Каталог автозапчастей Ford",
+	});
+}
 
 export default async function CataloguePage() {
 	const [data, facets] = await Promise.all([

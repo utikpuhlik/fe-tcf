@@ -1,5 +1,7 @@
 import { type ClassValue, clsx } from "clsx";
+import type { Metadata } from "next";
 import { twMerge } from "tailwind-merge";
+import { env } from "@/env";
 import type { CategorySchema } from "@/lib/schemas/categorySchema";
 import type { CurrencyEnum } from "@/lib/schemas/commonSchema";
 import type { OfferSchema } from "@/lib/schemas/offerSchema";
@@ -17,6 +19,34 @@ export function generateAvatarFallback(string: string) {
 	);
 
 	return mapped.join("");
+}
+
+export function generateMeta({
+	title,
+	description,
+	canonical,
+	og_image,
+}: {
+	title: string;
+	description: string;
+	canonical?: string;
+	og_image?: string;
+}): Metadata {
+	const ogImageUrl = og_image ?? `${env.NEXT_PUBLIC_APP_URL}/logo.png`;
+	const metadata: Metadata = {
+		title: `${title} | TCF`,
+		description: description,
+		metadataBase: new URL(`https://fe-tcf.vercel.app`),
+		openGraph: {
+			images: [ogImageUrl],
+		},
+	};
+
+	if (canonical) {
+		metadata.alternates = { canonical };
+	}
+
+	return metadata;
 }
 
 export function formatCurrency(

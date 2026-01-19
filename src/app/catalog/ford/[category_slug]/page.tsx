@@ -1,12 +1,23 @@
+import type { Metadata } from "next";
 import { CatalogGrid } from "@/components/catalog/catalog-grid";
 import Breadcrumbs from "@/components/shared/breadcrumbs";
 import { categoriesApi } from "@/lib/api/categoryApi";
 import { productsApi } from "@/lib/api/productApi";
 import { subCategoriesApi } from "@/lib/api/subCategoryApi";
-import { buildCatalogPath } from "@/lib/utils";
+import { buildCatalogPath, generateMeta } from "@/lib/utils";
 
 interface Props {
 	params: Promise<{ category_slug: string }>;
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+	const { category_slug } = await params;
+	const data = await categoriesApi.fetchBySlug(category_slug);
+	return generateMeta({
+		title: data.name,
+		description: `Подкатегории для ${data.name}`,
+		og_image: data.image_url,
+	});
 }
 
 export default async function SubCategoriesPage({ params }: Props) {

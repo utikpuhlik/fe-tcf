@@ -1,13 +1,23 @@
+import type { Metadata } from "next";
 import { OffersList } from "@/components/catalog/offers-list";
 import ProductOverview from "@/components/catalog/product-overview";
 import Breadcrumbs from "@/components/shared/breadcrumbs";
 import { offersApi } from "@/lib/api/offerApi";
 import { productsApi } from "@/lib/api/productApi";
-import { buildCatalogPath } from "@/lib/utils";
+import { buildCatalogPath, generateMeta } from "@/lib/utils";
 import { GetMinPriceAndQuantity } from "@/lib/utils/offers";
 
 interface Props {
 	params: Promise<{ product_slug: string }>;
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+	const { product_slug } = await params;
+	const data = await productsApi.fetchBySlug(product_slug);
+	return generateMeta({
+		title: data.name,
+		description: `Предложения для товаров ${data.name}`,
+	});
 }
 
 export default async function OffersPage({ params }: Props) {
