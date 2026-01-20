@@ -14,6 +14,8 @@ export const zProductSchema = zProductBaseSchema.extend({
 	slug: z.string(),
 	image_url: z.url(),
 	sub_category: zSubCategorySchema,
+	created_at: z.iso.datetime(),
+	updated_at: z.iso.datetime(),
 });
 
 export const zProductPaginatedSchema = zPaginatedSchema.extend({

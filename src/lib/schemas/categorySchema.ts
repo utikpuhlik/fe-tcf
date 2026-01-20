@@ -10,6 +10,8 @@ export const zCategorySchema = zCategoryBaseSchema.extend({
 	id: z.uuid(),
 	slug: z.string(),
 	image_url: z.url(),
+	created_at: z.iso.datetime(),
+	updated_at: z.iso.datetime(),
 });
 
 export const zCategoryPostSchema = zCategoryBaseSchema.extend({});

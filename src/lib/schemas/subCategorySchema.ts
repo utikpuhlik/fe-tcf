@@ -12,6 +12,8 @@ export const zSubCategorySchema = zSubCategoryBaseSchema.extend({
 	slug: z.string(),
 	category: zCategorySchema,
 	image_url: z.url(),
+	created_at: z.iso.datetime(),
+	updated_at: z.iso.datetime(),
 });
 export const zSubCategoryArraySchema = z.array(zSubCategorySchema);
 export const zSubCategoryPaginatedSchema = zPaginatedSchema.extend({
