@@ -14,7 +14,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 		await Promise.all([
 			categoriesApi.fetchAll(),
 			subCategoriesApi.fetchAll(),
-			productsApi.fetchAll(),
+			productsApi.fetchAll(1000),
 		]);
 	const baseUrl = env.NEXT_PUBLIC_APP_URL;
 	const catalogBase = `${baseUrl}/catalog/ford`;
