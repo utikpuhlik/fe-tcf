@@ -1,6 +1,6 @@
 import type { OfferSchema } from "@/lib/schemas/offerSchema";
 
-export function GetMinPriceAndQuantity(offers: OfferSchema[]) {
+export function getMinPriceAndQuantity(offers: OfferSchema[]) {
 	return {
 		minPriceRub: offers.length
 			? Math.min(...offers.map((o) => o.price_rub))
