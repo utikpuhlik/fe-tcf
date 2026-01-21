@@ -1,6 +1,5 @@
 import { env } from "@/env";
 import {
-	fetchEntity,
 	fetchEntityById,
 	fetchEntityBySlug,
 } from "@/lib/api/generic/fetchEntity";
@@ -21,8 +20,10 @@ export const productsApi = {
 	// -------------------------------
 	// Fetchers
 	// -------------------------------
-	fetchAll(): Promise<ProductPaginatedSchema> {
-		return fetchEntity<ProductPaginatedSchema>(zProductPaginatedSchema, ENTITY);
+	fetchAll(size: number = 10000): Promise<ProductPaginatedSchema> {
+		const url = new URL(`${env.NEXT_PUBLIC_API_URL}/${ENTITY}`);
+		url.searchParams.set("size", size.toString());
+		return fetchAndParse<ProductPaginatedSchema>(url, zProductPaginatedSchema);
 	},
 	fetchById(id: string): Promise<ProductSchema> {
 		return fetchEntityById<ProductSchema>(id, zProductSchema, ENTITY);

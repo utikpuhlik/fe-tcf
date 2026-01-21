@@ -5,19 +5,17 @@ import { productsApi } from "@/lib/api/productApi";
 import { subCategoriesApi } from "@/lib/api/subCategoryApi";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-	// call the API that returns catalog paths
-	// Only slug composition: baseUrl/catalog/ford/{c}/{sc}/{p}
-	// Only slug composition: baseUrl/catalog/ford/{c}/{sc}
-	// Only slug composition: baseUrl/catalog/ford/{c}
-	// Priority - optional
-	// Change frequency - optional
+	// call the API that returns catalog paths and build the sitemap entries
+	// Slug composition examples:
+	// Product: baseUrl/catalog/ford/{c}/{sc}/{p}
+	// SubCategory: baseUrl/catalog/ford/{c}/{sc}
+	// Category: baseUrl/catalog/ford/{c}
 	const [categoriesResponse, subCategoriesResponse, productsResponse] =
 		await Promise.all([
 			categoriesApi.fetchAll(),
 			subCategoriesApi.fetchAll(),
 			productsApi.fetchAll(),
 		]);
-	// todo: products have only 300 entries !!
 	const baseUrl = env.NEXT_PUBLIC_APP_URL;
 	const catalogBase = `${baseUrl}/catalog/ford`;
 
