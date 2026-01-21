@@ -192,11 +192,11 @@ export default function Footer() {
 				<div className="container mx-auto flex flex-col items-center justify-between px-4 text-muted-foreground text-xs sm:px-6 md:flex-row 2xl:max-w-[1700px]">
 					<p>
 						&copy; {`1994 - ${new Date().getFullYear()}`} Торговый центр "Форд".
-						Все права защищены.
+						{/*Все права защищены.*/}
 					</p>
 					{/*<p>Built with ❤️</p>*/}
 					<div className="flex gap-4">
-						<p>Карта сайта</p>
+						<Link href={"/sitemap.xml"}>Карта сайта</Link>
 						<p>Политика конфиденциальности</p>
 						<p>Публичная оферта</p>
 					</div>
