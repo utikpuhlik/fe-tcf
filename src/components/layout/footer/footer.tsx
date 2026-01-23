@@ -196,7 +196,9 @@ export default function Footer() {
 					</p>
 					{/*<p>Built with ❤️</p>*/}
 					<div className="flex gap-4">
-						<Link href={"/sitemap.xml"} prefetch={false}>Карта сайта</Link>
+						<Link href={"/sitemap.xml"} prefetch={false}>
+							Карта сайта
+						</Link>
 						<p>Политика конфиденциальности</p>
 						<p>Публичная оферта</p>
 					</div>

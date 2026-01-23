@@ -1,6 +1,7 @@
 "use client";
 
 import { Info } from "lucide-react";
+import Link from "next/link";
 import type { UseFormReturn } from "react-hook-form";
 import { AddressAutocomplete } from "@/components/checkout/address-autocomplete";
 import { Field, FieldContent, FieldLabel } from "@/components/ui/field";
@@ -37,10 +38,44 @@ export function CheckoutDeliveryFields({
 					Укажите адрес удобного для Вас пункта выдачи СДЭК или КИТ
 					<Tooltip>
 						<TooltipTrigger asChild>
-							<Info className="h-4 w-4" />
+							<Info className="h-4 w-4" aria-label="Информация о доставке" />
 						</TooltipTrigger>
-						<TooltipContent>
-							<p>Жду текст</p>
+						<TooltipContent className="max-w-xs">
+							<div className="space-y-2">
+								<p>
+									При отсутствии адреса пункта выдачи в строке, после оформления
+									заказа с Вами свяжется менеджер для уточнения необходимой
+									информации.
+								</p>
+								<p>
+									С адресами пунктов выдачи, сроками и стоимостью доставки можно
+									ознакомиться на сайтах транспортных компаний:
+								</p>
+								<div className="space-y-1">
+									<a
+										href="https://tk-kit.ru"
+										target="_blank"
+										rel="noreferrer"
+										className="block underline underline-offset-2"
+									>
+										ТК КИТ
+									</a>
+									<a
+										href="https://www.cdek.ru/ru"
+										target="_blank"
+										rel="noreferrer"
+										className="block underline underline-offset-2"
+									>
+										СДЭК
+									</a>
+								</div>
+								<Link
+									href="/delivery"
+									className="inline-flex underline underline-offset-2"
+								>
+									Подробнее
+								</Link>
+							</div>
 						</TooltipContent>
 					</Tooltip>
 				</FieldLabel>
