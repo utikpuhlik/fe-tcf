@@ -28,6 +28,10 @@ export const productsApi = {
 	fetchById(id: string): Promise<ProductSchema> {
 		return fetchEntityById<ProductSchema>(id, zProductSchema, ENTITY);
 	},
+	fetchByBitrixId(bitrix_id: string): Promise<ProductSchema> {
+		const url = `${env.NEXT_PUBLIC_API_URL}/${ENTITY}/bitrix/${bitrix_id}`;
+		return fetchAndParse<ProductSchema>(url, zProductSchema);
+	},
 	fetchBySlug(slug: string): Promise<ProductSchema> {
 		return fetchEntityBySlug<ProductSchema>(slug, zProductSchema, ENTITY);
 	},

@@ -17,6 +17,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 	return generateMeta({
 		title: data.name,
 		description: `Приобрести ${data.name.toLowerCase()} | Продажа автозапчастей Ford с доставкой по России`,
+		canonical: buildCatalogPath(data),
 	});
 }
 

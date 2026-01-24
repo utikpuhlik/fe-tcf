@@ -16,6 +16,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 	return generateMeta({
 		title: data.name,
 		description: `Продажа автозапчастей Ford с доставкой по России | ${data.name}`,
+		canonical: buildCatalogPath(data),
 		og_image: data.image_url,
 	});
 }

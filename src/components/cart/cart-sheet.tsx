@@ -17,6 +17,7 @@ import {
 	SheetTrigger,
 } from "@/components/ui/sheet";
 import type { CartItem as CartItemType } from "@/lib/stores/useCartStore";
+import { mutateWord } from "@/lib/utils/wordMutations";
 
 export function CartSheet() {
 	const items = useCartStore((state) => state.items);
@@ -51,7 +52,7 @@ export function CartSheet() {
 				<SheetHeader>
 					<SheetTitle>Корзина</SheetTitle>
 					<SheetDescription>
-						{items.length} {items.length === 1 ? "товар" : "товаров"} в корзине
+						{items.length} {mutateWord(items.length, "item")} в корзине
 					</SheetDescription>
 				</SheetHeader>
 

@@ -8,6 +8,7 @@ export async function generateMetadata(): Promise<Metadata> {
 	return generateMeta({
 		title: "Каталог",
 		description: "Каталог автозапчастей Ford",
+		canonical: "/catalog/ford",
 	});
 }
 

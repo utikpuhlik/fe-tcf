@@ -21,32 +21,48 @@ export function generateAvatarFallback(string: string) {
 	return mapped.join("");
 }
 
+interface Props {
+	title: string;
+	description: string;
+	canonical?: string;
+	og_image?: string;
+	keywords?: string[];
+	noIndex?: boolean;
+}
+
 export function generateMeta({
 	title,
 	description,
 	canonical,
 	og_image,
-}: {
-	title: string;
-	description: string;
-	canonical?: string;
-	og_image?: string;
-}): Metadata {
+	keywords,
+	noIndex,
+}: Props): Metadata {
+	const fullTitle = `${title} | TCF`;
 	const ogImageUrl = og_image ?? `${env.NEXT_PUBLIC_APP_URL}/logo.png`;
-	const metadata: Metadata = {
-		title: `${title} | TCF`,
+	return {
+		title: fullTitle,
 		description: description,
 		metadataBase: new URL(env.NEXT_PUBLIC_APP_URL),
+		alternates: {
+			canonical: canonical,
+		},
 		openGraph: {
+			title: fullTitle,
+			description: description,
 			images: [ogImageUrl],
+			locale: "ru_RU",
+			type: "website",
+		},
+		robots: {
+			index: !noIndex,
+			follow: !noIndex,
+			googleBot: {
+				index: !noIndex,
+				follow: !noIndex,
+			},
 		},
 	};
-
-	if (canonical) {
-		metadata.alternates = { canonical };
-	}
-
-	return metadata;
 }
 
 export function formatCurrency(

@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Card } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
+import { mutateWord } from "@/lib/utils/wordMutations";
 
 interface TileItem {
 	id: string;
@@ -16,7 +17,6 @@ interface TileGridProps<T extends TileItem> {
 	items: T[];
 	facets: Record<string, number>;
 	className?: string;
-	/** URL-паттерн, например: `/catalog/:slug` */
 	makeHref: (item: T) => string;
 }
 
@@ -35,14 +35,14 @@ export function TileGrid<T extends TileItem>({
 	return (
 		<section
 			className={cn(
-				"grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5",
+				"grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4",
 				"border border-border",
 				className,
 			)}
 		>
 			{merged.map((item) => (
 				<Link key={item.id} href={makeHref(item)} className="block">
-					<Card className="flex h-17.5 flex-row items-center gap-4 rounded-none border border-border border-t-0 border-l-0 px-4 py-3 transition-colors hover:bg-muted/40">
+					<Card className="flex h-20 flex-row items-center gap-4 rounded-none border border-border border-t-0 border-l-0 px-4 py-3 transition-colors hover:bg-muted/40">
 						<div className="relative h-12 w-12 shrink-0">
 							<Image
 								src={item.image_url}
@@ -59,7 +59,7 @@ export function TileGrid<T extends TileItem>({
 							</span>
 
 							<span className="text-muted-foreground text-xs">
-								{item.products_count} товаров
+								{item.products_count} {mutateWord(item.products_count, "item")}
 							</span>
 						</div>
 					</Card>
