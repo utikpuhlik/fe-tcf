@@ -11,6 +11,5 @@ export default async function LegacyProduct({ params }: Props) {
 
 	const product = await productsApi.fetchByBitrixId(bitrix_id);
 	const catalogPath = buildCatalogPath(product);
-	console.log(catalogPath);
 	permanentRedirect(catalogPath);
 }

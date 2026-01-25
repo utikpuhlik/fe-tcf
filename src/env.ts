@@ -17,6 +17,11 @@ export const env = createEnv({
 			.string()
 			.default("0x4AAAAAACG1ODz69-SuZrCY"),
 		NEXT_PUBLIC_CART_STORAGE_KEY: z.string().default("cart-store"),
+		NEXT_PUBLIC_GTM: z.string(),
+		NEXT_PUBLIC_GOOGLE_VERIFICATION: z
+			.string()
+			.default("EtF4AEicf8JSNWnctwcJh-vbwmK1DF920YrUEphcenU"),
+		NEXT_PUBLIC_YANDEX_VERIFICATION: z.string().default("7f8a52896845683c"),
 	},
 	runtimeEnv: {
 		APP_ENV: process.env.APP_ENV,
@@ -29,5 +34,10 @@ export const env = createEnv({
 		NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL,
 		NEXT_PUBLIC_TURNSTILE_SITE_KEY: process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY,
 		NEXT_PUBLIC_CART_STORAGE_KEY: process.env.NEXT_PUBLIC_CART_STORAGE_KEY,
+		NEXT_PUBLIC_GTM: process.env.NEXT_PUBLIC_GTM,
+		NEXT_PUBLIC_GOOGLE_VERIFICATION:
+			process.env.NEXT_PUBLIC_GOOGLE_VERIFICATION,
+		NEXT_PUBLIC_YANDEX_VERIFICATION:
+			process.env.NEXT_PUBLIC_YANDEX_VERIFICATION,
 	},
 });
