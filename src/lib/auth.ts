@@ -16,6 +16,8 @@ interface SessionCallbackArgs {
 }
 
 export const auth = betterAuth({
+	baseURL: env.NEXT_PUBLIC_APP_URL,
+	secret: env.BETTER_AUTH_SECRET,
 	database: drizzleAdapter(db, {
 		provider: "pg",
 		schema,
