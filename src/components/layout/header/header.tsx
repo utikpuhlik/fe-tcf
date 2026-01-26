@@ -55,10 +55,10 @@ export function Header() {
 	return (
 		<header className="relative mt-0.5 bg-background after:absolute after:right-4 after:bottom-0 after:left-4 after:h-px after:bg-border after:content-[''] sm:after:right-6 sm:after:left-6 2xl:after:right-[calc(50%-850px)] 2xl:after:left-[calc(50%-850px)]">
 			<div className="container mx-auto flex flex-col gap-4 px-4 py-4 sm:h-16 sm:flex-row sm:items-center sm:gap-6 sm:px-6 2xl:max-w-[1700px]">
-				<div className="flex w-full items-center justify-between gap-4 sm:w-auto sm:flex-shrink-0 sm:gap-6">
+				<div className="flex w-full items-center justify-between gap-4 sm:w-auto sm:shrink-0 sm:gap-6">
 					<Link
 						href="/"
-						className="ml-4 flex flex-shrink-0 items-center gap-2 sm:ml-0"
+						className="ml-4 flex shrink-0 items-center gap-2 sm:ml-0"
 					>
 						<Image
 							src="/logo/logo.svg"
@@ -153,7 +153,7 @@ export function Header() {
 					</div>
 				</div>
 
-				<div className="hidden items-center gap-2 sm:flex sm:flex-shrink-0 sm:justify-end md:gap-4">
+				<div className="hidden items-center gap-2 sm:flex sm:shrink-0 sm:justify-end md:gap-4">
 					<UserButton size="icon" additionalLinks={additionalLinks} />
 					<CartSheet />
 				</div>

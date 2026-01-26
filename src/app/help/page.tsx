@@ -34,7 +34,7 @@ const faqs = [
 
 export default function CenterAlignedWithActiveBackgroundGray() {
 	return (
-		<div className="container mx-auto max-w-[85rem] px-4 py-24 md:px-6 lg:py-32 2xl:max-w-[1400px]">
+		<div className="container mx-auto px-4">
 			{/* Title */}
 			<div className="mx-auto mb-10 max-w-2xl text-center lg:mb-14">
 				<h2 className="font-bold text-2xl md:text-4xl md:leading-tight">

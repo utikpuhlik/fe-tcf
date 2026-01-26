@@ -1,14 +1,15 @@
 import { Mail, MapPin, Phone, Smartphone } from "lucide-react";
 import Image from "next/image";
-import { Button } from "@/components/ui/button";
+import { ContactSubmitButton } from "@/app/contacts/_components/contact-submit-button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { sendContactMessageAction } from "@/lib/actions/contactAction";
 
 export default function MapWithContactInfo() {
 	return (
-		<div className="container mx-auto px-4 py-12 md:px-6 md:py-12 lg:py-16 2xl:max-w-[1400px]">
+		<div className="container mx-auto px-4">
 			<div className="mb-10 text-center">
 				<h2 className="mb-2 font-bold text-3xl tracking-tight sm:text-4xl">
 					Как нас найти:
@@ -41,7 +42,7 @@ export default function MapWithContactInfo() {
 
 							<div className="space-y-4">
 								<div className="foreground flex items-start gap-3 text-muted- text-sm">
-									<MapPin className="mt-1 size-5 flex-shrink-0 text-primary" />
+									<MapPin className="mt-1 size-5 shrink-0 text-primary" />
 									<div className="text-left">
 										<h4 className="font-medium">Адрес</h4>
 										<p className="text-muted-foreground text-sm">
@@ -53,7 +54,7 @@ export default function MapWithContactInfo() {
 									</div>
 								</div>
 								<div className="flex items-start gap-3 text-muted-foreground text-sm">
-									<Phone className="mt-1 size-5 flex-shrink-0 text-primary" />
+									<Phone className="mt-1 size-5 shrink-0 text-primary" />
 									<div>
 										<h4 className="font-medium text-foreground">Телефоны</h4>
 										<div className="mt-2 space-y-3">
@@ -79,7 +80,7 @@ export default function MapWithContactInfo() {
 									</div>
 								</div>
 								<div className="flex items-start gap-3 text-muted-foreground text-sm">
-									<Mail className="mt-1 size-5 flex-shrink-0 text-primary" />
+									<Mail className="mt-1 size-5 shrink-0 text-primary" />
 									<div>
 										<h4 className="font-medium text-foreground">Email</h4>
 										<a
@@ -91,7 +92,7 @@ export default function MapWithContactInfo() {
 									</div>
 								</div>
 								<div className="flex items-start gap-3 text-muted-foreground text-sm">
-									<Smartphone className="mt-1 size-5 flex-shrink-0 text-primary" />
+									<Smartphone className="mt-1 size-5 shrink-0 text-primary" />
 									<div className="flex flex-col gap-2">
 										<h4 className="font-medium text-foreground">
 											Свяжитесь с нами!
@@ -145,13 +146,14 @@ export default function MapWithContactInfo() {
 								{/* Mini Contact Form */}
 								<div className="border-t pt-6">
 									<h4 className="mb-4 font-medium">Отправьте нам сообщение</h4>
-									<form className="space-y-4">
+									<form action={sendContactMessageAction} className="space-y-4">
 										<div>
 											<Label htmlFor="quick-email" className="sr-only">
 												Email
 											</Label>
 											<Input
 												id="quick-email"
+												name="email"
 												type="email"
 												placeholder="Ваш email"
 												required
@@ -163,15 +165,14 @@ export default function MapWithContactInfo() {
 											</Label>
 											<Textarea
 												id="quick-message"
+												name="message"
 												placeholder="Ваше сообщение"
 												rows={3}
 												className="resize-none"
 												required
 											/>
 										</div>
-										<Button type="submit" className="w-full">
-											Отправить
-										</Button>
+										<ContactSubmitButton />
 									</form>
 								</div>
 							</div>

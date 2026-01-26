@@ -48,7 +48,7 @@ export function CartItem({
 					<div className="min-w-0">
 						<Link
 							href={buildCatalogPath(offer)}
-							className="truncate font-medium text-sm hover:underline"
+							className="font-medium text-sm hover:underline"
 						>
 							{offer.product.name}
 						</Link>
@@ -77,7 +77,7 @@ export function CartItem({
 			<CardContent className="p-0">
 				<div className="flex">
 					{/* Product Image */}
-					<div className="relative h-auto w-28 flex-shrink-0">
+					<div className="relative h-auto w-28 shrink-0">
 						<SheetClose asChild>
 							<Link href={buildCatalogPath(offer)}>
 								<Image
