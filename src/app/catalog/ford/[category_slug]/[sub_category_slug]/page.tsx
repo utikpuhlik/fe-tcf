@@ -25,7 +25,7 @@ export default async function ProductsPage({ params }: Props) {
 
 	const [sub_category, products] = await Promise.all([
 		await subCategoriesApi.fetchBySlug(sub_category_slug),
-		await productsApi.fetchStatsBySubCategorySlug(sub_category_slug),
+		await productsApi.fetchBySubCategorySlug(sub_category_slug),
 	]);
 
 	return (
@@ -46,7 +46,7 @@ export default async function ProductsPage({ params }: Props) {
 			/>
 
 			<ProductsList
-				products={products}
+				products={products.items}
 				categorySlug={sub_category.category.slug}
 				subCategorySlug={sub_category_slug}
 			/>

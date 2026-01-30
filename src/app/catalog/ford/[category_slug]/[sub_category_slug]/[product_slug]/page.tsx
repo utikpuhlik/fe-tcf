@@ -5,7 +5,6 @@ import Breadcrumbs from "@/components/shared/breadcrumbs";
 import { offersApi } from "@/lib/api/offerApi";
 import { productsApi } from "@/lib/api/productApi";
 import { buildCatalogPath, generateMeta } from "@/lib/utils";
-import { getMinPriceAndQuantity } from "@/lib/utils/offers";
 
 interface Props {
 	params: Promise<{ product_slug: string }>;
@@ -29,8 +28,6 @@ export default async function OffersPage({ params }: Props) {
 		offersApi.fetchByProductSlug(product_slug),
 	]);
 
-	const { minPriceRub, totalQuantity } = getMinPriceAndQuantity(offers.items);
-
 	return (
 		<main className="space-y-4">
 			<div className="mb-4">
@@ -50,11 +47,7 @@ export default async function OffersPage({ params }: Props) {
 				/>
 			</div>
 
-			<ProductOverview
-				product={product}
-				minPriceRub={minPriceRub}
-				totalQuantity={totalQuantity}
-			/>
+			<ProductOverview product={product} />
 
 			<OffersList offers={offers.items} />
 		</main>

@@ -6,19 +6,13 @@ import { formatCurrency } from "@/lib/utils";
 
 interface ProductOverviewProps {
 	product: ProductSchema;
-	minPriceRub: number | null;
-	totalQuantity: number;
 }
 
-export default function ProductOverview({
-	product,
-	minPriceRub,
-	totalQuantity,
-}: ProductOverviewProps) {
+export default function ProductOverview({ product }: ProductOverviewProps) {
 	const priceLabel =
-		minPriceRub == null
+		product.min_price_rub == null
 			? "цена не указана"
-			: `от: ${formatCurrency(minPriceRub)}`;
+			: `от: ${formatCurrency(product.min_price_rub)}`;
 
 	return (
 		<Card className="w-full">
@@ -43,7 +37,7 @@ export default function ProductOverview({
 					<p className="font-medium text-sm">{priceLabel}</p>
 
 					<div className="flex items-center gap-2">
-						<StockBadge quantity={totalQuantity} />
+						<StockBadge quantity={product.total_quantity} />
 					</div>
 				</div>
 			</CardContent>

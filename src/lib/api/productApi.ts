@@ -8,10 +8,8 @@ import { type CountSchema, zCountSchema } from "@/lib/schemas/commonSchema";
 import {
 	type ProductPaginatedSchema,
 	type ProductSchema,
-	type ProductWithStatsSchema,
 	zProductPaginatedSchema,
 	zProductSchema,
-	zProductWithStatsSchema,
 } from "@/lib/schemas/productSchema";
 
 const ENTITY = "products";
@@ -46,12 +44,6 @@ export const productsApi = {
 	): Promise<ProductPaginatedSchema> {
 		const url = `${env.NEXT_PUBLIC_API_URL}/${ENTITY}?sub_category_slug=${sub_category_slug}`;
 		return fetchAndParse(url, zProductPaginatedSchema);
-	},
-	fetchStatsBySubCategorySlug(
-		sub_category_slug: string,
-	): Promise<ProductWithStatsSchema[]> {
-		const url = `${env.NEXT_PUBLIC_API_URL}/${ENTITY}/stats/sub-category/${sub_category_slug}`;
-		return fetchAndParse(url, zProductWithStatsSchema.array());
 	},
 	// -------------------------------
 	// Facets

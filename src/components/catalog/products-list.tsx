@@ -4,11 +4,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { StockBadge } from "@/components/catalog/stock-badge";
 import { Card } from "@/components/ui/card";
-import type { ProductWithStatsSchema } from "@/lib/schemas/productSchema";
+import type { ProductSchema } from "@/lib/schemas/productSchema";
 import { cn, formatCurrency } from "@/lib/utils";
 
 interface ProductsListProps {
-	products: ProductWithStatsSchema[];
+	products: ProductSchema[];
 	categorySlug: string;
 	subCategorySlug: string;
 	className?: string;
