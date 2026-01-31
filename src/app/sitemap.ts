@@ -5,6 +5,7 @@ import { productsApi } from "@/lib/api/productApi";
 import { subCategoriesApi } from "@/lib/api/subCategoryApi";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+	if (env.ENV === "dev") return [];
 	// call the API that returns catalog paths and build the sitemap entries
 	// Slug composition examples:
 	// Product: baseUrl/catalog/ford/{c}/{sc}/{p}

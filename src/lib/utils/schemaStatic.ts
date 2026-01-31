@@ -7,7 +7,8 @@ const organizationJsonLd: WithContext<Organization> = {
 	"@id": `${env.NEXT_PUBLIC_APP_URL}/#organization`,
 	email: "fordsevas@yandex.ru",
 	name: "Торговый центр Форд | TCF",
-	description: "Продажа автозапчастей Ford в Севастополе с доставкой по России",
+	description:
+		"Продажа автозапчастей Ford в Севастополе с доставкой по России и странам СНГ",
 	url: `${env.NEXT_PUBLIC_APP_URL}/`,
 	image: `${env.NEXT_PUBLIC_APP_URL}/logo.png`,
 	logo: `${env.NEXT_PUBLIC_APP_URL}/logo.png`,

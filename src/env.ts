@@ -3,7 +3,7 @@ import { z } from "zod";
 
 export const env = createEnv({
 	server: {
-		APP_ENV: z.string().default("dev"),
+		ENV: z.enum(["dev", "prod"]).default("dev"),
 		RESEND_API_KEY: z.string(),
 		DATABASE_URL: z.string(),
 		BETTER_AUTH_WEBHOOK_SECRET: z.string(),
@@ -28,7 +28,7 @@ export const env = createEnv({
 			.default("https://yandex.com/maps/-/CPARm2NK"),
 	},
 	runtimeEnv: {
-		APP_ENV: process.env.APP_ENV,
+		ENV: process.env.ENV,
 		RESEND_API_KEY: process.env.RESEND_API_KEY,
 		DATABASE_URL: process.env.DATABASE_URL,
 		BETTER_AUTH_WEBHOOK_SECRET: process.env.BETTER_AUTH_WEBHOOK_SECRET,
