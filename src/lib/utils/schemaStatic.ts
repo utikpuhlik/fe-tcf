@@ -8,19 +8,28 @@ const organizationJsonLd: WithContext<Organization> = {
 	email: "fordsevas@yandex.ru",
 	name: "Торговый центр Форд | TCF",
 	url: `${env.NEXT_PUBLIC_APP_URL}/`,
+	image: `${env.NEXT_PUBLIC_APP_URL}/logo.png`,
 	logo: `${env.NEXT_PUBLIC_APP_URL}/logo.png`,
 	contactPoint: [
 		{
 			"@type": "ContactPoint",
 			telephone: "+7 978 042 46 66",
 			areaServed: ["RU", "BY", "KZ", "AM"],
-			availableLanguage: ["Russian"],
+			availableLanguage: {
+				"@type": "Language",
+				name: "Russian",
+				alternateName: "ru",
+			},
 		},
 		{
 			"@type": "ContactPoint",
 			telephone: "+7 918 300 26 22",
 			areaServed: ["RU", "BY", "KZ", "AM"],
-			availableLanguage: ["Russian"],
+			availableLanguage: {
+				"@type": "Language",
+				name: "Russian",
+				alternateName: "ru",
+			},
 		},
 	],
 };
@@ -34,6 +43,7 @@ const autoPartsStoreJsonLd: WithContext<AutoPartsStore> = {
 	brand: "Ford, Форд",
 	name: "Торговый центр Форд",
 	url: `${env.NEXT_PUBLIC_APP_URL}/`,
+	image: `${env.NEXT_PUBLIC_APP_URL}/logo.png`,
 	telephone: "+7 978 042 46 66",
 	openingHours: "Mo-St 09:00-18:00",
 	hasMap: "https://yandex.com/maps/-/CPARm2NK",

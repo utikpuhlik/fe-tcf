@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { ProductsList } from "@/components/catalog/products-list";
 import Breadcrumbs from "@/components/shared/breadcrumbs";
 import { productsApi } from "@/lib/api/productApi";
 import { subCategoriesApi } from "@/lib/api/subCategoryApi";
 import { buildCatalogPath, generateMeta } from "@/lib/utils";
+import { generateBreadcrumbs } from "@/lib/utils/schemaGenerator";
 
 interface Props {
 	params: Promise<{ sub_category_slug: string }>;
@@ -28,28 +30,35 @@ export default async function ProductsPage({ params }: Props) {
 		await productsApi.fetchBySubCategorySlug(sub_category_slug),
 	]);
 
-	return (
-		<main className="space-y-4">
-			<Breadcrumbs
-				breadcrumbs={[
-					{ label: "Каталог", href: buildCatalogPath() },
-					{
-						label: sub_category.category.name,
-						href: buildCatalogPath(sub_category.category),
-					},
-					{
-						label: sub_category.name,
-						href: buildCatalogPath(sub_category),
-						active: true,
-					},
-				]}
-			/>
+	const breadcrumbs = [
+		{ label: "Каталог", href: buildCatalogPath() },
+		{
+			label: sub_category.category.name,
+			href: buildCatalogPath(sub_category.category),
+		},
+		{
+			label: sub_category.name,
+			href: buildCatalogPath(sub_category),
+			active: true,
+		},
+	];
 
-			<ProductsList
-				products={products.items}
-				categorySlug={sub_category.category.slug}
-				subCategorySlug={sub_category_slug}
-			/>
-		</main>
+	const breadcrumbsJsonLd = generateBreadcrumbs(breadcrumbs);
+
+	return (
+		<>
+			<Script id="breadcrumbs-jsonld" type="application/ld+json">
+				{JSON.stringify(breadcrumbsJsonLd).replace(/</g, "\\u003c")}
+			</Script>
+			<main className="space-y-4">
+				<Breadcrumbs breadcrumbs={breadcrumbs} />
+
+				<ProductsList
+					products={products.items}
+					categorySlug={sub_category.category.slug}
+					subCategorySlug={sub_category_slug}
+				/>
+			</main>
+		</>
 	);
 }

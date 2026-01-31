@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { CatalogGrid } from "@/components/catalog/catalog-grid";
 import Breadcrumbs from "@/components/shared/breadcrumbs";
 import { categoriesApi } from "@/lib/api/categoryApi";
 import { productsApi } from "@/lib/api/productApi";
 import { subCategoriesApi } from "@/lib/api/subCategoryApi";
 import { buildCatalogPath, generateMeta } from "@/lib/utils";
+import { generateBreadcrumbs } from "@/lib/utils/schemaGenerator";
 
 interface Props {
 	params: Promise<{ category_slug: string }>;
@@ -31,20 +33,23 @@ export default async function SubCategoriesPage({ params }: Props) {
 		productsApi.fetchFacetsPerSubCategory(category.id),
 	]);
 
-	return (
-		<main className="space-y-4">
-			<Breadcrumbs
-				breadcrumbs={[
-					{ label: "Каталог", href: buildCatalogPath() },
-					{
-						label: category.name,
-						href: buildCatalogPath(category),
-						active: true,
-					},
-				]}
-			/>
+	const breadcrumbs = [
+		{ label: "Каталог", href: buildCatalogPath() },
+		{ label: category.name, href: buildCatalogPath(category) },
+	];
 
-			<CatalogGrid categories={data.items} facets={facets} />
-		</main>
+	const breadcrumbsJsonLd = generateBreadcrumbs(breadcrumbs);
+
+	return (
+		<>
+			<Script id="breadcrumbs-jsonld" type="application/ld+json">
+				{JSON.stringify(breadcrumbsJsonLd).replace(/</g, "\\u003c")}
+			</Script>
+			<main className="space-y-4">
+				<Breadcrumbs breadcrumbs={breadcrumbs} />
+
+				<CatalogGrid categories={data.items} facets={facets} />
+			</main>
+		</>
 	);
 }
