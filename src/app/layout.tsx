@@ -1,5 +1,6 @@
 import { GeistSans } from "geist/font/sans";
 import type { Metadata } from "next";
+import Script from "next/script";
 import "./globals.css";
 import { GoogleTagManager } from "@next/third-parties/google";
 import { Analytics } from "@vercel/analytics/next";
@@ -12,6 +13,10 @@ import { Header } from "@/components/layout/header/header";
 import { ThemedTopLoader } from "@/components/layout/top-loader";
 import { Toaster } from "@/components/ui/sonner";
 import { env } from "@/env";
+import {
+	autoPartsStoreJsonLd,
+	organizationJsonLd,
+} from "@/lib/utils/schemaStatic";
 
 export const metadata: Metadata = {
 	title: "Магазин автозапчастей Ford | TCF",
@@ -31,6 +36,12 @@ export default function RootLayout({
 		<html lang="en" className={GeistSans.className}>
 			<GoogleTagManager gtmId={env.NEXT_PUBLIC_GTM} />
 			<body>
+				<Script id="org-jsonld" type="application/ld+json">
+					{JSON.stringify(organizationJsonLd).replace(/</g, "\\u003c")}
+				</Script>
+				<Script id="store-jsonld" type="application/ld+json">
+					{JSON.stringify(autoPartsStoreJsonLd).replace(/</g, "\\u003c")}
+				</Script>
 				<AuthProvider>
 					<ThemedTopLoader />
 					<CartStoreProvider>
