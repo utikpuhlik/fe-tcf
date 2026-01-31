@@ -46,6 +46,9 @@ export function generateMeta({
 		metadataBase: new URL(env.NEXT_PUBLIC_APP_URL),
 		alternates: {
 			canonical: canonical,
+			languages: {
+				ru: canonical,
+			},
 		},
 		openGraph: {
 			title: fullTitle,
@@ -61,6 +64,10 @@ export function generateMeta({
 				index: !noIndex,
 				follow: !noIndex,
 			},
+		},
+		other: {
+			"google-site-verification": env.NEXT_PUBLIC_GOOGLE_VERIFICATION,
+			"yandex-verification": env.NEXT_PUBLIC_YANDEX_VERIFICATION,
 		},
 	};
 }

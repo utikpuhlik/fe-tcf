@@ -1,5 +1,4 @@
 import { GeistSans } from "geist/font/sans";
-import type { Metadata } from "next";
 import Script from "next/script";
 import "./globals.css";
 import { GoogleTagManager } from "@next/third-parties/google";
@@ -18,22 +17,13 @@ import {
 	organizationJsonLd,
 } from "@/lib/utils/schemaStatic";
 
-export const metadata: Metadata = {
-	title: "Магазин автозапчастей Ford | TCF",
-	description: "Магазин автозапчастей Ford | TCF",
-	other: {
-		"google-site-verification": env.NEXT_PUBLIC_GOOGLE_VERIFICATION,
-		"yandex-verification": env.NEXT_PUBLIC_YANDEX_VERIFICATION,
-	},
-};
-
 export default function RootLayout({
 	children,
 }: Readonly<{
 	children: React.ReactNode;
 }>) {
 	return (
-		<html lang="en" className={GeistSans.className}>
+		<html lang="ru" className={GeistSans.className}>
 			<GoogleTagManager gtmId={env.NEXT_PUBLIC_GTM} />
 			<body>
 				<Script id="org-jsonld" type="application/ld+json">
