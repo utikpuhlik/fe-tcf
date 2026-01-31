@@ -9,33 +9,30 @@ import {
 
 type DeliveryTimeRow = {
 	region: string;
-	cdek?: string | null;
-	tkKit?: string | null;
-	postamat?: string | null;
-	russianPost?: string | null;
+	cdek: string;
+	tkKit: string;
 };
 
 const rows: DeliveryTimeRow[] = [
 	{
 		region: "Московская область",
-		cdek: null,
-		tkKit: "2 рабочих дня",
-		postamat: null,
-		russianPost: "5 дней",
+		cdek: "2-3 рабочих дня",
+		tkKit: "2-3 рабочих дня",
 	},
 	{
 		region: "Урал и Поволжье",
 		cdek: "5-7 рабочих дней",
 		tkKit: "6-9 рабочих дней",
-		postamat: null,
-		russianPost: "14 дней",
 	},
 	{
 		region: "Сибирь",
 		cdek: "8-10 рабочих дней",
 		tkKit: "12 рабочих дней",
-		postamat: null,
-		russianPost: "14-21 день",
+	},
+	{
+		region: "Страны СНГ",
+		cdek: "10-14 рабочих дней",
+		tkKit: "10-16 рабочих дней",
 	},
 ];
 
@@ -53,12 +50,6 @@ export function DeliveryTimesTable() {
 						<TableHead className="min-w-[240px]">Регион</TableHead>
 						<TableHead className="min-w-[220px] text-center">СДЭК</TableHead>
 						<TableHead className="min-w-[220px] text-center">ТК КИТ</TableHead>
-						<TableHead className="min-w-[180px] text-center">
-							Постамат
-						</TableHead>
-						<TableHead className="min-w-[220px] text-center">
-							Почта России
-						</TableHead>
 					</TableRow>
 				</TableHeader>
 
@@ -71,12 +62,6 @@ export function DeliveryTimesTable() {
 							</TableCell>
 							<TableCell className="text-center">
 								<ValueCell value={row.tkKit} />
-							</TableCell>
-							<TableCell className="text-center">
-								<ValueCell value={row.postamat} />
-							</TableCell>
-							<TableCell className="text-center">
-								<ValueCell value={row.russianPost} />
 							</TableCell>
 						</TableRow>
 					))}

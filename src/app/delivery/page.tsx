@@ -1,7 +1,9 @@
+import type { Metadata } from "next";
 import { DeliveryTimesTable } from "@/components/delivery/timetable";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
+import { generateMeta } from "@/lib/utils";
 
 type DeliveryOption = {
 	title: string;
@@ -10,15 +12,22 @@ type DeliveryOption = {
 const deliveryOptions: DeliveryOption[] = [
 	{ title: "Курьерская служба СДЭК по России и странам СНГ" },
 	{ title: "Самовывоз из магазина" },
-	{ title: "Постаматы" },
 	{ title: "Транспортная компания КИТ по России и странам СНГ" },
 ];
+
+export async function generateMetadata(): Promise<Metadata> {
+	return generateMeta({
+		title: "Доставка",
+		description: "Условия и сроки доставки по территории России и СНГ",
+		canonical: "/help",
+	});
+}
 
 export default async function DeliveryPage() {
 	return (
 		<main className="mx-auto w-full max-w-7xl space-y-6">
 			<header className="space-y-2">
-				<h1 className="font-semibold text-xl tracking-tight md:text-2xl">
+				<h1 className="font-semibold text-xl tracking-tight md:text-2xl lg:text-3xl">
 					Условия доставки
 				</h1>
 				<p className="text-muted-foreground text-sm leading-relaxed md:text-base">

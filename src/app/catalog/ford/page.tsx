@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import { CatalogGrid } from "@/components/catalog/catalog-grid";
+import Breadcrumbs from "@/components/shared/breadcrumbs";
 import { categoriesApi } from "@/lib/api/categoryApi";
 import { productsApi } from "@/lib/api/productApi";
-import { generateMeta } from "@/lib/utils";
+import { buildCatalogPath, generateMeta } from "@/lib/utils";
 
 export async function generateMetadata(): Promise<Metadata> {
 	return generateMeta({
@@ -18,12 +19,15 @@ export default async function CataloguePage() {
 		productsApi.fetchFacetsPerCategory(),
 	]);
 
+	const breadcrumbs = [{ label: "Каталог", href: buildCatalogPath() }];
+
 	return (
 		<main className="space-y-4">
-			<h1 className="font-semibold text-xl tracking-tight lg:text-2xl">
-				Каталог
+			<h1 className="font-semibold text-xl tracking-tight sm:text-2xl lg:text-3xl">
+				{/*<h1 className="font-semibold tracking-tight text-xl sm:text-2xl lg:text-3xl">*/}
+				Каталог автозапчастей Ford
 			</h1>
-
+			<Breadcrumbs breadcrumbs={breadcrumbs} />
 			<CatalogGrid categories={data.items} facets={facets} />
 		</main>
 	);

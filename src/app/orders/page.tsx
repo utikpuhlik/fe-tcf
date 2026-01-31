@@ -1,11 +1,19 @@
 import { ChevronRight } from "lucide-react";
+import type { Metadata } from "next";
 import Link from "next/link";
 import { OrderBadge } from "@/components/orders/order-badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ordersApi } from "@/lib/api/orderApi";
-import { formatCurrency, formatDateToLocal } from "@/lib/utils";
+import { formatCurrency, formatDateToLocal, generateMeta } from "@/lib/utils";
 import { authGateWithRedirect } from "@/lib/utils/authGate";
 
+export async function generateMetadata(): Promise<Metadata> {
+	return generateMeta({
+		title: "Заказы",
+		description: "Список заказов пользователя",
+		canonical: "/orders",
+	});
+}
 export default async function OrdersPage() {
 	const session = await authGateWithRedirect();
 

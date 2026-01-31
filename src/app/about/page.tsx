@@ -1,10 +1,21 @@
+import type { Metadata } from "next";
+import { generateMeta } from "@/lib/utils";
+
+export async function generateMetadata(): Promise<Metadata> {
+	return generateMeta({
+		title: "О нас",
+		description: "Общая информация о интернет магазине Торговый центр Форд",
+		canonical: "/about",
+	});
+}
+
 export default async function AboutPage() {
 	return (
 		<div className="container mx-auto px-4">
 			<div className="mb-10 text-center">
-				<h2 className="mb-2 font-bold text-3xl tracking-tight sm:text-4xl">
-					О нас:
-				</h2>
+				<h1 className="mb-2 font-bold text-3xl tracking-tight sm:text-4xl">
+					О нас
+				</h1>
 				<p className="mx-auto max-w-2xl text-muted-foreground">
 					Находимся в Севастополе.
 					<br className="block sm:hidden" />

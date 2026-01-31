@@ -51,8 +51,10 @@ export default async function ProductsPage({ params }: Props) {
 				{JSON.stringify(breadcrumbsJsonLd).replace(/</g, "\\u003c")}
 			</Script>
 			<main className="space-y-4">
+				<h1 className="font-semibold text-xl tracking-tight sm:text-2xl lg:text-3xl">
+					{sub_category.name}
+				</h1>
 				<Breadcrumbs breadcrumbs={breadcrumbs} />
-
 				<ProductsList
 					products={products.items}
 					categorySlug={sub_category.category.slug}

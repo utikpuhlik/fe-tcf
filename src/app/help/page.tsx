@@ -1,9 +1,11 @@
+import type { Metadata } from "next";
 import {
 	Accordion,
 	AccordionContent,
 	AccordionItem,
 	AccordionTrigger,
 } from "@/components/ui/accordion";
+import { generateMeta } from "@/lib/utils";
 
 const faqs = [
 	{
@@ -32,14 +34,22 @@ const faqs = [
 	},
 ];
 
+export async function generateMetadata(): Promise<Metadata> {
+	return generateMeta({
+		title: "Помощь",
+		description: "Ответы на часто задаваемые вопросы (FAQ)",
+		canonical: "/help",
+	});
+}
+
 export default function CenterAlignedWithActiveBackgroundGray() {
 	return (
 		<div className="container mx-auto px-4">
 			{/* Title */}
 			<div className="mx-auto mb-10 max-w-2xl text-center lg:mb-14">
-				<h2 className="font-bold text-2xl md:text-4xl md:leading-tight">
+				<h1 className="font-semibold text-2xl md:text-4xl md:leading-tight">
 					Часто задаваемые вопросы
-				</h2>
+				</h1>
 				<p className="mt-1 text-muted-foreground">
 					Если ваш вопрос не был освещен здесь, пожалуйста, свяжитесь с нами по
 					телефону или электронной почте.

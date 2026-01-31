@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { headers } from "next/headers";
 import Link from "next/link";
 import { CartSummary } from "@/components/cart/cart-summary";
@@ -5,7 +6,15 @@ import { CheckoutCartReconciler } from "@/components/checkout/checkout-cart-reco
 import { CheckoutForm } from "@/components/checkout/checkout-form";
 import { CheckoutLoginDialog } from "@/components/checkout/checkout-login-dialog";
 import { auth } from "@/lib/auth";
+import { generateMeta } from "@/lib/utils";
 
+export async function generateMetadata(): Promise<Metadata> {
+	return generateMeta({
+		title: "Оформление заказа",
+		description: "Просмотр корзины и оформление заказа",
+		canonical: "/checkout",
+	});
+}
 export default async function CheckoutPage() {
 	const session = await auth.api.getSession({
 		headers: await headers(),

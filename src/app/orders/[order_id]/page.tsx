@@ -26,7 +26,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 	const order: OrderSchema = await ordersApi.fetchById(order_id);
 
 	return {
-		title: `${order.id} | TCF`,
+		title: `Заказ #${order.id}`,
 	};
 }
 
@@ -36,7 +36,7 @@ export default async function Page({ params }: Props) {
 	console.log(order);
 
 	return (
-		<div className="mx-auto max-w-screen-lg space-y-4 lg:mt-10">
+		<div className="mx-auto max-w-5xl space-y-4 lg:mt-10">
 			<div className="grid gap-4 md:grid-cols-2">
 				<Card>
 					<CardHeader>

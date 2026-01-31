@@ -1,4 +1,5 @@
 import { Mail, MapPin, Phone, Smartphone } from "lucide-react";
+import type { Metadata } from "next";
 import Image from "next/image";
 import { ContactSubmitButton } from "@/app/contacts/_components/contact-submit-button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -6,14 +7,23 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { sendContactMessageAction } from "@/lib/actions/contactAction";
+import { generateMeta } from "@/lib/utils";
+
+export async function generateMetadata(): Promise<Metadata> {
+	return generateMeta({
+		title: "Контакты",
+		description: "Контактная информация интернет-магазина Торговый центр Форд",
+		canonical: "/contacts",
+	});
+}
 
 export default function MapWithContactInfo() {
 	return (
 		<div className="container mx-auto px-4">
 			<div className="mb-10 text-center">
-				<h2 className="mb-2 font-bold text-3xl tracking-tight sm:text-4xl">
-					Как нас найти:
-				</h2>
+				<h1 className="mb-2 font-bold text-3xl tracking-tight sm:text-4xl">
+					Как нас найти
+				</h1>
 				<p className="mx-auto max-w-2xl text-muted-foreground">
 					Находимся в Севастополе.
 					<br className="block sm:hidden" />

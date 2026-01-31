@@ -42,7 +42,7 @@ export function TileGrid<T extends TileItem>({
 		>
 			{merged.map((item) => (
 				<Link key={item.id} href={makeHref(item)} className="block">
-					<Card className="flex h-20 flex-row items-center gap-4 rounded-none border border-border border-t-0 border-l-0 px-4 py-3 transition-colors hover:bg-muted/40">
+					<Card className="flex h-20 flex-row items-center gap-4 rounded-none border border-border border-t-0 border-l-0 px-4 py-4 transition-colors hover:bg-muted/40">
 						<div className="relative h-12 w-12 shrink-0">
 							<Image
 								src={item.image_url}

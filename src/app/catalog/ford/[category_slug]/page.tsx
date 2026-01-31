@@ -35,7 +35,7 @@ export default async function SubCategoriesPage({ params }: Props) {
 
 	const breadcrumbs = [
 		{ label: "Каталог", href: buildCatalogPath() },
-		{ label: category.name, href: buildCatalogPath(category) },
+		{ label: category.name, href: buildCatalogPath(category), active: true },
 	];
 
 	const breadcrumbsJsonLd = generateBreadcrumbs(breadcrumbs);
@@ -46,8 +46,11 @@ export default async function SubCategoriesPage({ params }: Props) {
 				{JSON.stringify(breadcrumbsJsonLd).replace(/</g, "\\u003c")}
 			</Script>
 			<main className="space-y-4">
+				<h1 className="font-semibold text-xl tracking-tight sm:text-2xl lg:text-3xl">
+					{category.name}
+				</h1>
 				<Breadcrumbs breadcrumbs={breadcrumbs} />
-
+				{/*TODO: catalogGrid doesnt match width with product-list*/}
 				<CatalogGrid categories={data.items} facets={facets} />
 			</main>
 		</>

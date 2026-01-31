@@ -57,10 +57,10 @@ export default async function OffersPage({ params }: Props) {
 				{JSON.stringify(breadcrumbsJsonLd).replace(/</g, "\\u003c")}
 			</Script>
 			<main className="space-y-4">
-				<div className="mb-4">
-					<Breadcrumbs breadcrumbs={breadcrumbs} />
-				</div>
-
+				<h1 className="font-semibold text-xl tracking-tight sm:text-2xl lg:text-3xl">
+					{product.name}
+				</h1>
+				<Breadcrumbs breadcrumbs={breadcrumbs} />
 				<ProductOverview product={product} />
 				<OffersList offers={offersPage.items} />
 			</main>
