@@ -7,6 +7,7 @@ const organizationJsonLd: WithContext<Organization> = {
 	"@id": `${env.NEXT_PUBLIC_APP_URL}/#organization`,
 	email: "fordsevas@yandex.ru",
 	name: "Торговый центр Форд | TCF",
+	description: "Продажа автозапчастей Ford в Севастополе с доставкой по России",
 	url: `${env.NEXT_PUBLIC_APP_URL}/`,
 	image: `${env.NEXT_PUBLIC_APP_URL}/logo.png`,
 	logo: `${env.NEXT_PUBLIC_APP_URL}/logo.png`,
@@ -46,7 +47,7 @@ const autoPartsStoreJsonLd: WithContext<AutoPartsStore> = {
 	image: `${env.NEXT_PUBLIC_APP_URL}/logo.png`,
 	telephone: "+7 978 042 46 66",
 	openingHours: "Mo-St 09:00-18:00",
-	hasMap: "https://yandex.com/maps/-/CPARm2NK",
+	hasMap: env.NEXT_PUBLIC_YANDEX_MAP_URL,
 	geo: {
 		"@type": "GeoCoordinates",
 		latitude: 44.556904,

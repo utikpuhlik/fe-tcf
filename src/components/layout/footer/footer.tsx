@@ -1,6 +1,7 @@
 import { Clock, Mail, MapPin, Phone } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { env } from "@/env";
 
 export default function Footer() {
 	return (
@@ -26,7 +27,7 @@ export default function Footer() {
 						<MapPin className="mt-0.5 h-4 w-4 text-primary" />
 						<Link
 							className="hover:underline"
-							href="https://yandex.ru/profile/213863116617?lang=ru&ysclid=mh9krqci6293026905"
+							href={env.NEXT_PUBLIC_YANDEX_MAP_URL}
 						>
 							Севастополь, ул. Хрусталёва, 74Ж
 						</Link>
@@ -90,7 +91,7 @@ export default function Footer() {
 								/>
 							</a>
 							<a
-								href="https://t.me/Katyermy"
+								href="https://t.me/fordsevas"
 								target="_blank"
 								rel="noopener noreferrer"
 								aria-label="Написать в Telegram"

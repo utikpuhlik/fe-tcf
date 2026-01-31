@@ -23,6 +23,9 @@ export const env = createEnv({
 			.string()
 			.default("EtF4AEicf8JSNWnctwcJh-vbwmK1DF920YrUEphcenU"),
 		NEXT_PUBLIC_YANDEX_VERIFICATION: z.string().default("7f8a52896845683c"),
+		NEXT_PUBLIC_YANDEX_MAP_URL: z
+			.string()
+			.default("https://yandex.com/maps/-/CPARm2NK"),
 	},
 	runtimeEnv: {
 		APP_ENV: process.env.APP_ENV,
@@ -41,5 +44,6 @@ export const env = createEnv({
 			process.env.NEXT_PUBLIC_GOOGLE_VERIFICATION,
 		NEXT_PUBLIC_YANDEX_VERIFICATION:
 			process.env.NEXT_PUBLIC_YANDEX_VERIFICATION,
+		NEXT_PUBLIC_YANDEX_MAP_URL: process.env.NEXT_PUBLIC_YANDEX_MAP_URL,
 	},
 });

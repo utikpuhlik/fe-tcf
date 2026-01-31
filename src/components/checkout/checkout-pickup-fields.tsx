@@ -2,8 +2,7 @@
 
 import { MapPin } from "lucide-react";
 import { Label } from "@/components/ui/label";
-
-const MAP_URL = "https://yandex.ru/maps/-/CLT0UGIv";
+import { env } from "@/env";
 
 const DEFAULT_PICKUP_POINT = {
 	title: "Россия, Севастополь",
@@ -26,7 +25,7 @@ export function CheckoutPickupFields() {
 						</div>
 					</div>
 					<a
-						href={MAP_URL}
+						href={env.NEXT_PUBLIC_YANDEX_MAP_URL}
 						target="_blank"
 						rel="noreferrer"
 						aria-label="Открыть магазин на карте"
